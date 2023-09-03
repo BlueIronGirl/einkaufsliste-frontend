@@ -1,0 +1,55 @@
+<form [formGroup]="loginForm" class="w-full" (ngSubmit)="login()">
+  <div class="w-full">
+    <!-- Benutzername -->
+    <div class="md:flex md:items-center mt-2 mb-6">
+      <div class="w-64">
+        <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="benutzername">
+          Benutzername
+        </label>
+      </div>
+      <div class="w-full">
+        <input id="benutzername" class="w-full" type="text" pInputText
+               formControlName="username"/>
+      </div>
+    </div>
+
+    <!-- Passwort -->
+    <div class="md:flex md:items-center mt-2 mb-6">
+      <div class="w-64">
+        <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="passwort">
+          Passwort
+        </label>
+      </div>
+      <div class="w-full">
+        <p-password id="passwort"
+                    [style]="{'width': '100%'}"
+                    [inputStyle]="{'width': '100%'}"
+                    formControlName="password"
+                    [feedback]="false"
+                    [toggleMask]="true"></p-password>
+      </div>
+    </div>
+
+    <!-- Speichern -->
+    <div class="md:flex md:items-center mt-2 mb-6">
+      <div class="w-64"></div>
+      <div class="w-full">
+        <button type="submit" [disabled]="loginForm.invalid"
+                class="text-white bg-gray-800 rounded-lg px-2 py-2 text-center">
+          Login
+        </button>
+
+        <button type="button" (click)="reset()"
+                class="text-white bg-gray-800 rounded-lg ml-1 px-2 py-2 text-center">
+          Zurücksetzen
+        </button>
+
+        <div class="text-xs text-gray-500 font-bold my-2">
+          Haben Sie noch keinen Account?
+          <a routerLink="/register" class="text-blue-400">Registrieren!</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</form>
