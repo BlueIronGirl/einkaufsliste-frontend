@@ -28,4 +28,4 @@ COPY .docker/ui.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /usr/local/app/dist/einkaufsliste /usr/share/nginx/html
 
 # Expose port 80
-EXPOSE 80
+EXPOSE 8080
