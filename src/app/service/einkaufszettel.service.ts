@@ -3,12 +3,13 @@ import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Observable, retry, throwError} from "rxjs";
 import {Artikel} from "../entities/artikel";
 import {catchError} from "rxjs/operators";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class EinkaufszettelService {
-  private api = 'http://localhost:8080';
+  private api = `${environment.webserviceurl}`;
 
   constructor(private httpClient: HttpClient) {
   }

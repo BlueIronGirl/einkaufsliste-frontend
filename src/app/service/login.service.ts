@@ -9,12 +9,13 @@ import jwtDecode, {JwtPayload} from 'jwt-decode';
 import {selectLogin} from "../store/einkaufszettel/einkaufszettel.selectors";
 import {Router} from "@angular/router";
 import {MessageService} from "primeng/api";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginService {
-  private api = 'http://localhost:8080';
+  private api = `${environment.webserviceurl}`;
 
   constructor(private router: Router, private httpClient: HttpClient, private store: Store, private messageService: MessageService) {
   }
