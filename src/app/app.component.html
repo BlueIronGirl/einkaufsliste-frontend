@@ -39,11 +39,15 @@
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4 items-center justify-center">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-              <a routerLink="/einkaufszettel" class="bg-gray-900 text-white rounded-lg px-3 py-2 text-sm font-medium"
+              <a routerLink="/einkaufszettel"
+                 class="bg-gray-900 text-white rounded-lg px-3 py-2 text-sm font-medium"
                  aria-current="page">Einkaufszettel</a>
               <a routerLink="/artikel/new"
                  class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-lg px-3 py-2 text-sm font-medium">Neuer
                 Artikel</a>
+              <a routerLink="/archiv"
+                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-lg px-3 py-2 text-sm font-medium"
+                 aria-current="page">Archiv</a>
               <button type="button"
                       (click)="archiviereGekaufteArtikel()"
                       class="text-white bg-blue-400 rounded-lg px-2 py-2 text-sm text-center">
@@ -72,6 +76,9 @@
         <a routerLink="/artikel/new"
            class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-lg px-3 py-2 text-base font-medium">Neuer
           Artikel</a>
+        <a routerLink="/archiv"
+           class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-lg px-3 py-2 text-sm font-medium"
+           aria-current="page">Archiv</a>
         <button type="button"
                 (click)="archiviereGekaufteArtikel()"
                 class="text-white bg-blue-400 rounded-lg px-1 py-1 text-center">

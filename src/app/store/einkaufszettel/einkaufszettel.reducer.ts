@@ -7,11 +7,13 @@ export const einkaufszettelFeatureKey = 'einkaufszettel';
 
 export interface State {
   artikels: Artikel[];
+  artikelsArchiv: Artikel[];
   loginUser: User | null;
 }
 
 export const initialState: State = {
   artikels: [],
+  artikelsArchiv: [],
   loginUser: null
 };
 
@@ -82,6 +84,11 @@ export const einkaufszettelReducer = createReducer(
     }
 
     return {...state, artikels: artikels};
+  }),
+
+  // loadArchiv
+  on(EinkaufszettelActions.loadArchivSuccess, (state, action) => {
+    return {...state, artikelsArchiv: action.data}
   }),
 );
 

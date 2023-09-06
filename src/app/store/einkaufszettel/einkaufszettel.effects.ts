@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {catchError, concatMap, map, switchMap, tap} from 'rxjs/operators';
-import {of} from 'rxjs';
+import {Observable, of, pipe} from 'rxjs';
 import {EinkaufszettelActions} from './einkaufszettel.actions';
 import {EinkaufszettelService} from "../../service/einkaufszettel.service";
 import {LoginService} from "../../service/login.service";
 import {Router} from "@angular/router";
+import {MessageService} from "primeng/api";
 
 
 @Injectable()
@@ -87,6 +88,8 @@ export class EinkaufszettelEffects {
       ofType(EinkaufszettelActions.createArtikelSuccess),
       tap((action) => {
         this.router.navigateByUrl("/einkaufszettel");
+        this.messageService.clear();
+        this.messageService.add({severity: 'success', summary: 'Artikel wurde gespeichert'});
       }),
     ), {dispatch: false});
 
@@ -106,6 +109,8 @@ export class EinkaufszettelEffects {
       ofType(EinkaufszettelActions.updateArtikelSuccess),
       tap((action) => {
         this.router.navigateByUrl("/einkaufszettel");
+        this.messageService.clear();
+        this.messageService.add({severity: 'success', summary: 'Artikel wurde gespeichert'});
       }),
     ), {dispatch: false});
 
@@ -130,6 +135,26 @@ export class EinkaufszettelEffects {
     )
   });
 
-  constructor(private actions$: Actions, private router: Router, private loginService: LoginService, private einkaufszettelService: EinkaufszettelService) {
+  archiviereArtikelSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EinkaufszettelActions.archiviereArtikelSuccess),
+      tap(() => {
+        this.messageService.clear();
+        this.messageService.add({severity: 'success', summary: 'Artikel wurden archiviert'});
+      }),
+    ), {dispatch: false});
+
+  loadArchiv$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(EinkaufszettelActions.loadArchiv),
+      switchMap(() => this.einkaufszettelService.loadAllArtikelArchiv().pipe(
+          map(artikels => EinkaufszettelActions.loadArchivSuccess({data: artikels})),
+          catchError(error => of(EinkaufszettelActions.loadArchivFailure({error})))
+        )
+      )
+    );
+  });
+
+  constructor(private actions$: Actions, private messageService: MessageService, private router: Router, private loginService: LoginService, private einkaufszettelService: EinkaufszettelService) {
   }
 }

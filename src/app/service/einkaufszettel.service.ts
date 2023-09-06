@@ -48,4 +48,10 @@ export class EinkaufszettelService {
       catchError(EinkaufszettelService.errorHandler)
     );
   }
+
+  loadAllArtikelArchiv(): Observable<Artikel[]> {
+    return this.httpClient.get<Artikel[]>(`${this.api}/archiv`).pipe(
+      retry(3)
+    );
+  }
 }

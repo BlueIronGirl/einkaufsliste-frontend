@@ -21,3 +21,8 @@ export const selectArtikelById = (id: number) => createSelector(
     return state.artikels[state.artikels.findIndex(artikel => artikel.id === id)];
   }
 )
+
+export const selectAllArtikelArchiv = createSelector(
+  selectEinkaufszettelState,
+  state => state.artikelsArchiv
+);

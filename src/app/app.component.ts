@@ -23,9 +23,6 @@ export class AppComponent implements OnInit{
 
   archiviereGekaufteArtikel() {
     this.store.dispatch(EinkaufszettelActions.archiviereArtikel());
-
-    this.messageService.clear();
-    this.messageService.add({severity: 'success', summary: 'Artikel wurden archiviert'});
   }
 
   logout() {

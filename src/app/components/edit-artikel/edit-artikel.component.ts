@@ -1,11 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {Store} from "@ngrx/store";
 import {selectArtikelById} from "../../store/einkaufszettel/einkaufszettel.selectors";
 import {Artikel} from "../../entities/artikel";
 import {EinkaufszettelActions} from "../../store/einkaufszettel/einkaufszettel.actions";
-import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-edit-artikel',
@@ -17,14 +16,14 @@ export class EditArtikelComponent implements OnInit {
     id: [{value: '', disabled: true}, Validators.required],
     name: [{value: ''}, Validators.compose([Validators.required, Validators.minLength(1)])],
     // kategorie: ['', Validators.compose([Validators.required, Validators.minLength(1)])], TODO
-    anzahl: ['', Validators.compose([Validators.required, Validators.min(1)])],
+    anzahl: ['', Validators.compose([Validators.required, Validators.min(1), Validators.max(100)])],
     gekauft: ['', Validators.required]
   });
 
   edit: boolean = false;
   header: string = '';
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private store: Store, private messageService: MessageService) {
+  constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private store: Store) {
   }
 
   ngOnInit(): void {
@@ -64,8 +63,6 @@ export class EditArtikelComponent implements OnInit {
     } else {
       this.store.dispatch(EinkaufszettelActions.createArtikel({data: artikel}));
     }
-
-    this.messageService.add({severity:'success', summary:'Artikel wurde gespeichert'});
   }
 
   reset() {

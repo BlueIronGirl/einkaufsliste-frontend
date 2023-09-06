@@ -3,7 +3,6 @@ import {Store} from "@ngrx/store";
 import {EinkaufszettelActions} from "../../store/einkaufszettel/einkaufszettel.actions";
 import {selectAllArtikel} from "../../store/einkaufszettel/einkaufszettel.selectors";
 import {Artikel} from "../../entities/artikel";
-import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-einkaufszettel',
@@ -13,13 +12,13 @@ import {MessageService} from "primeng/api";
 export class EinkaufszettelComponent implements OnInit {
   artikels!: Artikel[];
 
-  constructor(private store: Store, private messageService: MessageService) {
+  constructor(private store: Store) {
   }
 
   ngOnInit(): void {
     this.store.dispatch(EinkaufszettelActions.loadEinkaufszettels());
 
-    this.store.select(selectAllArtikel).subscribe(artikels => this.artikels = artikels);
+    this.store.select(selectAllArtikel).subscribe(artikels => this.artikels = JSON.parse(JSON.stringify(artikels))); // deep copy of store, so that changes are possible
   }
 
   deleteArtikel(artikel: Artikel) {
@@ -27,10 +26,6 @@ export class EinkaufszettelComponent implements OnInit {
   }
 
   changeArtikelGekauft(artikel: Artikel) {
-    let artikelNew = {...artikel, gekauft: !artikel.gekauft};
-    this.store.dispatch(EinkaufszettelActions.updateArtikel({data: artikelNew}));
-
-    this.messageService.clear();
-    this.messageService.add({severity: 'success', summary: 'Artikel wurde gespeichert'});
+    this.store.dispatch(EinkaufszettelActions.updateArtikel({data: artikel}));
   }
 }

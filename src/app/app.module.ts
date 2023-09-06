@@ -27,6 +27,7 @@ import {PasswordModule} from "primeng/password";
 import { RegisterComponent } from './components/register/register.component';
 import {MessageService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
+import { ArchivComponent } from './components/archiv/archiv.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {ToastModule} from "primeng/toast";
     EinkaufszettelComponent,
     EditArtikelComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ArchivComponent
   ],
   imports: [
     // standard angular

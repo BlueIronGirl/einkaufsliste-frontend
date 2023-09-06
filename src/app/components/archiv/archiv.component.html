@@ -5,24 +5,9 @@
              [collapsed]="true">
       <!-- Header -->
       <ng-template pTemplate="header">
-        <p-checkbox class="mr-2"
-                    [(ngModel)]="artikel.gekauft"
-                    [binary]="true"
-                    (onChange)="changeArtikelGekauft(artikel)"></p-checkbox>
-
         <span class="text-primary font-semibold text-xl text-emerald-500 mr-1">{{artikel.anzahl}}</span>
         <span class="text-primary font-semibold text-xl">{{artikel.name}}</span>
         <span class="flex-grow"></span>
-
-        <button type="button" [routerLink]="['/artikel', artikel.id]"
-                class="text-white bg-gray-800 rounded-lg px-1 py-1 text-center">
-          Editieren
-        </button>
-
-        <button type="button" (click)="deleteArtikel(artikel)"
-                class="text-white bg-gray-800 rounded-lg px-1 py-1 text-center">
-          Löschen
-        </button>
       </ng-template>
 
       <ng-template pTemplate="content">
