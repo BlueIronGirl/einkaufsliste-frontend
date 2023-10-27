@@ -12,13 +12,13 @@ import {MessageService} from "primeng/api";
 import {environment} from "../../environments/environment";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class LoginService {
-  private api = `${environment.webserviceurl}`;
+    private api = `${environment.webserviceurl}`;
 
-  constructor(private router: Router, private httpClient: HttpClient, private store: Store, private messageService: MessageService) {
-  }
+    constructor(private router: Router, private httpClient: HttpClient, private store: Store, private messageService: MessageService) {
+    }
 
   private errorHandler(error: HttpErrorResponse): Observable<never> {
     console.error('Fehler aufgetreten!' + JSON.stringify(error));
@@ -26,66 +26,66 @@ export class LoginService {
     return throwError(() => error);
   }
 
-  login(user: User) {
-    return this.httpClient.post<User>(`${this.api}/auth/login`, user).pipe(
-      catchError(error => this.errorHandler(error))
-    );
-  }
-
-  register(user: User) {
-    return this.httpClient.post<User>(`${this.api}/auth/register`, user).pipe(
-      catchError(error => this.errorHandler(error))
-    );
-  }
-
-  saveLoginStateToLocalStorage(user: User | null) {
-    localStorage.setItem('user', JSON.stringify(user));
-  }
-
-  getActiveLoginToken(): string {
-    let token = '';
-
-    this.store.select(selectLogin).subscribe(user => token = user?.token ? user.token : '');
-
-    return token;
-  }
-
-  isLoginStateValid() {
-    const userString = localStorage.getItem('user');
-
-    if (userString) {
-      const user: User = JSON.parse(userString);
-
-      if (user && user.token && this.isTokenNotExpired(this.getExpire(user.token))) {
-        this.store.dispatch(EinkaufszettelActions.loginLocalstorage({data: user}));
-        return true;
-      }
+    login(user: User) {
+        return this.httpClient.post<User>(`${this.api}/auth/login`, user).pipe(
+            catchError(error => this.errorHandler(error))
+        );
     }
 
-    return false;
-  }
-
-  private getExpire(token: string): Date {
-    const params: JwtPayload = jwtDecode(token);
-    if (params.exp) {
-      return new Date(params.exp * 1000);
-    } else {
-      return new Date();
+    register(user: User) {
+        return this.httpClient.post<User>(`${this.api}/auth/register`, user).pipe(
+            catchError(error => this.errorHandler(error))
+        );
     }
-  }
 
-  private isTokenNotExpired(expire: Date | string | undefined): boolean {
-    const date: Date | undefined = this.getDateOrStringAsDate(expire);
-    return date !== undefined && date.getTime() > new Date().getTime();
-  }
-
-  private getDateOrStringAsDate(dateOrString: string | Date | undefined): Date | undefined {
-    if (typeof dateOrString === 'string') {
-      return new Date(dateOrString);
-    } else if (dateOrString) {
-      return dateOrString;
-    } else {
-      return undefined;
+    saveLoginStateToLocalStorage(user: User | null) {
+        localStorage.setItem('user', JSON.stringify(user));
     }
-  }
+
+    getActiveLoginToken(): string {
+        let token = '';
+
+        this.store.select(selectLogin).subscribe(user => token = user?.token ? user.token : '');
+
+        return token;
+    }
+
+    isLoginStateValid() {
+        const userString = localStorage.getItem('user');
+
+        if (userString) {
+            const user: User = JSON.parse(userString);
+
+            if (user && user.token && this.isTokenNotExpired(this.getExpire(user.token))) {
+                this.store.dispatch(EinkaufszettelActions.loginLocalstorage({data: user}));
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private getExpire(token: string): Date {
+        const params: JwtPayload = jwtDecode(token);
+        if (params.exp) {
+            return new Date(params.exp * 1000);
+        } else {
+            return new Date();
+        }
+    }
+
+    private isTokenNotExpired(expire: Date | string | undefined): boolean {
+        const date: Date | undefined = this.getDateOrStringAsDate(expire);
+        return date !== undefined && date.getTime() > new Date().getTime();
+    }
+
+    private getDateOrStringAsDate(dateOrString: string | Date | undefined): Date | undefined {
+        if (typeof dateOrString === 'string') {
+            return new Date(dateOrString);
+        } else if (dateOrString) {
+            return dateOrString;
+        } else {
+            return undefined;
+        }
+    }
 }
