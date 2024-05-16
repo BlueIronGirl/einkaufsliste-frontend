@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'einkaufszettel/:einkaufszettelId', component: EditEinkaufszettelComponent, canActivate: [AuthGuard]},
   {path: 'einkaufszettel', component: EditEinkaufszettelComponent, canActivate: [AuthGuard]},
   {path: 'archiv', component: ArchivComponent, canActivate: [AuthGuard]},
-  {path: 'artikel/:einkaufszettelId/:id', component: EditArtikelComponent, canActivate: [AuthGuard]},
+  {path: 'artikel/:einkaufszettelId/:artikelId', component: EditArtikelComponent, canActivate: [AuthGuard]},
   {path: 'artikel/new/:einkaufszettelId', component: EditArtikelComponent, canActivate: [AuthGuard]}
 ];
 

@@ -26,7 +26,7 @@ export const selectArtikelById = (einkaufszettelId: number, artikelId: number) =
   selectEinkaufszettelState,
   state => {
     // @ts-ignore
-    return state.einkaufszettel[state.einkaufszettel.findIndex(einkaufszettel => einkaufszettel.id === einkaufszettelId)].artikels.filter(artikel => artikel.id === artikelId);
+    return state.einkaufszettel[state.einkaufszettel.findIndex(einkaufszettel => einkaufszettel.id === einkaufszettelId)].artikels.filter(artikel => artikel.id === artikelId)[0];
   }
 )
 
