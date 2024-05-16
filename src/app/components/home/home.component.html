@@ -1,0 +1,57 @@
+<div class="grid">
+  <div *ngFor="let einkaufszettel of einkaufszettel">
+    <h2>{{ einkaufszettel.name }}
+      <button type="button" [routerLink]="['/einkaufszettel', einkaufszettel.id]"
+              class="text-white bg-gray-800 rounded-lg px-1 py-1 text-center">
+        Freigeben
+      </button>
+      <button type="button" [routerLink]="['/artikel/new', einkaufszettel.id]"
+              class="text-white bg-gray-800 rounded-lg px-1 py-1 text-center">
+        Neuer Artikel
+      </button>
+    </h2>
+    <div *ngFor="let artikel of einkaufszettel.artikels">
+      <p-panel class="p-0"
+               [toggleable]="true"
+               [collapsed]="true">
+        <!-- Header -->
+        <ng-template pTemplate="header">
+          <p-checkbox class="mr-2"
+                      [(ngModel)]="artikel.gekauft"
+                      [binary]="true"
+                      (onChange)="changeArtikelGekauft(artikel)"></p-checkbox>
+
+          <span class="text-primary font-semibold text-xl text-emerald-500 mr-1">{{ artikel.anzahl }}</span>
+          <span class="text-primary font-semibold text-xl">{{ artikel.name }}</span>
+          <span class="flex-grow"></span>
+
+          <button type="button" [routerLink]="['/artikel', einkaufszettel.id, artikel.id]"
+                  class="text-white bg-gray-800 rounded-lg px-1 py-1 text-center">
+            Editieren
+          </button>
+
+          <button type="button" (click)="deleteArtikel(artikel)"
+                  class="text-white bg-gray-800 rounded-lg px-1 py-1 text-center">
+            Löschen
+          </button>
+        </ng-template>
+
+        <ng-template pTemplate="content">
+          <div class="grid grid-cols-2 gap-2 w-1/4">
+            <div>Erstellt am:</div>
+            <div>{{ artikel.erstellungsZeitpunkt | date:'dd.MM.yyyy HH:mm' }}</div>
+            <div>
+              <span *ngIf="artikel.kaufZeitpunkt"> Gekauft am:</span>
+            </div>
+            <div>
+              <span *ngIf="artikel.kaufZeitpunkt">{{ artikel.kaufZeitpunkt | date:'dd.MM.yyyy HH:mm' }}</span>
+            </div>
+          </div>
+        </ng-template>
+      </p-panel>
+    </div>
+    <p-divider></p-divider>
+  </div>
+</div>
+
+

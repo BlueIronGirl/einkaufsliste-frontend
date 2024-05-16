@@ -3,7 +3,7 @@ import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {EinkaufszettelComponent} from './components/einkaufszettel/einkaufszettel.component';
+import {HomeComponent} from './components/home/home.component';
 import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {EffectsModule} from '@ngrx/effects';
@@ -28,15 +28,19 @@ import { RegisterComponent } from './components/register/register.component';
 import {MessageService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
 import { ArchivComponent } from './components/archiv/archiv.component';
+import {DividerModule} from "primeng/divider";
+import { EditEinkaufszettelComponent } from './components/edit-einkaufszettel/edit-einkaufszettel.component';
+import {MultiSelectModule} from "primeng/multiselect";
 
 @NgModule({
   declarations: [
     AppComponent,
-    EinkaufszettelComponent,
+    HomeComponent,
     EditArtikelComponent,
     LoginComponent,
     RegisterComponent,
-    ArchivComponent
+    ArchivComponent,
+    EditEinkaufszettelComponent
   ],
   imports: [
     // standard angular
@@ -64,7 +68,9 @@ import { ArchivComponent } from './components/archiv/archiv.component';
     PanelModule,
     MessageModule,
     MessagesModule,
-    ToastModule
+    ToastModule,
+    DividerModule,
+    MultiSelectModule
   ],
   providers: [
     {

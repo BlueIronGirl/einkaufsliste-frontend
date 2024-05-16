@@ -20,6 +20,7 @@ export class EditArtikelComponent implements OnInit {
     gekauft: ['', Validators.required]
   });
 
+  einkaufszettelId: number = 0;
   edit: boolean = false;
   header: string = '';
 
@@ -27,21 +28,20 @@ export class EditArtikelComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const id = Number(this.activatedRoute.snapshot.paramMap.get('id'));
-    if (id >= 0) {
-      this.initEdit(id);
+    this.einkaufszettelId = Number(this.activatedRoute.snapshot.paramMap.get('einkaufszettelId'));
+    const artikelId = Number(this.activatedRoute.snapshot.paramMap.get('artikelId'));
+    if (artikelId > 0) {
+      this.initEdit(artikelId);
     } else {
       this.initNew();
     }
   }
 
-  private initEdit(id: number) {
+  private initEdit(artikelId: number) {
     this.edit = true;
     this.header = 'Artikel bearbeiten';
 
-    this.store.dispatch(EinkaufszettelActions.loadEinkaufszettels());
-
-    this.store.select(selectArtikelById(id)).subscribe(artikel => this.artikelForm.patchValue(artikel));
+    this.store.select(selectArtikelById(this.einkaufszettelId, artikelId)).subscribe(artikel => this.artikelForm.patchValue(artikel));
   }
 
   private initNew() {
@@ -61,7 +61,7 @@ export class EditArtikelComponent implements OnInit {
     if (this.edit) {
       this.store.dispatch(EinkaufszettelActions.updateArtikel({data: artikel}));
     } else {
-      this.store.dispatch(EinkaufszettelActions.createArtikel({data: artikel}));
+      this.store.dispatch(EinkaufszettelActions.createArtikel({einkaufszettelId: this.einkaufszettelId, data: artikel}));
     }
   }
 

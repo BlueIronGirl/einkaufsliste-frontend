@@ -4,6 +4,7 @@ import {Observable, retry, throwError} from "rxjs";
 import {Artikel} from "../entities/artikel";
 import {catchError} from "rxjs/operators";
 import {environment} from "../../environments/environment";
+import {Einkaufszettel} from "../entities/einkaufszettel";
 
 @Injectable({
   providedIn: 'root'
@@ -19,26 +20,44 @@ export class EinkaufszettelService {
     return throwError(() => error);
   }
 
-  getAll(): Observable<Artikel[]> {
-    return this.httpClient.get<Artikel[]>(`${this.api}/artikels`).pipe(
+  getAllEinkaufszettel(): Observable<Einkaufszettel[]> {
+    return this.httpClient.get<Einkaufszettel[]>(`${this.api}/einkaufszettel`).pipe(
       retry(3)
     );
   }
 
-  createArtikel(artikel: Artikel) {
-    return this.httpClient.post<Artikel>(`${this.api}/artikels`, artikel).pipe(
+  createEinkaufszettel(einkaufszettel: Einkaufszettel) {
+    return this.httpClient.post<Einkaufszettel>(`${this.api}/einkaufszettel`, einkaufszettel).pipe(
+      catchError(EinkaufszettelService.errorHandler)
+    );
+  }
+
+  updateEinkaufszettel(einkaufszettel: Einkaufszettel) {
+    return this.httpClient.put<Einkaufszettel>(`${this.api}/einkaufszettel/${einkaufszettel.id}`, einkaufszettel).pipe(
+      catchError(EinkaufszettelService.errorHandler)
+    );
+  }
+
+  deleteEinkaufszettel(einkaufszettel: Einkaufszettel) {
+    return this.httpClient.delete<Einkaufszettel>(`${this.api}/einkaufszettel/${einkaufszettel.id}`).pipe(
+      catchError(EinkaufszettelService.errorHandler)
+    );
+  }
+
+  createArtikel(einkaufszettelId: number, artikel: Artikel) {
+    return this.httpClient.post<Artikel>(`${this.api}/einkaufszettel/artikel/${einkaufszettelId}`, artikel).pipe(
       catchError(EinkaufszettelService.errorHandler)
     );
   }
 
   updateArtikel(artikel: Artikel) {
-    return this.httpClient.put<Artikel>(`${this.api}/artikels/${artikel.id}`, artikel).pipe(
+    return this.httpClient.put<Artikel>(`${this.api}/einkaufszettel/artikel/${artikel.id}`, artikel).pipe(
       catchError(EinkaufszettelService.errorHandler)
     );
   }
 
   deleteArtikel(artikel: Artikel) {
-    return this.httpClient.delete<Artikel>(`${this.api}/artikels/${artikel.id}`).pipe(
+    return this.httpClient.delete<Artikel>(`${this.api}/einkaufszettel/artikel/${artikel.id}`).pipe(
       catchError(EinkaufszettelService.errorHandler)
     );
   }

@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {catchError, concatMap, map, switchMap, tap} from 'rxjs/operators';
-import {Observable, of, pipe} from 'rxjs';
+import {of} from 'rxjs';
 import {EinkaufszettelActions} from './einkaufszettel.actions';
 import {EinkaufszettelService} from "../../service/einkaufszettel.service";
 import {LoginService} from "../../service/login.service";
 import {Router} from "@angular/router";
 import {MessageService} from "primeng/api";
+import {UserService} from "../../service/user.service";
 
 
 @Injectable()
@@ -46,7 +47,7 @@ export class EinkaufszettelEffects {
       ofType(EinkaufszettelActions.loginSuccess),
       tap((action) => {
         this.loginService.saveLoginStateToLocalStorage(action.data);
-        this.router.navigateByUrl("/einkaufszettel");
+        this.router.navigateByUrl("/home");
       }),
     ), {dispatch: false});
 
@@ -64,19 +65,88 @@ export class EinkaufszettelEffects {
   loadEinkaufszettels$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(EinkaufszettelActions.loadEinkaufszettels),
-      switchMap(() => this.einkaufszettelService.getAll().pipe(
-          map(artikels => EinkaufszettelActions.loadEinkaufszettelsSuccess({data: artikels})),
+      switchMap(() => this.einkaufszettelService.getAllEinkaufszettel().pipe(
+          map(einkaufszettel => EinkaufszettelActions.loadEinkaufszettelsSuccess({data: einkaufszettel})),
           catchError(error => of(EinkaufszettelActions.loadEinkaufszettelsFailure({error})))
         )
       )
     );
   });
 
+  createEinkaufszettel$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(EinkaufszettelActions.createEinkaufszettel),
+      concatMap(inputData => this.einkaufszettelService.createEinkaufszettel(inputData.data).pipe(
+        map(data => EinkaufszettelActions.createEinkaufszettelSuccess({data: data})),
+        catchError(error => of(EinkaufszettelActions.createEinkaufszettelFailure({error})))
+      ))
+    )
+  });
+
+  createEinkaufszettelSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EinkaufszettelActions.createEinkaufszettelSuccess),
+      tap((action) => {
+        this.router.navigateByUrl("/home");
+        this.messageService.clear();
+        this.messageService.add({severity: 'success', summary: 'Einkaufszettel wurde gespeichert'});
+      }),
+    ), {dispatch: false});
+
+  updateEinkaufszettel$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(EinkaufszettelActions.updateEinkaufszettel),
+      map(action => action.data),
+      concatMap(inputData => this.einkaufszettelService.updateEinkaufszettel(inputData).pipe(
+        map(data => EinkaufszettelActions.updateEinkaufszettelSuccess({data: data})),
+        catchError(error => of(EinkaufszettelActions.updateEinkaufszettelFailure({error})))
+      ))
+    )
+  });
+
+  updateEinkaufszettelSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EinkaufszettelActions.updateEinkaufszettelSuccess),
+      tap(() => {
+        this.router.navigateByUrl("/home");
+        this.messageService.clear();
+        this.messageService.add({severity: 'success', summary: 'Einkaufszettel wurde gespeichert'});
+      }),
+      concatMap(inputData => this.einkaufszettelService.getAllEinkaufszettel().pipe(
+        map(data => EinkaufszettelActions.loadEinkaufszettelsSuccess({data: data})),
+        catchError(error => of(EinkaufszettelActions.loadEinkaufszettelsFailure({error})))
+      ))
+    ), {dispatch: false});
+
+  deleteEinkaufszettel$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(EinkaufszettelActions.deleteEinkaufszettel),
+      map(action => action.data),
+      concatMap(inputData => this.einkaufszettelService.deleteEinkaufszettel(inputData).pipe(
+        map(data => EinkaufszettelActions.deleteEinkaufszettelSuccess({data: data})),
+        catchError(error => of(EinkaufszettelActions.deleteEinkaufszettelFailure({error})))
+      )),
+      concatMap(inputData => this.einkaufszettelService.getAllEinkaufszettel().pipe(
+        map(data => EinkaufszettelActions.loadEinkaufszettelsSuccess({data: data})),
+        catchError(error => of(EinkaufszettelActions.loadEinkaufszettelsFailure({error})))
+      ))
+    )
+  });
+
+  deleteEinkaufszettelSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(EinkaufszettelActions.deleteEinkaufszettelSuccess),
+      concatMap(() => this.einkaufszettelService.getAllEinkaufszettel().pipe(
+        map(data => EinkaufszettelActions.loadEinkaufszettelsSuccess({data: data})),
+        catchError(error => of(EinkaufszettelActions.loadEinkaufszettelsFailure({error})))
+      ))
+    )
+  });
+
   createArtikel$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(EinkaufszettelActions.createArtikel),
-      map(action => action.data),
-      concatMap(inputData => this.einkaufszettelService.createArtikel(inputData).pipe(
+      concatMap(inputData => this.einkaufszettelService.createArtikel(inputData.einkaufszettelId, inputData.data).pipe(
         map(data => EinkaufszettelActions.createArtikelSuccess({data: data})),
         catchError(error => of(EinkaufszettelActions.createArtikelFailure({error})))
       ))
@@ -87,7 +157,7 @@ export class EinkaufszettelEffects {
     this.actions$.pipe(
       ofType(EinkaufszettelActions.createArtikelSuccess),
       tap((action) => {
-        this.router.navigateByUrl("/einkaufszettel");
+        this.router.navigateByUrl("/home");
         this.messageService.clear();
         this.messageService.add({severity: 'success', summary: 'Artikel wurde gespeichert'});
       }),
@@ -108,10 +178,14 @@ export class EinkaufszettelEffects {
     this.actions$.pipe(
       ofType(EinkaufszettelActions.updateArtikelSuccess),
       tap((action) => {
-        this.router.navigateByUrl("/einkaufszettel");
+        this.router.navigateByUrl("/home");
         this.messageService.clear();
         this.messageService.add({severity: 'success', summary: 'Artikel wurde gespeichert'});
       }),
+      concatMap(inputData => this.einkaufszettelService.getAllEinkaufszettel().pipe(
+        map(data => EinkaufszettelActions.loadEinkaufszettelsSuccess({data: data})),
+        catchError(error => of(EinkaufszettelActions.loadEinkaufszettelsFailure({error})))
+      ))
     ), {dispatch: false});
 
   deleteArtikel$ = createEffect(() => {
@@ -121,6 +195,20 @@ export class EinkaufszettelEffects {
       concatMap(inputData => this.einkaufszettelService.deleteArtikel(inputData).pipe(
         map(data => EinkaufszettelActions.deleteArtikelSuccess({data: data})),
         catchError(error => of(EinkaufszettelActions.deleteArtikelFailure({error})))
+      )),
+      concatMap(inputData => this.einkaufszettelService.getAllEinkaufszettel().pipe(
+        map(data => EinkaufszettelActions.loadEinkaufszettelsSuccess({data: data})),
+        catchError(error => of(EinkaufszettelActions.loadEinkaufszettelsFailure({error})))
+      ))
+    )
+  });
+
+  deleteArtikelSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(EinkaufszettelActions.deleteArtikelSuccess),
+      concatMap(() => this.einkaufszettelService.getAllEinkaufszettel().pipe(
+        map(data => EinkaufszettelActions.loadEinkaufszettelsSuccess({data: data})),
+        catchError(error => of(EinkaufszettelActions.loadEinkaufszettelsFailure({error})))
       ))
     )
   });
@@ -142,7 +230,22 @@ export class EinkaufszettelEffects {
         this.messageService.clear();
         this.messageService.add({severity: 'success', summary: 'Artikel wurden archiviert'});
       }),
+      concatMap(() => this.einkaufszettelService.getAllEinkaufszettel().pipe(
+        map(data => EinkaufszettelActions.loadEinkaufszettelsSuccess({data: data})),
+        catchError(error => of(EinkaufszettelActions.loadEinkaufszettelsFailure({error})))
+      ))
     ), {dispatch: false});
+
+  loadUsers$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(EinkaufszettelActions.loadUsers),
+      switchMap(() => this.userService.getAllUsers().pipe(
+          map(users => EinkaufszettelActions.loadUsersSuccess({data: users})),
+          catchError(error => of(EinkaufszettelActions.loadUsersFailure({error})))
+        )
+      )
+    );
+  });
 
   loadArchiv$ = createEffect(() => {
     return this.actions$.pipe(
@@ -155,6 +258,6 @@ export class EinkaufszettelEffects {
     );
   });
 
-  constructor(private actions$: Actions, private messageService: MessageService, private router: Router, private loginService: LoginService, private einkaufszettelService: EinkaufszettelService) {
+  constructor(private actions$: Actions, private messageService: MessageService, private router: Router, private loginService: LoginService, private einkaufszettelService: EinkaufszettelService, private userService: UserService) {
   }
 }

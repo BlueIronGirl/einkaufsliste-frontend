@@ -10,17 +10,30 @@ export const selectLogin = createSelector(
   state => state.loginUser
 );
 
-export const selectAllArtikel = createSelector(
+export const selectAllEinkaufszettel = createSelector(
   selectEinkaufszettelState,
-  state => state.artikels
+  state => state.einkaufszettel
 );
 
-export const selectArtikelById = (id: number) => createSelector(
+export const selectEinkaufszettelById = (einkaufszettelId: number) => createSelector(
   selectEinkaufszettelState,
   state => {
-    return state.artikels[state.artikels.findIndex(artikel => artikel.id === id)];
+    return state.einkaufszettel[state.einkaufszettel.findIndex(einkaufszettel => einkaufszettel.id === einkaufszettelId)];
   }
 )
+
+export const selectArtikelById = (einkaufszettelId: number, artikelId: number) => createSelector(
+  selectEinkaufszettelState,
+  state => {
+    // @ts-ignore
+    return state.einkaufszettel[state.einkaufszettel.findIndex(einkaufszettel => einkaufszettel.id === einkaufszettelId)].artikels.filter(artikel => artikel.id === artikelId);
+  }
+)
+
+export const selectAllUsers = createSelector(
+  selectEinkaufszettelState,
+  state => state.users
+);
 
 export const selectAllArtikelArchiv = createSelector(
   selectEinkaufszettelState,

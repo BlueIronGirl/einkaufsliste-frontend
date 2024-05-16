@@ -2,19 +2,22 @@ import {createReducer, on} from '@ngrx/store';
 import {EinkaufszettelActions} from './einkaufszettel.actions';
 import {Artikel} from "../../entities/artikel";
 import {User} from "../../entities/user";
+import {Einkaufszettel} from "../../entities/einkaufszettel";
 
 export const einkaufszettelFeatureKey = 'einkaufszettel';
 
 export interface State {
-  artikels: Artikel[];
+  einkaufszettel: Einkaufszettel[];
   artikelsArchiv: Artikel[];
   loginUser: User | null;
+  users: User[];
 }
 
 export const initialState: State = {
-  artikels: [],
+  einkaufszettel: [],
   artikelsArchiv: [],
-  loginUser: null
+  loginUser: null,
+  users: []
 };
 
 export const einkaufszettelReducer = createReducer(
@@ -37,53 +40,14 @@ export const einkaufszettelReducer = createReducer(
     return {...state, loginUser: null}
   }),
 
-  // loadEinkaufszettel
+  // loadEinkaufszettels
   on(EinkaufszettelActions.loadEinkaufszettelsSuccess, (state, action) => {
-    return {...state, artikels: action.data}
+    return {...state, einkaufszettel: action.data}
   }),
 
-  // addArtikel
-  on(EinkaufszettelActions.createArtikelSuccess, (state, action) => {
-    let artikels = [...state.artikels, action.data];
-    return {...state, artikels: artikels};
-  }),
-
-  // updateArtikel
-  on(EinkaufszettelActions.updateArtikelSuccess, (state, action) => {
-    let indexToUpdate = state.artikels.findIndex(item => item.id === action.data.id);
-
-    let artikels = [...state.artikels];
-    if (indexToUpdate >= 0) {
-      artikels[indexToUpdate] = action.data;
-    }
-
-    return {...state, artikels: artikels};
-  }),
-
-  // deleteArtikel
-  on(EinkaufszettelActions.deleteArtikelSuccess, (state, action) => {
-    let indexToRemove = state.artikels.findIndex(item => item.id === action.data.id);
-
-    let artikels = [...state.artikels];
-    if (indexToRemove >= 0) {
-      artikels.splice(indexToRemove, 1);
-    }
-
-    return {...state, artikels: artikels};
-  }),
-
-  // archiviereArtikel
-  on(EinkaufszettelActions.archiviereArtikelSuccess, (state, action) => {
-    let artikels = [...state.artikels];
-
-    for (let artikel of action.data) {
-      let indexToRemove = artikels.findIndex(item => item.id === artikel.id);
-      if (indexToRemove >= 0) {
-        artikels.splice(indexToRemove, 1);
-      }
-    }
-
-    return {...state, artikels: artikels};
+  // loadUsers
+  on(EinkaufszettelActions.loadUsersSuccess, (state, action) => {
+    return {...state, users: action.data}
   }),
 
   // loadArchiv
