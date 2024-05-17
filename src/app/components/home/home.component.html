@@ -1,12 +1,12 @@
 <div class="grid">
   <div *ngFor="let einkaufszettel of einkaufszettel">
-    <h2>{{ einkaufszettel.name }}
+    <h2 class="ml-1 mb-2">{{ einkaufszettel.name }}
       <button type="button" [routerLink]="['/einkaufszettel', einkaufszettel.id]"
-              class="text-white bg-gray-800 rounded-lg px-1 py-1 text-center">
+              class="ml-1 text-white bg-gray-800 rounded-lg px-1 py-1 text-center">
         Freigeben
       </button>
       <button type="button" [routerLink]="['/artikel/new', einkaufszettel.id]"
-              class="text-white bg-gray-800 rounded-lg px-1 py-1 text-center">
+              class="ml-1 text-white bg-gray-800 rounded-lg px-1 py-1 text-center">
         Neuer Artikel
       </button>
     </h2>
