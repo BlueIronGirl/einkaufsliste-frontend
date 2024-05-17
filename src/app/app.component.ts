@@ -9,7 +9,7 @@ import {selectLogin} from "./store/einkaufszettel/einkaufszettel.selectors";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   // adminModus = false;
   logoutButtonRendered = false;
 

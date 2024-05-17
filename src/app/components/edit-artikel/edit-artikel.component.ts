@@ -61,7 +61,10 @@ export class EditArtikelComponent implements OnInit {
     if (this.edit) {
       this.store.dispatch(EinkaufszettelActions.updateArtikel({data: artikel}));
     } else {
-      this.store.dispatch(EinkaufszettelActions.createArtikel({einkaufszettelId: this.einkaufszettelId, data: artikel}));
+      this.store.dispatch(EinkaufszettelActions.createArtikel({
+        einkaufszettelId: this.einkaufszettelId,
+        data: artikel
+      }));
     }
   }
 

@@ -1,10 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {Observable, retry, throwError} from "rxjs";
-import {Artikel} from "../entities/artikel";
-import {catchError} from "rxjs/operators";
 import {environment} from "../../environments/environment";
-import {Einkaufszettel} from "../entities/einkaufszettel";
 import {User} from "../entities/user";
 
 @Injectable({

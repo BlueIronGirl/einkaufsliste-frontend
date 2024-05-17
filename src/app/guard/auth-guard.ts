@@ -8,14 +8,15 @@ import {Observable} from "rxjs";
 })
 export class AuthGuard {
 
-  constructor(private router: Router, private loginService: LoginService) { }
+  constructor(private router: Router, private loginService: LoginService) {
+  }
 
   canActivate():
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if(!this.loginService.isLoginStateValid()) {
+    if (!this.loginService.isLoginStateValid()) {
       this.router.navigateByUrl('/login');
       return false;
     }

@@ -5,20 +5,20 @@
              [collapsed]="true">
       <!-- Header -->
       <ng-template pTemplate="header">
-        <span class="text-primary font-semibold text-xl text-emerald-500 mr-1">{{artikel.anzahl}}</span>
-        <span class="text-primary font-semibold text-xl">{{artikel.name}}</span>
+        <span class="text-primary font-semibold text-xl text-emerald-500 mr-1">{{ artikel.anzahl }}</span>
+        <span class="text-primary font-semibold text-xl">{{ artikel.name }}</span>
         <span class="flex-grow"></span>
       </ng-template>
 
       <ng-template pTemplate="content">
         <div class="grid grid-cols-2 gap-2 w-1/4">
           <div>Erstellt am:</div>
-          <div>{{artikel.erstellungsZeitpunkt | date:'dd.MM.yyyy HH:mm' }}</div>
+          <div>{{ artikel.erstellungsZeitpunkt | date:'dd.MM.yyyy HH:mm' }}</div>
           <div>
             <span *ngIf="artikel.kaufZeitpunkt"> Gekauft am:</span>
           </div>
           <div>
-            <span *ngIf="artikel.kaufZeitpunkt">{{artikel.kaufZeitpunkt | date:'dd.MM.yyyy HH:mm' }}</span>
+            <span *ngIf="artikel.kaufZeitpunkt">{{ artikel.kaufZeitpunkt | date:'dd.MM.yyyy HH:mm' }}</span>
           </div>
         </div>
       </ng-template>

@@ -2,10 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Einkaufszettel} from "../../entities/einkaufszettel";
 import {Store} from "@ngrx/store";
 import {EinkaufszettelActions} from "../../store/einkaufszettel/einkaufszettel.actions";
-import {
-  selectAllUsers,
-  selectEinkaufszettelById
-} from "../../store/einkaufszettel/einkaufszettel.selectors";
+import {selectAllUsers, selectEinkaufszettelById} from "../../store/einkaufszettel/einkaufszettel.selectors";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {User} from "../../entities/user";

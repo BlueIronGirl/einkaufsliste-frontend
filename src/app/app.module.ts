@@ -1,4 +1,4 @@
-import {NgModule, isDevMode} from '@angular/core';
+import {isDevMode, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 
 import {AppRoutingModule} from './app-routing.module';
@@ -15,21 +15,21 @@ import {CheckboxModule} from "primeng/checkbox";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {PanelModule} from "primeng/panel";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import { EditArtikelComponent } from './components/edit-artikel/edit-artikel.component';
+import {EditArtikelComponent} from './components/edit-artikel/edit-artikel.component';
 import {InputNumberModule} from "primeng/inputnumber";
 import {ButtonModule} from "primeng/button";
 import {InputTextModule} from "primeng/inputtext";
 import {MessageModule} from "primeng/message";
 import {MessagesModule} from "primeng/messages";
-import { LoginComponent } from './components/login/login.component';
+import {LoginComponent} from './components/login/login.component';
 import {TokenInterceptor} from "./interceptor/token-interceptor.service";
 import {PasswordModule} from "primeng/password";
-import { RegisterComponent } from './components/register/register.component';
+import {RegisterComponent} from './components/register/register.component';
 import {MessageService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
-import { ArchivComponent } from './components/archiv/archiv.component';
+import {ArchivComponent} from './components/archiv/archiv.component';
 import {DividerModule} from "primeng/divider";
-import { EditEinkaufszettelComponent } from './components/edit-einkaufszettel/edit-einkaufszettel.component';
+import {EditEinkaufszettelComponent} from './components/edit-einkaufszettel/edit-einkaufszettel.component';
 import {MultiSelectModule} from "primeng/multiselect";
 
 @NgModule({
