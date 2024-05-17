@@ -51,6 +51,15 @@ export class EinkaufszettelEffects {
       }),
     ), {dispatch: false});
 
+  loginFailure = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EinkaufszettelActions.loginFailure),
+      tap((action) => {
+        this.messageService.clear();
+        this.messageService.add({severity: 'error', summary: 'Der Benutzername oder das Passwort sind falsch! Bitte überprüfen Sie Ihre Eingaben.'});
+      }),
+    ), {dispatch: false});
+
   logout$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(EinkaufszettelActions.logout),

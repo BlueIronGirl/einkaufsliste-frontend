@@ -45,7 +45,7 @@ export class EinkaufszettelService {
   }
 
   createArtikel(einkaufszettelId: number, artikel: Artikel) {
-    return this.httpClient.post<Artikel>(`${this.api}/einkaufszettel/artikel/${einkaufszettelId}`, artikel).pipe(
+    return this.httpClient.post<Artikel>(`${this.api}/einkaufszettel/${einkaufszettelId}/artikel`, artikel).pipe(
       catchError(EinkaufszettelService.errorHandler)
     );
   }
