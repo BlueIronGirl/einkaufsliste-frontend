@@ -1,11 +1,11 @@
-<div class="m-auto">
-  <nav class="bg-gray-800">
+<div>
+  <nav class="bg-cyan-800">
     <div class="mx-auto px-2 sm:px-6 lg:px-4">
       <div class="relative flex h-16 items-center justify-between">
         <div class="flex items-center sm:hidden">
           <!-- Mobile menu button-->
           <button type="button"
-                  class="inline-flex items-center justify-center rounded-lg p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                  class="inline-flex items-center rounded-lg p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                   (click)="toggleCollapseMenu()"
                   aria-controls="mobile-menu" aria-expanded="false">
             <span class="sr-only">Open main menu</span>
@@ -30,31 +30,32 @@
           </button>
         </div>
 
-        <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+        <div class="flex flex-1 items-center sm:items-stretch sm:justify-start">
           <div class="flex flex-shrink-0 items-center">
-            <img class="h-8 w-auto"
-                 src="https://image.spreadshirtmedia.net/image-server/v1/products/T1600A1PA5077PT10X10Y10D152726996W3830H3830/views/1,width=378,height=378,appearanceId=1,backgroundColor=F2F2F2/hier-koennte-ihre-werbung-stehen.jpg"
-                 alt="Your Company">
+            <i class="fas fa-check"></i>
           </div>
 
           <div class="hidden sm:ml-6 sm:block">
             <div class="flex space-x-4 items-center justify-center">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <a routerLink="/home"
-                 class="bg-gray-900 text-white rounded-lg px-3 py-2 text-sm font-medium"
+                 routerLinkActive="text-cyan-300"
+                 class="fa-solid fa-house hover:bg-gray-700 hover:text-white rounded-lg px-3 py-2 text-sm font-medium"
                  aria-current="page">Übersicht</a>
               <a routerLink="/einkaufszettel"
-                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-lg px-3 py-2 text-sm font-medium"
+                 routerLinkActive="text-cyan-300"
+                 class="hover:bg-gray-700 hover:text-white rounded-lg px-3 py-2 text-sm font-medium"
                  aria-current="page">Einkaufszettel</a>
               <a routerLink="/archiv"
-                 class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-lg px-3 py-2 text-sm font-medium"
+                 routerLinkActive="text-cyan-300"
+                 class="hover:bg-gray-700 hover:text-white rounded-lg px-3 py-2 text-sm font-medium"
                  aria-current="page">Archiv</a>
             </div>
           </div>
 
           <button type="button"
                   (click)="archiviereGekaufteArtikel()"
-                  class="text-white bg-blue-400 rounded-lg ml-6 px-2 py-2 text-sm text-center">
+                  class="bg-cyan-500 rounded-lg ml-6 px-2 py-2 text-sm text-center">
             Archivieren
           </button>
         </div>
@@ -63,7 +64,7 @@
         <button type="button"
                 *ngIf="logoutButtonRendered"
                 (click)="logout()"
-                class="text-white bg-blue-400 rounded-lg px-2 py-2 text-sm text-center end-0">
+                class="bg-cyan-600 rounded-lg ml-6 px-2 py-2 text-sm text-center font-medium end-0">
           Logout
         </button>
       </div>
@@ -73,19 +74,18 @@
     <div *ngIf="!menuCollapsed" class="sm:hidden" id="mobile-menu">
       <div class="space-y-1 px-2 pb-3 pt-2">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
-        <a routerLink="/home" class="bg-gray-900 text-white block rounded-lg px-3 py-2 text-base font-medium"
+        <a routerLink="/home"
+           routerLinkActive="text-cyan-300"
+           class="block rounded-lg px-3 py-2 text-base font-medium"
            aria-current="page">Übersicht</a>
         <a routerLink="/einkaufszettel"
-           class="text-gray-300 hover:bg-gray-700 hover:text-white block rounded-lg px-3 py-2 text-base font-medium"
+           routerLinkActive="text-cyan-300"
+           class="block rounded-lg px-3 py-2 text-base font-medium"
            aria-current="page">Einkaufszettel</a>
         <a routerLink="/archiv"
-           class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-lg px-3 py-2 text-sm font-medium"
+           routerLinkActive="text-cyan-300"
+           class="block rounded-lg px-3 py-2 text-base font-medium"
            aria-current="page">Archiv</a>
-        <button type="button"
-                (click)="archiviereGekaufteArtikel()"
-                class="text-white bg-blue-400 rounded-lg px-1 py-1 text-center">
-          Archivieren
-        </button>
       </div>
     </div>
   </nav>

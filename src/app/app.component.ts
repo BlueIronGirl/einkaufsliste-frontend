@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {MessageService} from "primeng/api";
 import {EinkaufszettelActions} from "./store/einkaufszettel/einkaufszettel.actions";
 import {selectLogin} from "./store/einkaufszettel/einkaufszettel.selectors";
 
@@ -14,7 +13,7 @@ export class AppComponent implements OnInit {
   logoutButtonRendered = false;
   menuCollapsed = true;
 
-  constructor(private store: Store, private messageService: MessageService) {
+  constructor(private store: Store) {
 
   }
 
