@@ -12,6 +12,7 @@ import {selectLogin} from "./store/einkaufszettel/einkaufszettel.selectors";
 export class AppComponent implements OnInit {
   // adminModus = false;
   logoutButtonRendered = false;
+  menuCollapsed = true;
 
   constructor(private store: Store, private messageService: MessageService) {
 
@@ -27,5 +28,9 @@ export class AppComponent implements OnInit {
 
   logout() {
     this.store.dispatch(EinkaufszettelActions.logout());
+  }
+
+  toggleCollapseMenu() {
+    this.menuCollapsed = !this.menuCollapsed;
   }
 }
