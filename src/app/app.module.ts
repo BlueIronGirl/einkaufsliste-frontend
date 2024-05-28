@@ -25,12 +25,13 @@ import {LoginComponent} from './components/login/login.component';
 import {TokenInterceptor} from "./interceptor/token-interceptor.service";
 import {PasswordModule} from "primeng/password";
 import {RegisterComponent} from './components/register/register.component';
-import {MessageService} from "primeng/api";
+import {ConfirmationService, MessageService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
 import {ArchivComponent} from './components/archiv/archiv.component';
 import {DividerModule} from "primeng/divider";
 import {EditEinkaufszettelComponent} from './components/edit-einkaufszettel/edit-einkaufszettel.component';
 import {MultiSelectModule} from "primeng/multiselect";
+import {ConfirmDialogModule} from "primeng/confirmdialog";
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import {MultiSelectModule} from "primeng/multiselect";
     MessagesModule,
     ToastModule,
     DividerModule,
-    MultiSelectModule
+    MultiSelectModule,
+    ConfirmDialogModule,
   ],
   providers: [
     {
@@ -78,7 +80,7 @@ import {MultiSelectModule} from "primeng/multiselect";
       useClass: TokenInterceptor,
       multi: true
     },
-    MessageService
+    MessageService, ConfirmationService
   ],
   bootstrap: [AppComponent]
 })
