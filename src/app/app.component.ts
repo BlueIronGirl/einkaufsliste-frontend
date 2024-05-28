@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {EinkaufszettelActions} from "./store/einkaufszettel/einkaufszettel.actions";
 import {selectLogin} from "./store/einkaufszettel/einkaufszettel.selectors";
+import {ConfirmationService} from "primeng/api";
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent implements OnInit {
   logoutButtonRendered = false;
   menuCollapsed = true;
 
-  constructor(private store: Store) {
+  constructor(private store: Store, private confirmationService: ConfirmationService,) {
 
   }
 
@@ -25,8 +26,19 @@ export class AppComponent implements OnInit {
     this.store.dispatch(EinkaufszettelActions.archiviereArtikel());
   }
 
-  logout() {
-    this.store.dispatch(EinkaufszettelActions.logout());
+  logout(event: Event) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Sind Sie sich sicher, dass Sie sich ausloggen wollen?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      acceptIcon: "none",
+      rejectIcon: "none",
+      rejectButtonStyleClass: "p-button-text",
+      accept: () => {
+        this.store.dispatch(EinkaufszettelActions.logout());
+      }
+    });
   }
 
   toggleCollapseMenu() {

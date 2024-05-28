@@ -9,20 +9,12 @@
                   (click)="toggleCollapseMenu()"
                   aria-controls="mobile-menu" aria-expanded="false">
             <span class="sr-only">Open main menu</span>
-            <!--
-              Icon when menu is closed.
-
-              Menu open: "hidden", Menu closed: "block"
-            -->
+            <!--Icon when menu is closed. Menu open: "hidden", Menu closed: "block" -->
             <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                  aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/>
             </svg>
-            <!--
-              Icon when menu is open.
-
-              Menu open: "block", Menu closed: "hidden"
-            -->
+            <!-- Icon when menu is open. Menu open: "block", Menu closed: "hidden" -->
             <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
                  aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
@@ -31,17 +23,13 @@
         </div>
 
         <div class="flex flex-1 items-center sm:items-stretch sm:justify-start">
-          <div class="flex flex-shrink-0 items-center">
-            <i class="fas fa-check"></i>
-          </div>
-
-          <div class="hidden sm:ml-6 sm:block">
+          <div class="hidden sm:block">
             <div class="flex space-x-4 items-center justify-center">
               <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <a routerLink="/home"
                  routerLinkActive="bg-gray-700"
                  class="hover:bg-gray-700 text-white rounded-lg px-3 py-2 text-sm font-medium"
-                 aria-current="page">Übersicht</a>
+                 aria-current="page"><span class="fas fa-house"></span> Übersicht</a>
               <a routerLink="/einkaufszettel"
                  routerLinkActive="bg-gray-700"
                  class="hover:bg-gray-700 text-white rounded-lg px-3 py-2 text-sm font-medium"
@@ -61,10 +49,14 @@
         </div>
 
         <div class="grow"></div>
+        <a href="https://github.com/BlueIronGirl/shopping-list-app"
+           class="text-white rounded-lg px-3 py-2 text-sm font-medium"
+           target="_blank"
+           aria-current="page"><span class="fa-brands fa-github fa-xl"></span></a>
         <button type="button"
                 *ngIf="logoutButtonRendered"
-                (click)="logout()"
-                class="bg-cyan-600 rounded-lg ml-6 px-2 py-2 text-sm text-center font-medium end-0">
+                (click)="logout($event)"
+                class="bg-cyan-600 rounded-lg px-2 py-2 text-sm text-center font-medium end-0">
           Logout
         </button>
       </div>
@@ -72,19 +64,19 @@
 
     <!-- Mobile menu, show/hide based on menu state. -->
     <div *ngIf="!menuCollapsed" class="sm:hidden" id="mobile-menu">
-      <div class="space-y-1 px-2 pb-3 pt-2">
+      <div class="space-y-1 px-2 pb-3 pt-2 items-center">
         <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <a routerLink="/home"
-           routerLinkActive="text-cyan-300"
-           class="block rounded-lg px-3 py-2 text-base font-medium"
-           aria-current="page">Übersicht</a>
+           routerLinkActive="bg-gray-700"
+           class="block rounded-lg px-3 py-2 text-white text-base font-medium"
+           aria-current="page"><span class="fas fa-house"></span> Übersicht</a>
         <a routerLink="/einkaufszettel"
-           routerLinkActive="text-cyan-300"
-           class="block rounded-lg px-3 py-2 text-base font-medium"
+           routerLinkActive="bg-gray-700"
+           class="block rounded-lg px-3 py-2 text-white text-base font-medium"
            aria-current="page">Einkaufszettel</a>
         <a routerLink="/archiv"
-           routerLinkActive="text-cyan-300"
-           class="block rounded-lg px-3 py-2 text-base font-medium"
+           routerLinkActive="bg-gray-700"
+           class="block rounded-lg px-3 py-2 text-white text-base font-medium"
            aria-current="page">Archiv</a>
       </div>
     </div>
