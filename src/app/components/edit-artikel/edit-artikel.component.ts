@@ -5,6 +5,7 @@ import {Store} from "@ngrx/store";
 import {selectArtikelById} from "../../store/einkaufszettel/einkaufszettel.selectors";
 import {Artikel} from "../../entities/artikel";
 import {EinkaufszettelActions} from "../../store/einkaufszettel/einkaufszettel.actions";
+import {ConfirmationService} from "primeng/api";
 
 @Component({
   selector: 'app-edit-artikel',
@@ -24,7 +25,7 @@ export class EditArtikelComponent implements OnInit {
   edit: boolean = false;
   header: string = '';
 
-  constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private store: Store) {
+  constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private store: Store, private confirmationService: ConfirmationService,) {
   }
 
   ngOnInit(): void {
@@ -70,5 +71,24 @@ export class EditArtikelComponent implements OnInit {
 
   reset() {
     this.ngOnInit();
+  }
+
+  deleteArtikel(event: Event) {
+    const formValue = this.artikelForm.getRawValue();
+    const artikel: Artikel = {...formValue};
+
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Sind Sie sich sicher, dass Sie den Artikel löschen möchten?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      acceptIcon: "none",
+      rejectIcon: "none",
+      rejectButtonStyleClass: "p-button-text",
+      accept: () => {
+        this.store.dispatch(EinkaufszettelActions.deleteArtikel({data: artikel}));
+        this.store.dispatch(EinkaufszettelActions.loadEinkaufszettels());
+      }
+    });
   }
 }

@@ -1,57 +1,25 @@
-<div class="grid">
-  <div *ngFor="let einkaufszettel of einkaufszettel">
+<div class="w-full">
+  <div *ngFor="let einkaufszettel of einkaufszettel" class="flex-grow-1 bg-white m-5 p-3 rounded overflow-hidden shadow-lg">
     <h2 class="ml-1 mb-2">{{ einkaufszettel.name }}
       <button type="button" [routerLink]="['/einkaufszettel', einkaufszettel.id]"
-              class="ml-1 text-white bg-gray-800 rounded-lg px-1 py-1 text-center">
-        Freigeben
-      </button>
+              class="fas fa-share"></button>
       <button type="button" [routerLink]="['/artikel/new', einkaufszettel.id]"
-              class="ml-1 text-white bg-gray-800 rounded-lg px-1 py-1 text-center">
-        Neuer Artikel
-      </button>
+              class="fas fa-plus ml-2"></button>
     </h2>
 
-    <div *ngFor="let artikel of einkaufszettel.artikels">
-      <p-panel class="p-0"
-               [toggleable]="true"
-               [collapsed]="true">
-        <!-- Header -->
-        <ng-template pTemplate="header">
-          <p-checkbox class="mr-2"
-                      [(ngModel)]="artikel.gekauft"
-                      [binary]="true"
-                      (onChange)="changeArtikelGekauft(artikel)"></p-checkbox>
+    <div class="p-3">
+      <div class="flex" *ngFor="let artikel of einkaufszettel.artikels">
+        <p-checkbox class="mr-2"
+                    [(ngModel)]="artikel.gekauft"
+                    [binary]="true"
+                    (onChange)="changeArtikelGekauft(artikel)"></p-checkbox>
 
-          <span class="text-primary font-semibold text-xl text-emerald-500 mr-1">{{ artikel.anzahl }}</span>
-          <span class="text-primary font-semibold text-xl">{{ artikel.name }}</span>
-          <span class="flex-grow"></span>
+        <span class="text-primary font-semibold text-xl text-cyan-600 mr-1">{{ artikel.anzahl }}</span>
+        <span class="text-primary font-semibold text-xl cursor-pointer hover:underline" [routerLink]="['/artikel', einkaufszettel.id, artikel.id]">{{ artikel.name }}</span>
 
-          <button type="button" [routerLink]="['/artikel', einkaufszettel.id, artikel.id]"
-                  class="text-white bg-gray-800 rounded-lg px-1 py-1 text-center">
-            Editieren
-          </button>
-
-          <button type="button" (click)="deleteArtikel($event, artikel)"
-                  class="text-white bg-gray-800 rounded-lg px-1 py-1 text-center">
-            Löschen
-          </button>
-        </ng-template>
-
-        <ng-template pTemplate="content">
-          <div class="grid grid-cols-2 gap-2 w-1/4">
-            <div>Erstellt am:</div>
-            <div>{{ artikel.erstellungsZeitpunkt | date:'dd.MM.yyyy HH:mm' }}</div>
-            <div>
-              <span *ngIf="artikel.kaufZeitpunkt"> Gekauft am:</span>
-            </div>
-            <div>
-              <span *ngIf="artikel.kaufZeitpunkt">{{ artikel.kaufZeitpunkt | date:'dd.MM.yyyy HH:mm' }}</span>
-            </div>
-          </div>
-        </ng-template>
-      </p-panel>
+      </div>
     </div>
-    <p-divider></p-divider>
+
   </div>
 </div>
 
