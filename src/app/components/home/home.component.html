@@ -1,5 +1,6 @@
 <div class="w-full">
-  <div *ngFor="let einkaufszettel of einkaufszettel" class="flex-grow-1 bg-white m-5 p-3 rounded overflow-hidden shadow-lg">
+  <div *ngFor="let einkaufszettel of einkaufszettel"
+       class="flex-grow-1 bg-white m-5 p-3 rounded overflow-hidden shadow-lg">
     <h2 class="ml-1 mb-2">{{ einkaufszettel.name }}
       <button type="button" [routerLink]="['/einkaufszettel', einkaufszettel.id]"
               class="fas fa-share"></button>
@@ -15,11 +16,21 @@
                     (onChange)="changeArtikelGekauft(artikel)"></p-checkbox>
 
         <span class="text-primary font-semibold text-xl text-cyan-600 mr-1">{{ artikel.anzahl }}</span>
-        <span class="text-primary font-semibold text-xl cursor-pointer hover:underline" [routerLink]="['/artikel', einkaufszettel.id, artikel.id]">{{ artikel.name }}</span>
+        <span class="text-primary font-semibold text-xl cursor-pointer hover:underline"
+              [routerLink]="['/artikel', einkaufszettel.id, artikel.id]">{{ artikel.name }}</span>
+
 
       </div>
     </div>
 
+  </div>
+
+  <div *ngIf="einkaufszettel.length === 0" class="font-medium">
+    <div class="text-gray-500">
+      Sie haben noch keinen Einkaufszettel angelegt?
+    </div>
+    <a routerLink="/einkaufszettel" class="text-blue-400"><span
+      class="fas fa-cart-shopping text-cyan-600 mr-2 text-xl"></span>Neuen Einkaufszettel anlegen</a>
   </div>
 </div>
 
