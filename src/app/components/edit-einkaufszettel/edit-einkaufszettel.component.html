@@ -19,13 +19,13 @@
 
   <!-- Buttons -->
   <div class="flex md:items-center mt-2">
-    <button type="submit" [disabled]="einkaufszettelForm.invalid"
-            class="text-white bg-gray-800 rounded-lg px-2 py-2 text-center">
-      Speichern
+    <button *ngIf="edit" type="button" (click)="delete($event)"
+            class="text-cyan-900 font-bold underline rounded-lg mr-5 py-2 text-center">
+      Löschen
     </button>
-    <button type="button" (click)="reset()"
-            class="text-white bg-gray-800 rounded-lg ml-2 px-2 py-2 text-center">
-      Zurücksetzen
+    <button type="submit" [disabled]="einkaufszettelForm.invalid"
+            class="bg-cyan-500 rounded-lg px-2 py-2 text-center">
+      Speichern
     </button>
   </div>
 </form>

@@ -32,6 +32,8 @@ export class AppComponent implements OnInit {
       message: 'Sind Sie sich sicher, dass Sie sich ausloggen wollen?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Ja',
+      rejectLabel: 'Nein',
       acceptIcon: "none",
       rejectIcon: "none",
       rejectButtonStyleClass: "p-button-text",

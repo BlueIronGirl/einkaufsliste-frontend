@@ -6,6 +6,7 @@ import {selectAllUsers, selectEinkaufszettelById} from "../../store/einkaufszett
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {User} from "../../entities/user";
+import {ConfirmationService} from "primeng/api";
 
 @Component({
   selector: 'app-einkaufszettel',
@@ -23,7 +24,7 @@ export class EditEinkaufszettelComponent implements OnInit {
   header: string = '';
   allUsers: User[] = [];
 
-  constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private store: Store) {
+  constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private store: Store, private confirmationService: ConfirmationService) {
   }
 
   ngOnInit(): void {
@@ -68,5 +69,26 @@ export class EditEinkaufszettelComponent implements OnInit {
 
   reset() {
     this.ngOnInit();
+  }
+
+  delete(event: Event) {
+    const formValue = this.einkaufszettelForm.getRawValue();
+    const einkaufszettel: Einkaufszettel = {...formValue};
+
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: 'Sind Sie sich sicher, dass Sie den Einkaufszettel löschen möchten?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Ja',
+      rejectLabel: 'Nein',
+      acceptIcon: "none",
+      rejectIcon: "none",
+      rejectButtonStyleClass: "p-button-text",
+      accept: () => {
+        this.store.dispatch(EinkaufszettelActions.deleteEinkaufszettel({data: einkaufszettel}));
+        this.store.dispatch(EinkaufszettelActions.loadEinkaufszettels());
+      }
+    });
   }
 }

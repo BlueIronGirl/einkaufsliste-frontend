@@ -69,7 +69,7 @@ export class EditArtikelComponent implements OnInit {
     }
   }
 
-  deleteArtikel(event: Event) {
+  delete(event: Event) {
     const formValue = this.artikelForm.getRawValue();
     const artikel: Artikel = {...formValue};
 
