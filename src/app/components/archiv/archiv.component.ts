@@ -18,6 +18,6 @@ export class ArchivComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(EinkaufszettelActions.loadArchiv());
 
-    this.store.select(selectAllArtikelArchiv).subscribe(artikels => this.artikels = artikels);
+    this.store.select(selectAllArtikelArchiv).subscribe(artikels => this.artikels = [...artikels]);
   }
 }
