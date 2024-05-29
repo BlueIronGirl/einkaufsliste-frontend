@@ -1,11 +1,13 @@
 <div class="w-full">
   <div *ngFor="let einkaufszettel of einkaufszettel"
        class="flex-grow-1 bg-white m-5 p-3 rounded overflow-hidden shadow-lg">
-    <h2 class="ml-1 mb-2">{{ einkaufszettel.name }}
+    <h2 class="flex ml-1 mb-2 text-3xl">
+      <span class="font-bold">{{ einkaufszettel.name }} </span>
       <button type="button" [routerLink]="['/einkaufszettel', einkaufszettel.id]"
-              class="fas fa-share"></button>
+              class="fas fa-share ml-2 text-xl"></button>
+      <div class="grow"></div>
       <button type="button" [routerLink]="['/artikel/new', einkaufszettel.id]"
-              class="fas fa-plus ml-2"></button>
+              class="fas fa-plus"></button>
     </h2>
 
     <div class="p-3">
