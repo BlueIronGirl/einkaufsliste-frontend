@@ -11,7 +11,7 @@ import {ConfirmationService} from "primeng/api";
 })
 export class AppComponent implements OnInit {
   // adminModus = false;
-  logoutButtonRendered = false;
+  userLoggedIn = false;
   menuCollapsed = true;
 
   constructor(private store: Store, private confirmationService: ConfirmationService,) {
@@ -19,7 +19,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.select(selectLogin).subscribe(user => this.logoutButtonRendered = user != null);
+    this.store.select(selectLogin).subscribe(user => this.userLoggedIn = user != null);
   }
 
   archiviereGekaufteArtikel() {

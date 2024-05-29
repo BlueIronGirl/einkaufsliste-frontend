@@ -1,46 +1,31 @@
-<form [formGroup]="einkaufszettelForm" class="w-full" (ngSubmit)="save()">
+<form [formGroup]="einkaufszettelForm" class="max-w-xl m-auto" (ngSubmit)="save()">
   <!-- Name -->
-  <div class="md:flex md:items-center mt-2 mb-6">
-    <div class="w-64">
-      <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="name">
-        Name*
-      </label>
-    </div>
-    <div class="w-full">
-      <input id="name" class="w-full" type="text" pInputText formControlName="name"/>
-    </div>
+  <div class="mt-2 mb-6">
+    <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="name">Name*</label>
+    <input id="name" class="w-full" type="text" pInputText formControlName="name"/>
   </div>
 
   <!-- Users -->
-  <div class="md:flex md:items-center mt-2 mb-6">
-    <div class="w-64">
-      <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="name">
-        Benutzer
-      </label>
-    </div>
-    <div class="w-full">
-      <p-multiSelect
-        [options]="allUsers"
-        formControlName="users"
-        optionLabel="username"
-        placeholder="Wähle Benutzer die auch Zugriff haben sollen"/>
-    </div>
+  <div class="mt-2 mb-6">
+    <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="name">Personen mit Zugriff</label>
+    <p-multiSelect
+      [options]="allUsers"
+      [style]="{'width': '100%'}"
+      [ngStyle]="{'width': '100%'}"
+      formControlName="users"
+      optionLabel="username"
+      placeholder="Wähle Benutzer die auch Zugriff haben sollen"/>
   </div>
 
   <!-- Buttons -->
-  <div class="md:flex md:items-center mt-2 mb-6">
-    <div class="w-64">
-
-    </div>
-    <div class="w-full">
-      <button type="submit" [disabled]="einkaufszettelForm.invalid"
-              class="text-white bg-gray-800 rounded-lg px-2 py-2 text-center">
-        Speichern
-      </button>
-      <button type="button" (click)="reset()"
-              class="text-white bg-gray-800 rounded-lg ml-2 px-2 py-2 text-center">
-        Zurücksetzen
-      </button>
-    </div>
+  <div class="flex md:items-center mt-2">
+    <button type="submit" [disabled]="einkaufszettelForm.invalid"
+            class="text-white bg-gray-800 rounded-lg px-2 py-2 text-center">
+      Speichern
+    </button>
+    <button type="button" (click)="reset()"
+            class="text-white bg-gray-800 rounded-lg ml-2 px-2 py-2 text-center">
+      Zurücksetzen
+    </button>
   </div>
 </form>
