@@ -69,10 +69,6 @@ export class EditArtikelComponent implements OnInit {
     }
   }
 
-  reset() {
-    this.ngOnInit();
-  }
-
   deleteArtikel(event: Event) {
     const formValue = this.artikelForm.getRawValue();
     const artikel: Artikel = {...formValue};
@@ -82,6 +78,8 @@ export class EditArtikelComponent implements OnInit {
       message: 'Sind Sie sich sicher, dass Sie den Artikel löschen möchten?',
       header: 'Confirmation',
       icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Ja',
+      rejectLabel: 'Nein',
       acceptIcon: "none",
       rejectIcon: "none",
       rejectButtonStyleClass: "p-button-text",
