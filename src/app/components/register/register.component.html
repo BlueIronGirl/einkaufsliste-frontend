@@ -1,13 +1,13 @@
 <form [formGroup]="loginForm" class="max-w-xl m-auto" (ngSubmit)="register()">
   <!-- Benutzername -->
   <div class="mt-2 mb-6">
-    <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="benutzername">Benutzername</label>
+    <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="benutzername">Benutzername *</label>
     <input id="benutzername" class="w-full" type="text" pInputText formControlName="username"/>
   </div>
 
   <!-- Passwort -->
   <div class="mt-2 mb-6">
-    <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="passwort">Passwort</label>
+    <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="passwort">Passwort *</label>
     <p-password id="passwort"
                 [style]="{'width': '100%'}"
                 [inputStyle]="{'width': '100%'}"
@@ -20,9 +20,17 @@
   <!-- Name -->
   <div class="mt-2 mb-6">
     <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="name">
-      Name
+      Name *
     </label>
     <input id="name" class="w-full" type="text" pInputText formControlName="name"/>
+  </div>
+
+  <!-- Email -->
+  <div class="mt-2 mb-6">
+    <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="email">
+      E-Mail *
+    </label>
+    <input id="email" class="w-full" type="text" pInputText formControlName="email"/>
   </div>
 
   <!-- Speichern -->
