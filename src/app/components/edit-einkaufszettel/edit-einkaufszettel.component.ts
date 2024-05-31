@@ -29,7 +29,7 @@ export class EditEinkaufszettelComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(EinkaufszettelActions.loadEinkaufszettels());
-    this.store.dispatch(EinkaufszettelActions.loadUsers());
+    this.store.dispatch(EinkaufszettelActions.loadUsersFriends());
 
     const einkaufszettelId = Number(this.activatedRoute.snapshot.paramMap.get('einkaufszettelId'));
     if (einkaufszettelId > 0) {

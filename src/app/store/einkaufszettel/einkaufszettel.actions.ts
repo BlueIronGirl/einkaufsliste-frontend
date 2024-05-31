@@ -23,6 +23,10 @@ export const EinkaufszettelActions = createActionGroup({
     'Load Users Success': props<{ data: User[] }>(),
     'Load Users Failure': props<{ error: HttpErrorResponse }>(),
 
+    'Load Users Friends': emptyProps(),
+    'Load Users Friends Success': props<{ data: User[] }>(),
+    'Load Users Friends Failure': props<{ error: HttpErrorResponse }>(),
+
     'Load Einkaufszettels': emptyProps(),
     'Load Einkaufszettels Success': props<{ data: Einkaufszettel[] }>(),
     'Load Einkaufszettels Failure': props<{ error: HttpErrorResponse }>(),

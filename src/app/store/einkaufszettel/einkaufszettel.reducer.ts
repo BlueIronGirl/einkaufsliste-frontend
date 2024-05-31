@@ -10,6 +10,7 @@ export interface State {
   einkaufszettel: Einkaufszettel[];
   artikelsArchiv: Artikel[];
   loginUser: User | null;
+  usersFriends: User[];
   users: User[];
 }
 
@@ -17,6 +18,7 @@ export const initialState: State = {
   einkaufszettel: [],
   artikelsArchiv: [],
   loginUser: null,
+  usersFriends: [],
   users: []
 };
 
@@ -43,6 +45,11 @@ export const einkaufszettelReducer = createReducer(
   // loadEinkaufszettels
   on(EinkaufszettelActions.loadEinkaufszettelsSuccess, (state, action) => {
     return {...state, einkaufszettel: action.data}
+  }),
+
+  // loadUsersFriends
+  on(EinkaufszettelActions.loadUsersFriendsSuccess, (state, action) => {
+    return {...state, usersFriends: action.data}
   }),
 
   // loadUsers

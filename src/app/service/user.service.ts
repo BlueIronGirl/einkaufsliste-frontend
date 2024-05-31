@@ -18,8 +18,14 @@ export class UserService {
     return throwError(() => error);
   }
 
-  getAllUsers(): Observable<User[]> {
+  getAllUsersFriends(): Observable<User[]> {
     return this.httpClient.get<User[]>(`${this.api}/user/friends`).pipe(
+      retry(3)
+    );
+  }
+
+  getAllUsers(): Observable<User[]> {
+    return this.httpClient.get<User[]>(`${this.api}/user`).pipe(
       retry(3)
     );
   }

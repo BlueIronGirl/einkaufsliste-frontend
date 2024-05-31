@@ -227,6 +227,17 @@ export class EinkaufszettelEffects {
     ));
   }
 
+  loadUsersFriends$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(EinkaufszettelActions.loadUsersFriends),
+      switchMap(() => this.userService.getAllUsersFriends().pipe(
+          map(users => EinkaufszettelActions.loadUsersFriendsSuccess({data: users})),
+          catchError(error => of(EinkaufszettelActions.loadUsersFriendsFailure({error})))
+        )
+      )
+    );
+  });
+
   loadUsers$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(EinkaufszettelActions.loadUsers),

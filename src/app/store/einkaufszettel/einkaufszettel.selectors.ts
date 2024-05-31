@@ -32,7 +32,7 @@ export const selectArtikelById = (einkaufszettelId: number, artikelId: number) =
 
 export const selectAllUsers = createSelector(
   selectEinkaufszettelState,
-  state => state.users
+  state => state.usersFriends
 );
 
 export const selectAllArtikelArchiv = createSelector(
