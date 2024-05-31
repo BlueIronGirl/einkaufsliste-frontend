@@ -3,11 +3,11 @@
        class="flex-grow-1 bg-white m-5 p-3 rounded overflow-hidden shadow-lg">
     <h2 class="flex ml-1 mb-2 text-3xl">
       <span class="font-bold">{{ einkaufszettel.name }} </span>
-      <button type="button" [routerLink]="['/einkaufszettel', einkaufszettel.id]"
-              class="fas fa-share ml-2 text-xl"></button>
-      <div class="grow"></div>
       <button type="button" [routerLink]="['/artikel/new', einkaufszettel.id]"
-              class="fas fa-plus"></button>
+              class="fas fa-plus ml-2"></button>
+      <div class="grow"></div>
+      <button type="button" [routerLink]="['/einkaufszettel', einkaufszettel.id]"
+              class="fas fa-gear text-xl"></button>
     </h2>
 
     <div class="p-3">
