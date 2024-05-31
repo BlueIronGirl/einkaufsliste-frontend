@@ -33,6 +33,7 @@ import {EditEinkaufszettelComponent} from './components/edit-einkaufszettel/edit
 import {MultiSelectModule} from "primeng/multiselect";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {TableModule} from "primeng/table";
+import {TooltipModule} from "primeng/tooltip";
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import {TableModule} from "primeng/table";
     DividerModule,
     MultiSelectModule,
     ConfirmDialogModule,
-    TableModule
+    TableModule,
+    TooltipModule
   ],
   providers: [
     {
