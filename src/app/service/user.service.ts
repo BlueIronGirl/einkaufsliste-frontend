@@ -19,7 +19,7 @@ export class UserService {
   }
 
   getAllUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>(`${this.api}/user`).pipe(
+    return this.httpClient.get<User[]>(`${this.api}/user/friends`).pipe(
       retry(3)
     );
   }
