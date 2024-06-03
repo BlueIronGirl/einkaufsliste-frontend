@@ -96,7 +96,7 @@
           <span class="fas fa-archive fa-sm"></span> Archiv
         </a>
 
-        <a *ngIf="isAdmin"
+        <a *ngIf="hasRole(ROLE_NAME.ROLE_ADMIN)"
            routerLink="/user"
            routerLinkActive="bg-gray-700"
            class="block rounded-lg px-3 py-2 text-white text-base font-medium"
