@@ -5,5 +5,6 @@ export interface Einkaufszettel {
   id: number;
   name: string;
   artikels?: Artikel[];
-  users: User[];
+  owners: User[];
+  sharedWith: User[];
 }

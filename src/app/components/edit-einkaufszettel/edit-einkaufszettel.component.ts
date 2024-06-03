@@ -17,7 +17,8 @@ export class EditEinkaufszettelComponent implements OnInit {
   einkaufszettelForm: FormGroup = this.formBuilder.group({
     id: [{value: '', disabled: true}, Validators.required],
     name: [{value: ''}, Validators.compose([Validators.required, Validators.minLength(1)])],
-    users: new FormControl<User[] | null>([])
+    owners: new FormControl<User[] | null>([]),
+    sharedWith: new FormControl<User[] | null>([])
   });
 
   edit: boolean = false;
@@ -51,7 +52,8 @@ export class EditEinkaufszettelComponent implements OnInit {
     const einkaufszettel: Einkaufszettel = {
       id: -1,
       name: '',
-      users: []
+      owners: [],
+      sharedWith: []
     };
     this.einkaufszettelForm.patchValue(einkaufszettel);
   }
@@ -65,10 +67,6 @@ export class EditEinkaufszettelComponent implements OnInit {
     } else {
       this.store.dispatch(EinkaufszettelActions.createEinkaufszettel({data: einkaufszettel}));
     }
-  }
-
-  reset() {
-    this.ngOnInit();
   }
 
   delete(event: Event) {
