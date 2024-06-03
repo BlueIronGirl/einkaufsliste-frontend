@@ -45,6 +45,13 @@
                  aria-current="page">
                 <span class="fas fa-archive fa-sm"></span> Archiv
               </a>
+              <a *ngIf="hasRole(ROLE_NAME.ROLE_ADMIN)"
+                 routerLink="/user"
+                 routerLinkActive="bg-gray-700"
+                 class="hover:bg-gray-700 text-white rounded-lg px-3 py-2 text-sm font-medium"
+                 aria-current="page">
+                <span class="fas fa-user-tie fa-sm"></span> Userverwaltung
+              </a>
             </div>
           </div>
 
@@ -57,7 +64,6 @@
           </button>
         </div>
 
-        <div class="grow"></div>
         <button type="button"
                 *ngIf="userLoggedIn"
                 (click)="logout($event)"
@@ -88,6 +94,14 @@
            class="block rounded-lg px-3 py-2 text-white text-base font-medium"
            aria-current="page">
           <span class="fas fa-archive fa-sm"></span> Archiv
+        </a>
+
+        <a *ngIf="isAdmin"
+           routerLink="/user"
+           routerLinkActive="bg-gray-700"
+           class="block rounded-lg px-3 py-2 text-white text-base font-medium"
+           aria-current="page">
+          <span class="fas fa-user-tie fa-sm"></span> Userverwaltung
         </a>
       </div>
     </div>

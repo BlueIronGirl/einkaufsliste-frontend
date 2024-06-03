@@ -34,6 +34,7 @@ import {MultiSelectModule} from "primeng/multiselect";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {TableModule} from "primeng/table";
 import {TooltipModule} from "primeng/tooltip";
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import {TooltipModule} from "primeng/tooltip";
     LoginComponent,
     RegisterComponent,
     ArchivComponent,
-    EditEinkaufszettelComponent
+    EditEinkaufszettelComponent,
+    UserComponent
   ],
   imports: [
     // standard angular

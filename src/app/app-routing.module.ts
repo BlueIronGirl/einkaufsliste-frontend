@@ -7,6 +7,9 @@ import {AuthGuard} from "./guard/auth-guard";
 import {RegisterComponent} from "./components/register/register.component";
 import {ArchivComponent} from "./components/archiv/archiv.component";
 import {EditEinkaufszettelComponent} from "./components/edit-einkaufszettel/edit-einkaufszettel.component";
+import {RoleGuard} from "./guard/role-guard";
+import {UserComponent} from "./components/user/user.component";
+import {ROLE_NAME} from "./entities/enum/rolename";
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -15,9 +18,10 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'einkaufszettel/:einkaufszettelId', component: EditEinkaufszettelComponent, canActivate: [AuthGuard]},
   {path: 'einkaufszettel', component: EditEinkaufszettelComponent, canActivate: [AuthGuard]},
-  {path: 'archiv', component: ArchivComponent, canActivate: [AuthGuard]},
   {path: 'artikel/new/:einkaufszettelId', component: EditArtikelComponent, canActivate: [AuthGuard]},
-  {path: 'artikel/:einkaufszettelId/:artikelId', component: EditArtikelComponent, canActivate: [AuthGuard]}
+  {path: 'artikel/:einkaufszettelId/:artikelId', component: EditArtikelComponent, canActivate: [AuthGuard]},
+  {path: 'archiv', component: ArchivComponent, canActivate: [AuthGuard]},
+  {path: 'user', component: UserComponent, canActivate: [AuthGuard, RoleGuard], data: {expectedRole: ROLE_NAME.ROLE_ADMIN}}
 ];
 
 @NgModule({

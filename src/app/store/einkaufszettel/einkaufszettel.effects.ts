@@ -4,7 +4,7 @@ import {catchError, concatMap, map, switchMap, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {EinkaufszettelActions} from './einkaufszettel.actions';
 import {EinkaufszettelService} from "../../service/einkaufszettel.service";
-import {LoginService} from "../../service/login.service";
+import {AuthService} from "../../service/auth.service";
 import {Router} from "@angular/router";
 import {MessageService} from "primeng/api";
 import {UserService} from "../../service/user.service";
@@ -260,6 +260,6 @@ export class EinkaufszettelEffects {
     );
   });
 
-  constructor(private actions$: Actions, private messageService: MessageService, private router: Router, private loginService: LoginService, private einkaufszettelService: EinkaufszettelService, private userService: UserService) {
+  constructor(private actions$: Actions, private messageService: MessageService, private router: Router, private loginService: AuthService, private einkaufszettelService: EinkaufszettelService, private userService: UserService) {
   }
 }

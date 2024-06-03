@@ -7,17 +7,18 @@ import {Store} from "@ngrx/store";
 import {EinkaufszettelActions} from "../store/einkaufszettel/einkaufszettel.actions";
 import jwtDecode, {JwtPayload} from 'jwt-decode';
 import {selectLogin} from "../store/einkaufszettel/einkaufszettel.selectors";
-import {Router} from "@angular/router";
 import {MessageService} from "primeng/api";
 import {environment} from "../../environments/environment";
+import {ROLE_NAME, RoleName} from "../entities/enum/rolename";
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class AuthService {
   private api = `${environment.webserviceurl}`;
+  private userRoles: RoleName[] = [];
 
-  constructor(private router: Router, private httpClient: HttpClient, private store: Store, private messageService: MessageService) {
+  constructor(private httpClient: HttpClient, private store: Store, private messageService: MessageService) {
   }
 
   private errorHandler(error: HttpErrorResponse): Observable<never> {
@@ -63,6 +64,30 @@ export class LoginService {
     }
 
     return false;
+  }
+
+  getAllRolesOfLoggedInUser(): RoleName[] {
+    if (this.userRoles.length > 0) {
+      return this.userRoles;
+    }
+
+    this.store.select(selectLogin).subscribe(user => {
+      const roles = user?.roles;
+      if (roles) {
+        this.userRoles = [];
+        for (let role of roles) {
+          Object.values(ROLE_NAME).forEach((value) => {
+            const roleValue: RoleName = value;
+            if (role.name === value) {
+              this.userRoles.push(roleValue);
+            }
+          });
+        }
+      }
+
+    });
+
+    return this.userRoles;
   }
 
   private getExpire(token: string): Date {

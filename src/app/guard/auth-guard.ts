@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {LoginService} from "../service/login.service";
+import {AuthService} from "../service/auth.service";
 import {Router, UrlTree} from "@angular/router";
 import {Observable} from "rxjs";
 
@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
 })
 export class AuthGuard {
 
-  constructor(private router: Router, private loginService: LoginService) {
+  constructor(private router: Router, private loginService: AuthService) {
   }
 
   canActivate():

@@ -3,6 +3,8 @@ import {Store} from "@ngrx/store";
 import {EinkaufszettelActions} from "./store/einkaufszettel/einkaufszettel.actions";
 import {selectLogin} from "./store/einkaufszettel/einkaufszettel.selectors";
 import {ConfirmationService} from "primeng/api";
+import {AuthService} from "./service/auth.service";
+import {ROLE_NAME, RoleName} from "./entities/enum/rolename";
 
 @Component({
   selector: 'app-root',
@@ -10,16 +12,20 @@ import {ConfirmationService} from "primeng/api";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  // adminModus = false;
   userLoggedIn = false;
   menuCollapsed = true;
+  isAdmin = false;
+  private userRoles: RoleName[] = [];
 
-  constructor(private store: Store, private confirmationService: ConfirmationService,) {
+  constructor(private store: Store, private confirmationService: ConfirmationService, private authService: AuthService) {
 
   }
 
   ngOnInit(): void {
-    this.store.select(selectLogin).subscribe(user => this.userLoggedIn = user != null);
+    this.store.select(selectLogin).subscribe(user => {
+      this.userLoggedIn = user != null;
+      this.userRoles = [...this.authService.getAllRolesOfLoggedInUser()];
+    });
   }
 
   archiviereGekaufteArtikel() {
@@ -46,4 +52,10 @@ export class AppComponent implements OnInit {
   toggleCollapseMenu() {
     this.menuCollapsed = !this.menuCollapsed;
   }
+
+  hasRole(roleName: RoleName) {
+    return this.userRoles.filter(role => role === roleName).length > 0
+  }
+
+  protected readonly ROLE_NAME = ROLE_NAME;
 }
