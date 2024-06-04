@@ -17,7 +17,7 @@
         <p-checkbox class="mr-2"
                     [(ngModel)]="artikel.gekauft"
                     [binary]="true"
-                    (onChange)="changeArtikelGekauft(artikel)"></p-checkbox>
+                    (onChange)="changeArtikelGekauft(einkaufszettel, artikel)"></p-checkbox>
 
         <span class="text-primary font-semibold text-xl text-cyan-600 mr-1">{{ artikel.anzahl }}</span>
         <span class="text-primary font-semibold text-xl cursor-pointer hover:underline"

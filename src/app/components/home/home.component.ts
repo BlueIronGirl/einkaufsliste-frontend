@@ -22,7 +22,10 @@ export class HomeComponent implements OnInit {
     this.store.select(selectAllEinkaufszettel).subscribe(einkaufszettel => this.einkaufszettel = JSON.parse(JSON.stringify(einkaufszettel))); // deep copy of store, so that changes are possible
   }
 
-  changeArtikelGekauft(artikel: Artikel) {
-    this.store.dispatch(EinkaufszettelActions.updateArtikel({data: artikel}));
+  changeArtikelGekauft(einkaufszettel: Einkaufszettel, artikel: Artikel) {
+    this.store.dispatch(EinkaufszettelActions.updateArtikel({
+      einkaufszettelId: einkaufszettel.id,
+      data: artikel
+    }));
   }
 }

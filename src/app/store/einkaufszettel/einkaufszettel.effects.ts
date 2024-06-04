@@ -167,8 +167,7 @@ export class EinkaufszettelEffects {
   updateArtikel$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(EinkaufszettelActions.updateArtikel),
-      map(action => action.data),
-      concatMap(inputData => this.einkaufszettelService.updateArtikel(inputData).pipe(
+      concatMap(inputData => this.einkaufszettelService.updateArtikel(inputData.einkaufszettelId, inputData.data).pipe(
         map(data => EinkaufszettelActions.updateArtikelSuccess({data: data})),
         catchError(error => of(EinkaufszettelActions.updateArtikelFailure({error})))
       ))
@@ -186,8 +185,7 @@ export class EinkaufszettelEffects {
   deleteArtikel$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(EinkaufszettelActions.deleteArtikel),
-      map(action => action.data),
-      concatMap(inputData => this.einkaufszettelService.deleteArtikel(inputData).pipe(
+      concatMap(inputData => this.einkaufszettelService.deleteArtikel(inputData.einkaufszettelId, inputData.data).pipe(
         map(data => EinkaufszettelActions.deleteArtikelSuccess({data: data})),
         catchError(error => of(EinkaufszettelActions.deleteArtikelFailure({error})))
       ))

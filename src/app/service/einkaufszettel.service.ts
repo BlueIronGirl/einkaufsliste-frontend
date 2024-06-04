@@ -50,14 +50,14 @@ export class EinkaufszettelService {
     );
   }
 
-  updateArtikel(artikel: Artikel) {
-    return this.httpClient.put<Artikel>(`${this.api}/einkaufszettel/artikel/${artikel.id}`, artikel).pipe(
+  updateArtikel(einkaufszettelId: number, artikel: Artikel) {
+    return this.httpClient.put<Artikel>(`${this.api}/einkaufszettel/${einkaufszettelId}/artikel/${artikel.id}`, artikel).pipe(
       catchError(EinkaufszettelService.errorHandler)
     );
   }
 
-  deleteArtikel(artikel: Artikel) {
-    return this.httpClient.delete<Artikel>(`${this.api}/einkaufszettel/artikel/${artikel.id}`).pipe(
+  deleteArtikel(einkaufszettelId: number,artikel: Artikel) {
+    return this.httpClient.delete<Artikel>(`${this.api}/einkaufszettel/${einkaufszettelId}/artikel/${artikel.id}`).pipe(
       catchError(EinkaufszettelService.errorHandler)
     );
   }

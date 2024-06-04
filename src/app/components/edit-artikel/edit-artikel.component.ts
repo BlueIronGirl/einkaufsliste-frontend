@@ -60,7 +60,10 @@ export class EditArtikelComponent implements OnInit {
     const artikel: Artikel = {...formValue};
 
     if (this.edit) {
-      this.store.dispatch(EinkaufszettelActions.updateArtikel({data: artikel}));
+      this.store.dispatch(EinkaufszettelActions.updateArtikel({
+        einkaufszettelId: this.einkaufszettelId,
+        data: artikel
+      }));
     } else {
       this.store.dispatch(EinkaufszettelActions.createArtikel({
         einkaufszettelId: this.einkaufszettelId,
@@ -84,7 +87,10 @@ export class EditArtikelComponent implements OnInit {
       rejectIcon: "none",
       rejectButtonStyleClass: "p-button-text",
       accept: () => {
-        this.store.dispatch(EinkaufszettelActions.deleteArtikel({data: artikel}));
+        this.store.dispatch(EinkaufszettelActions.deleteArtikel({
+          einkaufszettelId: this.einkaufszettelId,
+          data: artikel
+        }));
         this.store.dispatch(EinkaufszettelActions.loadEinkaufszettels());
       }
     });

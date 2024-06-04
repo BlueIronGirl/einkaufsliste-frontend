@@ -52,11 +52,11 @@ export const EinkaufszettelActions = createActionGroup({
     'Create Artikel Success': props<{ data: Artikel }>(),
     'Create Artikel Failure': props<{ error: HttpErrorResponse }>(),
 
-    'Update Artikel': props<{ data: Artikel }>(),
+    'Update Artikel': props<{ einkaufszettelId: number, data: Artikel }>(),
     'Update Artikel Success': props<{ data: Artikel }>(),
     'Update Artikel Failure': props<{ error: HttpErrorResponse }>(),
 
-    'Delete Artikel': props<{ data: Artikel }>(),
+    'Delete Artikel': props<{ einkaufszettelId: number, data: Artikel }>(),
     'Delete Artikel Success': props<{ data: Artikel }>(),
     'Delete Artikel Failure': props<{ error: HttpErrorResponse }>(),
 
