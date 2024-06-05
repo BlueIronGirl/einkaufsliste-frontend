@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Einkaufszettel} from "../../entities/einkaufszettel";
 import {Store} from "@ngrx/store";
 import {EinkaufszettelActions} from "../../store/einkaufszettel/einkaufszettel.actions";
-import {selectAllUsers, selectEinkaufszettelById} from "../../store/einkaufszettel/einkaufszettel.selectors";
+import {selectAllUsersFriends, selectEinkaufszettelById} from "../../store/einkaufszettel/einkaufszettel.selectors";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {User} from "../../entities/user";
@@ -23,7 +23,7 @@ export class EditEinkaufszettelComponent implements OnInit {
 
   edit: boolean = false;
   header: string = '';
-  allUsers: User[] = [];
+  allUsersFriends: User[] = [];
 
   constructor(private activatedRoute: ActivatedRoute, private formBuilder: FormBuilder, private store: Store, private confirmationService: ConfirmationService) {
   }
@@ -38,7 +38,7 @@ export class EditEinkaufszettelComponent implements OnInit {
     } else {
       this.initNew();
     }
-    this.store.select(selectAllUsers).subscribe(users => this.allUsers = users);
+    this.store.select(selectAllUsersFriends).subscribe(users => this.allUsersFriends = users);
   }
 
   private initEdit(einkaufszettelId: number) {

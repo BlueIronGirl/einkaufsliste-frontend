@@ -5,11 +5,12 @@ import {environment} from "../../environments/environment";
 import {User} from "../entities/user";
 import {Einkaufszettel} from "../entities/einkaufszettel";
 import {catchError} from "rxjs/operators";
+import {Role} from "../entities/role";
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class RoleService {
   private api = `${environment.webserviceurl}`;
 
   constructor(private httpClient: HttpClient) {
@@ -20,21 +21,9 @@ export class UserService {
     return throwError(() => error);
   }
 
-  getAllUsersFriends(): Observable<User[]> {
-    return this.httpClient.get<User[]>(`${this.api}/user/friends`).pipe(
+  getAllRoles(): Observable<Role[]> {
+    return this.httpClient.get<Role[]>(`${this.api}/role`).pipe(
       retry(3)
-    );
-  }
-
-  getAllUsers(): Observable<User[]> {
-    return this.httpClient.get<User[]>(`${this.api}/user`).pipe(
-      retry(3)
-    );
-  }
-
-  updateUser(user: User) {
-    return this.httpClient.put<User>(`${this.api}/user/${user.id}`, user).pipe(
-      catchError(UserService.errorHandler)
     );
   }
 }

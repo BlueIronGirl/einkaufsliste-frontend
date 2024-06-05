@@ -10,3 +10,8 @@ export const ROLE_NAME = {
 // This is the associated type of the readonly constant
 // In case you want to use it as a type
 export type RoleName = EnumLike<typeof ROLE_NAME>;
+
+// Function to get all role values
+export const getAllRoleValues = (): RoleName[] => {
+  return Object.values(ROLE_NAME);
+}

@@ -8,6 +8,7 @@ import {AuthService} from "../../service/auth.service";
 import {Router} from "@angular/router";
 import {MessageService} from "primeng/api";
 import {UserService} from "../../service/user.service";
+import {RoleService} from "../../service/role.service";
 
 
 @Injectable()
@@ -100,8 +101,12 @@ export class EinkaufszettelEffects {
   });
 
   private navigateToHome(message: string) {
+    return this.navigate(message, 'home');
+  }
+
+  private navigate(message: string, navigationTarget: string) {
     return tap(() => {
-      this.router.navigateByUrl("/home");
+      this.router.navigateByUrl(`/${navigationTarget}`);
       this.messageService.clear();
       this.messageService.add({severity: 'success', summary: message});
     });
@@ -247,6 +252,36 @@ export class EinkaufszettelEffects {
     );
   });
 
+  loadRoles$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(EinkaufszettelActions.loadRoles),
+      switchMap(() => this.roleService.getAllRoles().pipe(
+          map(roles => EinkaufszettelActions.loadRolesSuccess({data: roles})),
+          catchError(error => of(EinkaufszettelActions.loadRolesFailure({error})))
+        )
+      )
+    );
+  });
+
+  updateUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(EinkaufszettelActions.updateUser),
+      map(action => action.data),
+      concatMap(inputData => this.userService.updateUser(inputData).pipe(
+        map(data => EinkaufszettelActions.updateUserSuccess({data: data})),
+        catchError(error => of(EinkaufszettelActions.updateUserFailure({error})))
+      ))
+    )
+  });
+
+  updateUserSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(EinkaufszettelActions.updateUserSuccess),
+      this.navigate('User wurde gespeichert', 'user'),
+      this.loadAllEinkaufszettel()
+    )
+  });
+
   loadArchiv$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(EinkaufszettelActions.loadArchiv),
@@ -258,6 +293,6 @@ export class EinkaufszettelEffects {
     );
   });
 
-  constructor(private actions$: Actions, private messageService: MessageService, private router: Router, private loginService: AuthService, private einkaufszettelService: EinkaufszettelService, private userService: UserService) {
+  constructor(private actions$: Actions, private messageService: MessageService, private router: Router, private loginService: AuthService, private einkaufszettelService: EinkaufszettelService, private userService: UserService, private roleService: RoleService) {
   }
 }

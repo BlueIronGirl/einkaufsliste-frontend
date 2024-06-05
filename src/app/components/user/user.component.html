@@ -1,1 +1,122 @@
-<p>user works!</p>
+<div class="card">
+  <p-table class="p-0"
+           dataKey="id"
+           editMode="row"
+           [value]="allUsers"
+           [paginator]="true"
+           [rows]="10"
+           [rowsPerPageOptions]="[5, 10, 15]">
+    <!-- Header -->
+    <ng-template pTemplate="header">
+      <tr>
+        <th pResizableColumn pSortableColumn="username" style="width: 10%">
+          Username
+          <p-sortIcon field="username"/>
+        </th>
+        <th pResizableColumn pSortableColumn="name" style="width: 40%">
+          Name
+          <p-sortIcon field="name"/>
+        </th>
+        <th pResizableColumn pSortableColumn="email" style="width: 20%">
+          E-Mail
+          <p-sortIcon field="email"/>
+        </th>
+        <th pResizableColumn pSortableColumn="roles" style="width: 20%">
+          Rollen
+          <p-sortIcon field="roles"/>
+        </th>
+        <th style="width:10%"></th>
+      </tr>
+    </ng-template>
+
+    <ng-template pTemplate="body" let-user let-editing="editing" let-rowIndex="rowIndex">
+      <tr [pEditableRow]="user">
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                pInputText
+                type="text"
+                [(ngModel)]="user.username"/>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user.username }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                pInputText
+                type="text"
+                [(ngModel)]="user.name"/>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user.name }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <input
+                pInputText
+                type="text"
+                [(ngModel)]="user.email"/>
+            </ng-template>
+            <ng-template pTemplate="output">
+              {{ user.email }}
+            </ng-template>
+          </p-cellEditor>
+        </td>
+        <td>
+          <p-cellEditor>
+            <ng-template pTemplate="input">
+              <p-multiSelect
+                [options]="allRoles"
+                [style]="{'width': '100%'}"
+                [ngStyle]="{'width': '100%'}"
+                [(ngModel)]="user.roles"
+                optionLabel="name"
+                placeholder="Wähle alle Rollen des Benutzers"/>
+            </ng-template>
+            <ng-template pTemplate="output">
+              <div *ngFor="let role of user.roles">{{ role.name }}</div>
+            </ng-template>
+          </p-cellEditor>
+
+        </td>
+        <td>
+          <div class="flex align-items-center justify-content-center gap-2">
+            <button
+              *ngIf="!editing"
+              pButton
+              type="button"
+              pInitEditableRow
+              class="fas fa-edit bg-cyan-500 text-white rounded-lg px-2 py-2 text-center">
+            </button>
+            <button
+              *ngIf="editing"
+              pButton
+              type="button"
+              pSaveEditableRow
+              (click)="onRowEditSave(user)"
+              class="fas fa-check bg-cyan-500 text-white rounded-lg px-2 py-2 text-center">
+            </button>
+            <button
+              *ngIf="editing"
+              pButton
+              type="button"
+              pCancelEditableRow
+              (click)="onRowEditCancel(rowIndex)"
+              class="fas fa-xmark bg-cyan-500 text-white rounded-lg px-2 py-2 text-center">
+            </button>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
+
+

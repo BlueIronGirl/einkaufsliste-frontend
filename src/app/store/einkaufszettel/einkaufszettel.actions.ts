@@ -3,6 +3,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {Artikel} from "../../entities/artikel";
 import {User} from "../../entities/user";
 import {Einkaufszettel} from "../../entities/einkaufszettel";
+import {Role} from "../../entities/role";
 
 export const EinkaufszettelActions = createActionGroup({
   source: 'Einkaufszettel',
@@ -19,6 +20,10 @@ export const EinkaufszettelActions = createActionGroup({
     'Logout': emptyProps(),
     'Logout Success': emptyProps(),
 
+    'Load Roles': emptyProps(),
+    'Load Roles Success': props<{ data: Role[] }>(),
+    'Load Roles Failure': props<{ error: HttpErrorResponse }>(),
+
     'Load Users': emptyProps(),
     'Load Users Success': props<{ data: User[] }>(),
     'Load Users Failure': props<{ error: HttpErrorResponse }>(),
@@ -26,6 +31,10 @@ export const EinkaufszettelActions = createActionGroup({
     'Load Users Friends': emptyProps(),
     'Load Users Friends Success': props<{ data: User[] }>(),
     'Load Users Friends Failure': props<{ error: HttpErrorResponse }>(),
+
+    'Update User': props<{ data: User }>(),
+    'Update User Success': props<{ data: User }>(),
+    'Update User Failure': props<{ error: HttpErrorResponse }>(),
 
     'Load Einkaufszettels': emptyProps(),
     'Load Einkaufszettels Success': props<{ data: Einkaufszettel[] }>(),

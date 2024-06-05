@@ -6,10 +6,10 @@
   </div>
 
   <!-- Owners -->
-  <div class="mt-2 mb-6" *ngIf="allUsers.length > 0">
+  <div class="mt-2 mb-6" *ngIf="allUsersFriends.length > 0">
     <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="name">Besitzer</label>
     <p-multiSelect
-      [options]="allUsers"
+      [options]="allUsersFriends"
       [style]="{'width': '100%'}"
       [ngStyle]="{'width': '100%'}"
       formControlName="owners"
@@ -18,10 +18,10 @@
   </div>
 
   <!-- Shared with Users -->
-  <div class="mt-2 mb-6" *ngIf="allUsers.length > 0">
+  <div class="mt-2 mb-6" *ngIf="allUsersFriends.length > 0">
     <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="name">Personen mit Zugriff</label>
     <p-multiSelect
-      [options]="allUsers"
+      [options]="allUsersFriends"
       [style]="{'width': '100%'}"
       [ngStyle]="{'width': '100%'}"
       formControlName="sharedWith"

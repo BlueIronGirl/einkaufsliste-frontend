@@ -3,6 +3,7 @@ import {EinkaufszettelActions} from './einkaufszettel.actions';
 import {Artikel} from "../../entities/artikel";
 import {User} from "../../entities/user";
 import {Einkaufszettel} from "../../entities/einkaufszettel";
+import {Role} from "../../entities/role";
 
 export const einkaufszettelFeatureKey = 'einkaufszettel';
 
@@ -12,6 +13,7 @@ export interface State {
   loginUser: User | null;
   usersFriends: User[];
   users: User[];
+  roles: Role[];
 }
 
 export const initialState: State = {
@@ -19,7 +21,8 @@ export const initialState: State = {
   artikelsArchiv: [],
   loginUser: null,
   usersFriends: [],
-  users: []
+  users: [],
+  roles: []
 };
 
 export const einkaufszettelReducer = createReducer(
@@ -55,6 +58,11 @@ export const einkaufszettelReducer = createReducer(
   // loadUsers
   on(EinkaufszettelActions.loadUsersSuccess, (state, action) => {
     return {...state, users: action.data}
+  }),
+
+  // loadRoles
+  on(EinkaufszettelActions.loadRolesSuccess, (state, action) => {
+    return {...state, roles: action.data}
   }),
 
   // loadArchiv
