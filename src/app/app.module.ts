@@ -35,6 +35,7 @@ import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {TableModule} from "primeng/table";
 import {TooltipModule} from "primeng/tooltip";
 import { UserComponent } from './components/user/user.component';
+import { RegistrationConfirmationComponent } from './components/registration-confirmation/registration-confirmation.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { UserComponent } from './components/user/user.component';
     RegisterComponent,
     ArchivComponent,
     EditEinkaufszettelComponent,
-    UserComponent
+    UserComponent,
+    RegistrationConfirmationComponent
   ],
   imports: [
     // standard angular

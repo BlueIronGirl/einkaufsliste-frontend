@@ -10,11 +10,15 @@ import {EditEinkaufszettelComponent} from "./components/edit-einkaufszettel/edit
 import {RoleGuard} from "./guard/role-guard";
 import {UserComponent} from "./components/user/user.component";
 import {ROLE_NAME} from "./entities/enum/rolename";
+import {
+  RegistrationConfirmationComponent
+} from "./components/registration-confirmation/registration-confirmation.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'registration-confirmation', component: RegistrationConfirmationComponent},
   {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
   {path: 'einkaufszettel/:einkaufszettelId', component: EditEinkaufszettelComponent, canActivate: [AuthGuard]},
   {path: 'einkaufszettel', component: EditEinkaufszettelComponent, canActivate: [AuthGuard]},

@@ -39,6 +39,12 @@ export class AuthService {
     );
   }
 
+  confirmRegistrationToken(token: string) {
+    return this.httpClient.post<string>(`${this.api}/auth/confirm?token=${token}`, token).pipe(
+      catchError(error => this.errorHandler(error))
+    );
+  }
+
   saveLoginStateToLocalStorage(user: User | null) {
     localStorage.setItem('user', JSON.stringify(user));
   }
