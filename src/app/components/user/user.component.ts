@@ -40,7 +40,7 @@ export class UserComponent {
     this.store.dispatch(EinkaufszettelActions.updateUser({data: user}));
   }
 
-  onRowEditCancel(rowIndex: any) {
+  onRowEditCancel(rowIndex: number) {
     this.allUsers[rowIndex] = {...this.allUsersCloned[rowIndex]};
   }
 }

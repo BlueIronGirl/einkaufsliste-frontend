@@ -8,4 +8,6 @@ export interface User {
   email?: string;
   token?: string;
   roles?: Role[];
+  createdAt?: Date;
+  lastLoggedIn?: Date;
 }

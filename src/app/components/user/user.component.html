@@ -25,6 +25,14 @@
           Rollen
           <p-sortIcon field="roles"/>
         </th>
+        <th pResizableColumn pSortableColumn="createdAt">
+          Erstellt am
+          <p-sortIcon field="createdAt"/>
+        </th>
+        <th pResizableColumn pSortableColumn="lastLoggedIn">
+          Zuletzt eingeloggt am
+          <p-sortIcon field="lastLoggedIn"/>
+        </th>
         <th style="width:10%"></th>
       </tr>
     </ng-template>
@@ -37,6 +45,8 @@
               <input
                 pInputText
                 type="text"
+                [style]="{'width': '100%'}"
+                [ngStyle]="{'width': '100%'}"
                 [(ngModel)]="user.username"/>
             </ng-template>
             <ng-template pTemplate="output">
@@ -50,6 +60,8 @@
               <input
                 pInputText
                 type="text"
+                [style]="{'width': '100%'}"
+                [ngStyle]="{'width': '100%'}"
                 [(ngModel)]="user.name"/>
             </ng-template>
             <ng-template pTemplate="output">
@@ -63,6 +75,8 @@
               <input
                 pInputText
                 type="text"
+                [style]="{'width': '100%'}"
+                [ngStyle]="{'width': '100%'}"
                 [(ngModel)]="user.email"/>
             </ng-template>
             <ng-template pTemplate="output">
@@ -85,7 +99,12 @@
               <div *ngFor="let role of user.roles">{{ role.name }}</div>
             </ng-template>
           </p-cellEditor>
-
+        </td>
+        <td>
+          {{ user.createdAt | date:'dd.MM.yyyy HH:mm' }}
+        </td>
+        <td>
+          {{ user.lastLoggedIn | date:'dd.MM.yyyy HH:mm' }}
         </td>
         <td>
           <div class="flex align-items-center justify-content-center gap-2">
