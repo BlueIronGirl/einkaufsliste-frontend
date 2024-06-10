@@ -28,6 +28,11 @@ export class EinkaufszettelEffects {
     this.actions$.pipe(
       ofType(EinkaufszettelActions.registerSuccess),
       tap((action) => {
+        this.messageService.clear();
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Die Registrierung war erfolgreich! Der Bestätigungslink wurde per E-Mail versandt.'
+        });
         this.router.navigateByUrl("/login");
       }),
     ), {dispatch: false});
