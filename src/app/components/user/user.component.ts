@@ -7,6 +7,7 @@ import {ConfirmationService} from "primeng/api";
 import {EinkaufszettelActions} from "../../store/einkaufszettel/einkaufszettel.actions";
 import {selectAllRoles, selectAllUsers} from "../../store/einkaufszettel/einkaufszettel.selectors";
 import {Role} from "../../entities/role";
+import {ROLE_NAME} from "../../entities/enum/rolename";
 
 @Component({
   selector: 'app-user',
@@ -42,5 +43,26 @@ export class UserComponent {
 
   onRowEditCancel(rowIndex: number) {
     this.allUsers[rowIndex] = {...this.allUsersCloned[rowIndex]};
+  }
+
+  isAdmin(user: User) {
+    return user.roles!.filter(role => role.name === ROLE_NAME.ROLE_ADMIN).length > 0
+  }
+
+  deleteUser(user: User) {
+    this.confirmationService.confirm({
+      message: 'Sind Sie sich sicher, dass Sie den Benutzer löschen möchten?',
+      header: 'Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      acceptLabel: 'Ja',
+      rejectLabel: 'Nein',
+      acceptIcon: "none",
+      rejectIcon: "none",
+      rejectButtonStyleClass: "p-button-text",
+      accept: () => {
+        this.store.dispatch(EinkaufszettelActions.deleteUser({data: user}));
+        this.store.dispatch(EinkaufszettelActions.loadUsers());
+      }
+    });
   }
 }

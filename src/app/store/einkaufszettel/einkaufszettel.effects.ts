@@ -283,9 +283,35 @@ export class EinkaufszettelEffects {
     return this.actions$.pipe(
       ofType(EinkaufszettelActions.updateUserSuccess),
       this.navigate('User wurde gespeichert', 'user'),
-      this.loadAllEinkaufszettel()
+      this.loadAllUsers()
     )
   });
+
+  deleteUser$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(EinkaufszettelActions.deleteUser),
+      map(action => action.data),
+      concatMap(inputData => this.userService.deleteUser(inputData).pipe(
+        map(data => EinkaufszettelActions.deleteUserSuccess({data: data})),
+        catchError(error => of(EinkaufszettelActions.deleteUserFailure({error})))
+      ))
+    )
+  });
+
+  deleteUserSuccess$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(EinkaufszettelActions.deleteUserSuccess),
+      this.navigate('User wurde gelöscht', 'user'),
+      this.loadAllUsers()
+    )
+  });
+
+  private loadAllUsers() {
+    return concatMap(() => this.userService.getAllUsers().pipe(
+      map(data => EinkaufszettelActions.loadUsersSuccess({data: data})),
+      catchError(error => of(EinkaufszettelActions.loadUsersFailure({error})))
+    ));
+  }
 
   loadArchiv$ = createEffect(() => {
     return this.actions$.pipe(

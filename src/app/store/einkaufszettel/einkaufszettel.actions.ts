@@ -36,6 +36,10 @@ export const EinkaufszettelActions = createActionGroup({
     'Update User Success': props<{ data: User }>(),
     'Update User Failure': props<{ error: HttpErrorResponse }>(),
 
+    'Delete User': props<{ data: User }>(),
+    'Delete User Success': props<{ data: User }>(),
+    'Delete User Failure': props<{ error: HttpErrorResponse }>(),
+
     'Load Einkaufszettels': emptyProps(),
     'Load Einkaufszettels Success': props<{ data: Einkaufszettel[] }>(),
     'Load Einkaufszettels Failure': props<{ error: HttpErrorResponse }>(),

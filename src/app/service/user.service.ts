@@ -37,4 +37,10 @@ export class UserService {
       catchError(UserService.errorHandler)
     );
   }
+
+  deleteUser(user: User) {
+    return this.httpClient.delete<User>(`${this.api}/user/${user.id}`).pipe(
+      catchError(UserService.errorHandler)
+    );
+  }
 }

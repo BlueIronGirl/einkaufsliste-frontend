@@ -116,6 +116,13 @@
               class="fas fa-edit bg-cyan-500 text-white rounded-lg px-2 py-2 text-center">
             </button>
             <button
+              *ngIf="!editing && !isAdmin(user)"
+              pButton
+              type="button"
+              (click)="deleteUser(user)"
+              class="fas fa-trash bg-cyan-500 text-white rounded-lg px-2 py-2 text-center">
+            </button>
+            <button
               *ngIf="editing"
               pButton
               type="button"
