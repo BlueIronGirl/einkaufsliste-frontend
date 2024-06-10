@@ -39,6 +39,9 @@ export const einkaufszettelReducer = createReducer(
   on(EinkaufszettelActions.loginLocalstorage, (state, action) => {
     return {...state, loginUser: action.data}
   }),
+  on(EinkaufszettelActions.refreshTokenSuccess, (state, action) => {
+    return {...state, loginUser: action.data}
+  }),
 
   // logout
   on(EinkaufszettelActions.logout, (state, action) => {

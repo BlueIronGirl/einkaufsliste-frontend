@@ -57,6 +57,25 @@ export class EinkaufszettelEffects {
       }),
     ), {dispatch: false});
 
+  refreshToken$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(EinkaufszettelActions.refreshToken),
+      map(action => action.data),
+      concatMap(inputData => this.loginService.refreshToken(inputData).pipe(
+        map(data => EinkaufszettelActions.refreshTokenSuccess({data: data})),
+        catchError(error => of(EinkaufszettelActions.refreshTokenFailure({error})))
+      ))
+    )
+  });
+
+  refreshTokenSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(EinkaufszettelActions.refreshTokenSuccess),
+      tap((action) => {
+        this.loginService.saveLoginStateToLocalStorage(action.data);
+      }),
+    ), {dispatch: false});
+
   loginFailure = createEffect(() =>
     this.actions$.pipe(
       ofType(EinkaufszettelActions.loginFailure),

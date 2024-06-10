@@ -45,6 +45,12 @@ export class AuthService {
     );
   }
 
+  refreshToken(token: string) {
+    return this.httpClient.post<any>(`${this.api}/auth/refresh-token`, token).pipe(
+      catchError(error => this.errorHandler(error))
+    );
+  }
+
   saveLoginStateToLocalStorage(user: User | null) {
     localStorage.setItem('user', JSON.stringify(user));
   }
