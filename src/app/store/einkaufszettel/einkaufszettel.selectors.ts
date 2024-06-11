@@ -24,8 +24,3 @@ export const selectArtikelById = (einkaufszettelId: number, artikelId: number) =
     return state.einkaufszettel[state.einkaufszettel.findIndex(einkaufszettel => einkaufszettel.id === einkaufszettelId)].artikels.filter(artikel => artikel.id === artikelId)[0];
   }
 )
-
-export const selectAllArtikelArchiv = createSelector(
-  selectEinkaufszettelState,
-  state => state.artikelsArchiv
-);

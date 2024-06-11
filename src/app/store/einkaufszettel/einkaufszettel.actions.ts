@@ -44,10 +44,5 @@ export const EinkaufszettelActions = createActionGroup({
     'Archiviere Artikel': emptyProps(),
     'Archiviere Artikel Success': props<{ data: Artikel[] }>(),
     'Archiviere Artikel Failure': props<{ error: HttpErrorResponse }>(),
-
-
-    'Load Archiv': emptyProps(),
-    'Load Archiv Success': props<{ data: Artikel[] }>(),
-    'Load Archiv Failure': props<{ error: HttpErrorResponse }>(),
   }
 });

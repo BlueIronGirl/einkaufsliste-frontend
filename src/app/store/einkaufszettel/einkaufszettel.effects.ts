@@ -1,14 +1,11 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {catchError, concatMap, map, switchMap, tap} from 'rxjs/operators';
+import {catchError, concatMap, map, tap} from 'rxjs/operators';
 import {of} from 'rxjs';
 import {EinkaufszettelActions} from './einkaufszettel.actions';
 import {EinkaufszettelService} from "../../service/einkaufszettel.service";
-import {AuthService} from "../../service/auth.service";
 import {Router} from "@angular/router";
 import {MessageService} from "primeng/api";
-import {UserService} from "../../service/user.service";
-import {RoleService} from "../../service/role.service";
 
 
 @Injectable()
@@ -37,18 +34,6 @@ export class EinkaufszettelEffects {
       this.loadAllEinkaufszettel()
     )
   });
-
-  private navigateToHomeWithMessage(message: string) {
-    return this.navigateWithMessage(message, 'home');
-  }
-
-  private navigateWithMessage(message: string, navigationTarget: string) {
-    return tap(() => {
-      this.router.navigateByUrl(`/${navigationTarget}`);
-      this.messageService.clear();
-      this.messageService.add({severity: 'success', summary: message});
-    });
-  }
 
   updateEinkaufszettel$ = createEffect(() => {
     return this.actions$.pipe(
@@ -168,17 +153,18 @@ export class EinkaufszettelEffects {
     ));
   }
 
-  loadArchiv$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(EinkaufszettelActions.loadArchiv),
-      switchMap(() => this.einkaufszettelService.loadAllArtikelArchiv().pipe(
-          map(artikels => EinkaufszettelActions.loadArchivSuccess({data: artikels})),
-          catchError(error => of(EinkaufszettelActions.loadArchivFailure({error})))
-        )
-      )
-    );
-  });
+  private navigateToHomeWithMessage(message: string) {
+    return this.navigateWithMessage(message, 'home');
+  }
 
-  constructor(private actions$: Actions, private messageService: MessageService, private router: Router, private loginService: AuthService, private einkaufszettelService: EinkaufszettelService, private userService: UserService, private roleService: RoleService) {
+  private navigateWithMessage(message: string, navigationTarget: string) {
+    return tap(() => {
+      this.router.navigateByUrl(`/${navigationTarget}`);
+      this.messageService.clear();
+      this.messageService.add({severity: 'success', summary: message});
+    });
+  }
+
+  constructor(private actions$: Actions, private messageService: MessageService, private router: Router, private einkaufszettelService: EinkaufszettelService) {
   }
 }

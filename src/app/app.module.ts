@@ -44,6 +44,8 @@ import {AuthEffects} from "./store/auth/auth.effects";
 import {authFeature, authFeatureKey, authReducer} from "./store/auth/auth.reducer";
 import {UserEffects} from "./store/user/user.effects";
 import {userFeature} from "./store/user/user.reducer";
+import {ArchivEffects} from "./store/archiv/archiv.effects";
+import {archivFeature} from "./store/archiv/archiv.reducer";
 
 @NgModule({
   declarations: [
@@ -76,6 +78,8 @@ import {userFeature} from "./store/user/user.reducer";
     StoreModule.forFeature(authFeature),
     EffectsModule.forFeature([UserEffects]),
     StoreModule.forFeature(userFeature),
+    EffectsModule.forFeature([ArchivEffects]),
+    StoreModule.forFeature(archivFeature),
 
     //primeng
     ButtonModule,

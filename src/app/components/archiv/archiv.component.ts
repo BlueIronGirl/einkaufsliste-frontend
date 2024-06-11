@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {Artikel} from "../../entities/artikel";
 import {Store} from "@ngrx/store";
-import {EinkaufszettelActions} from "../../store/einkaufszettel/einkaufszettel.actions";
-import {selectAllArtikelArchiv} from "../../store/einkaufszettel/einkaufszettel.selectors";
+import {ArchivActions} from "../../store/archiv/archiv.actions";
+import {selectAllArtikelArchiv} from "../../store/archiv/archiv.selectors";
 
 @Component({
   selector: 'app-archiv',
@@ -16,7 +16,7 @@ export class ArchivComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(EinkaufszettelActions.loadArchiv());
+    this.store.dispatch(ArchivActions.loadArchiv());
 
     this.store.select(selectAllArtikelArchiv).subscribe(artikels => this.artikels = [...artikels]);
   }
