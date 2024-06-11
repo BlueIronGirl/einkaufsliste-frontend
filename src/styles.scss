@@ -5,3 +5,9 @@
 body {
   font-family: var(--font-family);
 }
+
+.p-checkbox .p-checkbox-box.p-highlight {
+  background-color: rgb(163 230 53 / var(--tw-bg-opacity));
+  color: rgb(255, 255, 255); /* White */
+  border-color: rgb(163 230 53 / var(--tw-bg-opacity));
+}
