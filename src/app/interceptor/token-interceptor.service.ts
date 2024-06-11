@@ -17,12 +17,12 @@ export class TokenInterceptor implements HttpInterceptor {
 
     const options: IsActiveMatchOptions = {
       paths: 'exact',
-      queryParams: 'exact',
+      queryParams: 'ignored',
       fragment: 'ignored',
       matrixParams: 'ignored'
     };
 
-    if (!this.router.isActive('/login', options) && !this.router.isActive('/register', options)) {
+    if (!this.router.isActive('/login', options) && !this.router.isActive('/register', options) && !this.router.isActive('/registration-confirmation', options)) {
       if (!this.auth.isLoginStateValid()) {
         this.router.navigateByUrl('/login')
         return throwError(() => new Error("Token nicht mehr valide!"));

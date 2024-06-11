@@ -1,11 +1,11 @@
-<div class="m-auto h-screen" style="max-width: 1200px; min-width: 400px; min-height: 400px;">
-  <nav class="bg-cyan-800">
+<div class="m-auto text-gray-600" style="max-width: 1200px; min-width: 800px; min-height: 800px;">
+  <nav class="bg-lime-400 rounded-md">
     <div class="mx-auto px-2 sm:px-6 lg:px-4">
       <div class="relative flex h-16 items-center justify-between">
         <div class="flex items-center sm:hidden">
           <!-- Mobile menu button-->
           <button type="button"
-                  class="inline-flex items-center rounded-lg p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                  class="inline-flex items-center rounded-lg p-2 text-gray-600 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                   [disabled]="!userLoggedIn"
                   (click)="toggleCollapseMenu()"
                   aria-controls="mobile-menu" aria-expanded="false">
@@ -26,29 +26,28 @@
         <div class="flex flex-1 items-center sm:items-stretch sm:justify-start">
           <div class="hidden sm:block">
             <div class="flex space-x-4 items-center justify-center">
-              <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
               <a routerLink="/home"
-                 routerLinkActive="bg-gray-700"
-                 class="hover:bg-gray-700 text-white rounded-lg px-3 py-2 text-sm font-medium"
+                 routerLinkActive="bg-gray-200"
+                 class="hover:bg-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 font-medium"
                  aria-current="page">
                 <span class="fas fa-house fa-sm"></span> Übersicht
               </a>
               <a routerLink="/einkaufszettel"
-                 routerLinkActive="bg-gray-700"
-                 class="hover:bg-gray-700 text-white rounded-lg px-3 py-2 text-sm font-medium"
+                 routerLinkActive="bg-gray-200"
+                 class="hover:bg-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 font-medium"
                  aria-current="page">
                 <span class="fas fa-cart-shopping fa-sm"></span> Einkaufszettel
               </a>
               <a routerLink="/archiv"
-                 routerLinkActive="bg-gray-700"
-                 class="hover:bg-gray-700 text-white rounded-lg px-3 py-2 text-sm font-medium"
+                 routerLinkActive="bg-gray-200"
+                 class="hover:bg-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 font-medium"
                  aria-current="page">
                 <span class="fas fa-archive fa-sm"></span> Archiv
               </a>
               <a *ngIf="hasRole(ROLE_NAME.ROLE_ADMIN)"
                  routerLink="/user"
-                 routerLinkActive="bg-gray-700"
-                 class="hover:bg-gray-700 text-white rounded-lg px-3 py-2 text-sm font-medium"
+                 routerLinkActive="bg-gray-200"
+                 class="hover:bg-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 font-medium"
                  aria-current="page">
                 <span class="fas fa-user-tie fa-sm"></span> Userverwaltung
               </a>
@@ -59,7 +58,7 @@
                   (click)="archiviereGekaufteArtikel()"
                   *ngIf="userLoggedIn"
                   pTooltip="Alle gekauften Artikel archivieren"
-                  class="bg-cyan-500 rounded-lg ml-6 px-2 py-2 text-sm text-center">
+                  class="bg-gray-50 rounded-lg ml-6 px-2 py-2 text-sm text-center">
             Archivieren
           </button>
         </div>
@@ -67,8 +66,14 @@
         <button type="button"
                 *ngIf="userLoggedIn"
                 (click)="logout($event)"
-                class="bg-cyan-600 rounded-lg px-2 py-2 text-sm text-center font-medium end-0">
+                class="bg-gray-50 rounded-lg px-2 py-2 text-sm text-center font-medium end-0">
           Logout
+        </button>
+
+        <!-- Mobile menu button-->
+        <button type="button"
+                class="fas fa-user inline-flex items-center rounded-lg p-2 text-gray-500 hover:bg-gray-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                [disabled]="!userLoggedIn">
         </button>
       </div>
     </div>
@@ -76,30 +81,29 @@
     <!-- Mobile menu, show/hide based on menu state. -->
     <div *ngIf="!menuCollapsed" class="sm:hidden" id="mobile-menu">
       <div class="space-y-1 px-2 pb-3 pt-2 items-center">
-        <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
         <a routerLink="/home"
-           routerLinkActive="bg-gray-700"
-           class="block rounded-lg px-3 py-2 text-white text-base font-medium"
+           routerLinkActive="bg-gray-200"
+           class="block rounded-lg px-3 py-2 text-base text-gray-600 font-medium"
            aria-current="page">
           <span class="fas fa-house fa-sm"></span> Übersicht
         </a>
         <a routerLink="/einkaufszettel"
-           routerLinkActive="bg-gray-700"
-           class="block rounded-lg px-3 py-2 text-white text-base font-medium"
+           routerLinkActive="bg-gray-200"
+           class="block rounded-lg px-3 py-2 text-base text-gray-600 font-medium"
            aria-current="page">
           <span class="fas fa-cart-shopping fa-sm"></span> Einkaufszettel
         </a>
         <a routerLink="/archiv"
-           routerLinkActive="bg-gray-700"
-           class="block rounded-lg px-3 py-2 text-white text-base font-medium"
+           routerLinkActive="bg-gray-200"
+           class="block rounded-lg px-3 py-2 text-base text-gray-600 font-medium"
            aria-current="page">
           <span class="fas fa-archive fa-sm"></span> Archiv
         </a>
 
         <a *ngIf="hasRole(ROLE_NAME.ROLE_ADMIN)"
            routerLink="/user"
-           routerLinkActive="bg-gray-700"
-           class="block rounded-lg px-3 py-2 text-white text-base font-medium"
+           routerLinkActive="bg-gray-200"
+           class="block rounded-lg px-3 py-2 text-base text-gray-600 font-medium"
            aria-current="page">
           <span class="fas fa-user-tie fa-sm"></span> Userverwaltung
         </a>
@@ -107,18 +111,22 @@
     </div>
   </nav>
 
-  <div class="border-gray-50 border-1 p-4 bg-blue-50" style="min-height: inherit">
+  <div class="border-gray-50 border-1 p-4 bg-lime-50" style="min-height: inherit; height: inherit">
     <router-outlet></router-outlet>
   </div>
 
-  <div class="flex bg-gray-600 text-gray-300 text-sm font-medium">
+  <div class="flex bg-gray-200 text-gray-500 text-sm font-medium">
     <div class="grow"></div>
     <div class="py-2">
       <span class="fa-regular fa-copyright fa-xl rounded-lg text-xs font-medium align-middle"></span>
       <span class="ml-1 text-xs">Alice Bedow</span>
     </div>
+    <a href="https://www.linkedin.com/in/alice-bedow-1a7a7a219/"
+       class="rounded-lg px-1 py-2 ml-1"
+       target="_blank"
+       aria-current="page"><span class="fa-brands fa-linkedin fa-xl"></span></a>
     <a href="https://github.com/BlueIronGirl/shopping-list-app"
-       class="rounded-lg px-3 py-2 ml-3"
+       class="rounded-lg pl-1 py-2 mr-2"
        target="_blank"
        aria-current="page"><span class="fa-brands fa-github fa-xl"></span></a>
   </div>

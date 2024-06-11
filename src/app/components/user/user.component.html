@@ -113,14 +113,14 @@
               pButton
               type="button"
               pInitEditableRow
-              class="fas fa-edit bg-cyan-500 text-white rounded-lg px-2 py-2 text-center">
+              class="fas fa-edit bg-lime-400 text-white rounded-lg px-2 py-2 text-center">
             </button>
             <button
               *ngIf="!editing && !isAdmin(user)"
               pButton
               type="button"
               (click)="deleteUser(user)"
-              class="fas fa-trash bg-cyan-500 text-white rounded-lg px-2 py-2 text-center">
+              class="fas fa-trash bg-lime-400 text-white rounded-lg px-2 py-2 text-center">
             </button>
             <button
               *ngIf="editing"
@@ -128,7 +128,7 @@
               type="button"
               pSaveEditableRow
               (click)="onRowEditSave(user)"
-              class="fas fa-check bg-cyan-500 text-white rounded-lg px-2 py-2 text-center">
+              class="fas fa-check bg-lime-400 text-white rounded-lg px-2 py-2 text-center">
             </button>
             <button
               *ngIf="editing"
@@ -136,7 +136,7 @@
               type="button"
               pCancelEditableRow
               (click)="onRowEditCancel(rowIndex)"
-              class="fas fa-xmark bg-cyan-500 text-white rounded-lg px-2 py-2 text-center">
+              class="fas fa-xmark bg-lime-400 text-white rounded-lg px-2 py-2 text-center">
             </button>
           </div>
         </td>

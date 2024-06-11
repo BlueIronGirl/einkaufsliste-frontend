@@ -2,14 +2,14 @@
   <div *ngFor="let einkaufszettel of einkaufszettel"
        class="flex-grow-1 bg-white m-5 p-3 rounded overflow-hidden shadow-lg">
     <h2 class="flex ml-1 mb-2 text-3xl">
-      <span class="font-bold">{{ einkaufszettel.name }} </span>
+      <span class="font-bold text-lime-600">{{ einkaufszettel.name }} </span>
       <button type="button" [routerLink]="['/artikel/new', einkaufszettel.id]"
               pTooltip="Neuen Artikel anlegen"
-              class="fas fa-plus ml-2"></button>
+              class="fas fa-plus ml-2 text-gray-500"></button>
       <div class="grow"></div>
       <button type="button" [routerLink]="['/einkaufszettel', einkaufszettel.id]"
               pTooltip="Einkaufszettel bearbeiten"
-              class="fas fa-gear text-xl"></button>
+              class="fas fa-gear text-xl text-gray-500"></button>
     </h2>
 
     <div class="p-3">
@@ -19,7 +19,7 @@
                     [binary]="true"
                     (onChange)="changeArtikelGekauft(einkaufszettel, artikel)"></p-checkbox>
 
-        <span class="text-primary font-semibold text-xl text-cyan-600 mr-1">{{ artikel.anzahl }}</span>
+        <span class="text-primary font-semibold text-xl text-lime-600 mr-1">{{ artikel.anzahl }}</span>
         <span class="text-primary font-semibold text-xl cursor-pointer hover:underline"
               pTooltip="Artikel bearbeiten"
               [routerLink]="['/artikel', einkaufszettel.id, artikel.id]">{{ artikel.name }}</span>
@@ -34,8 +34,8 @@
     <div class="text-gray-500">
       Sie haben noch keinen Einkaufszettel angelegt?
     </div>
-    <a routerLink="/einkaufszettel" class="text-blue-400"><span
-      class="fas fa-cart-shopping text-cyan-600 mr-2 text-xl"></span>Neuen Einkaufszettel anlegen</a>
+    <a routerLink="/einkaufszettel" class="text-lime-600"><span
+      class="fas fa-cart-shopping text-lime-600 mr-2 text-xl"></span>Neuen Einkaufszettel anlegen</a>
   </div>
 </div>
 
