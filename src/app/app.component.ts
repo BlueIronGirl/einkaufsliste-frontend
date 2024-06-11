@@ -1,10 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {EinkaufszettelActions} from "./store/einkaufszettel/einkaufszettel.actions";
-import {selectLogin} from "./store/einkaufszettel/einkaufszettel.selectors";
 import {ConfirmationService} from "primeng/api";
 import {AuthService} from "./service/auth.service";
 import {ROLE_NAME, RoleName} from "./entities/enum/rolename";
+import {AuthActions} from "./store/auth/auth.actions";
+import {selectLogin} from "./store/auth/auth.selectors";
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,6 @@ import {ROLE_NAME, RoleName} from "./entities/enum/rolename";
 export class AppComponent implements OnInit {
   userLoggedIn = false;
   menuCollapsed = true;
-  isAdmin = false;
   private userRoles: RoleName[] = [];
 
   constructor(private store: Store, private confirmationService: ConfirmationService, private authService: AuthService) {
@@ -44,7 +44,7 @@ export class AppComponent implements OnInit {
       rejectIcon: "none",
       rejectButtonStyleClass: "p-button-text",
       accept: () => {
-        this.store.dispatch(EinkaufszettelActions.logout());
+        this.store.dispatch(AuthActions.logout());
       }
     });
   }

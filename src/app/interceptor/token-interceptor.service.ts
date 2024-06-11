@@ -3,8 +3,8 @@ import {HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/com
 import {Observable, throwError} from 'rxjs';
 import {AuthService} from "../service/auth.service";
 import {Store} from "@ngrx/store";
-import {Router} from "@angular/router";
-import {EinkaufszettelActions} from "../store/einkaufszettel/einkaufszettel.actions";
+import {IsActiveMatchOptions, Router} from "@angular/router";
+import {AuthActions} from "../store/auth/auth.actions";
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor {
@@ -15,13 +15,22 @@ export class TokenInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const token = this.auth.getActiveLoginToken();
 
-    if (!this.auth.isLoginStateValid()) {
-      this.router.navigateByUrl('/login')
-      return throwError(() => new Error("Token nicht mehr valide!"));
-    }
+    const options: IsActiveMatchOptions = {
+      paths: 'exact',
+      queryParams: 'exact',
+      fragment: 'ignored',
+      matrixParams: 'ignored'
+    };
 
-    if (!request.url.endsWith('refresh-token')) {
-      this.store.dispatch(EinkaufszettelActions.refreshToken({data: token}));
+    if (!this.router.isActive('/login', options) && !this.router.isActive('/register', options)) {
+      if (!this.auth.isLoginStateValid()) {
+        this.router.navigateByUrl('/login')
+        return throwError(() => new Error("Token nicht mehr valide!"));
+      }
+
+      if (!request.url.endsWith('refresh-token')) {
+        this.store.dispatch(AuthActions.refreshToken({data: token}));
+      }
     }
 
     request = request.clone({

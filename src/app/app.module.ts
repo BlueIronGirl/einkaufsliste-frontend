@@ -36,6 +36,8 @@ import {TableModule} from "primeng/table";
 import {TooltipModule} from "primeng/tooltip";
 import { UserComponent } from './components/user/user.component';
 import { RegistrationConfirmationComponent } from './components/registration-confirmation/registration-confirmation.component';
+import {AuthEffects} from "./store/auth/auth.effects";
+import {authFeature, authFeatureKey, authReducer} from "./store/auth/auth.reducer";
 
 @NgModule({
   declarations: [
@@ -60,10 +62,12 @@ import { RegistrationConfirmationComponent } from './components/registration-con
 
     // ngrx
     StoreModule.forRoot({}, {}),
-    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
     EffectsModule.forRoot([]),
+    StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
     EffectsModule.forFeature([EinkaufszettelEffects]),
     StoreModule.forFeature(einkaufszettelFeatureKey, einkaufszettelReducer),
+    EffectsModule.forFeature([AuthEffects]),
+    StoreModule.forFeature(authFeature),
 
     //primeng
     ButtonModule,

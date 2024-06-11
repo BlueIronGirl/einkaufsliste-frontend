@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {MessageService} from "primeng/api";
 import {User} from "../../entities/user";
-import {EinkaufszettelActions} from "../../store/einkaufszettel/einkaufszettel.actions";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
+import {AuthActions} from "../../store/auth/auth.actions";
 
 @Component({
   selector: 'app-login',
@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
     const formValue = this.loginForm.getRawValue();
     const user: User = {...formValue};
 
-    this.store.dispatch(EinkaufszettelActions.login({data: user}));
+    this.store.dispatch(AuthActions.login({data: user}));
   }
 
   reset() {

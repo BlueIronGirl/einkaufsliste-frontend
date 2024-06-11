@@ -4,7 +4,7 @@ import {User} from "../../entities/user";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {Router} from "@angular/router";
-import {EinkaufszettelActions} from "../../store/einkaufszettel/einkaufszettel.actions";
+import {AuthActions} from "../../store/auth/auth.actions";
 
 @Component({
   selector: 'app-register',
@@ -36,7 +36,7 @@ export class RegisterComponent implements OnInit {
     const formValue = this.loginForm.getRawValue();
     const user: User = {...formValue};
 
-    this.store.dispatch(EinkaufszettelActions.register({data: user}));
+    this.store.dispatch(AuthActions.register({data: user}));
   }
 
   reset() {

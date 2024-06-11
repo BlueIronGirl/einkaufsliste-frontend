@@ -10,7 +10,6 @@ export const einkaufszettelFeatureKey = 'einkaufszettel';
 export interface State {
   einkaufszettel: Einkaufszettel[];
   artikelsArchiv: Artikel[];
-  loginUser: User | null;
   usersFriends: User[];
   users: User[];
   roles: Role[];
@@ -19,7 +18,6 @@ export interface State {
 export const initialState: State = {
   einkaufszettel: [],
   artikelsArchiv: [],
-  loginUser: null,
   usersFriends: [],
   users: [],
   roles: []
@@ -27,26 +25,6 @@ export const initialState: State = {
 
 export const einkaufszettelReducer = createReducer(
   initialState,
-  // register
-  on(EinkaufszettelActions.registerSuccess, (state, action) => {
-    return {...state, loginUser: action.data}
-  }),
-
-  // login
-  on(EinkaufszettelActions.loginSuccess, (state, action) => {
-    return {...state, loginUser: action.data}
-  }),
-  on(EinkaufszettelActions.loginLocalstorage, (state, action) => {
-    return {...state, loginUser: action.data}
-  }),
-  on(EinkaufszettelActions.refreshTokenSuccess, (state, action) => {
-    return {...state, loginUser: action.data}
-  }),
-
-  // logout
-  on(EinkaufszettelActions.logout, (state, action) => {
-    return {...state, loginUser: null}
-  }),
 
   // loadEinkaufszettels
   on(EinkaufszettelActions.loadEinkaufszettelsSuccess, (state, action) => {

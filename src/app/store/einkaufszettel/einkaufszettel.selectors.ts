@@ -5,11 +5,6 @@ export const selectEinkaufszettelState = createFeatureSelector<fromEinkaufszette
   fromEinkaufszettel.einkaufszettelFeatureKey
 );
 
-export const selectLogin = createSelector(
-  selectEinkaufszettelState,
-  state => state.loginUser
-);
-
 export const selectAllEinkaufszettel = createSelector(
   selectEinkaufszettelState,
   state => state.einkaufszettel
