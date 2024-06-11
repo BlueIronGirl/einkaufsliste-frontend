@@ -1,7 +1,7 @@
 <div class="w-full">
   <div *ngFor="let einkaufszettel of einkaufszettel"
-       class="flex-grow-1 bg-white m-5 p-3 rounded overflow-hidden shadow-lg">
-    <h2 class="flex ml-1 mb-2 text-3xl">
+       class="flex-grow-1 bg-white m-5 p-3 rounded-lg overflow-hidden shadow-lg border-2">
+    <h2 class="flex ml-1 mb-2 text-2xl">
       <span class="font-bold text-lime-600">{{ einkaufszettel.name }} </span>
       <button type="button" [routerLink]="['/artikel/new', einkaufszettel.id]"
               pTooltip="Neuen Artikel anlegen"
@@ -14,7 +14,7 @@
 
     <div class="p-3">
       <div class="flex" *ngFor="let artikel of einkaufszettel.artikels">
-        <p-checkbox class="mr-2"
+        <p-checkbox class="mr-2 rounded"
                     [(ngModel)]="artikel.gekauft"
                     [binary]="true"
                     (onChange)="changeArtikelGekauft(einkaufszettel, artikel)"></p-checkbox>
