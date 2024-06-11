@@ -25,21 +25,6 @@ export const selectArtikelById = (einkaufszettelId: number, artikelId: number) =
   }
 )
 
-export const selectAllUsers = createSelector(
-  selectEinkaufszettelState,
-  state => state.users
-);
-
-export const selectAllUsersFriends = createSelector(
-  selectEinkaufszettelState,
-  state => state.usersFriends
-);
-
-export const selectAllRoles = createSelector(
-  selectEinkaufszettelState,
-  state => state.roles
-);
-
 export const selectAllArtikelArchiv = createSelector(
   selectEinkaufszettelState,
   state => state.artikelsArchiv

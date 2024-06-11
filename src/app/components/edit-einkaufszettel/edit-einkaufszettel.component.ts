@@ -2,11 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {Einkaufszettel} from "../../entities/einkaufszettel";
 import {Store} from "@ngrx/store";
 import {EinkaufszettelActions} from "../../store/einkaufszettel/einkaufszettel.actions";
-import {selectAllUsersFriends, selectEinkaufszettelById} from "../../store/einkaufszettel/einkaufszettel.selectors";
+import {selectEinkaufszettelById} from "../../store/einkaufszettel/einkaufszettel.selectors";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {User} from "../../entities/user";
 import {ConfirmationService} from "primeng/api";
+import {UserActions} from "../../store/user/user.actions";
+import {selectAllUsersFriends} from "../../store/user/user.selectors";
 
 @Component({
   selector: 'app-einkaufszettel',
@@ -30,7 +32,7 @@ export class EditEinkaufszettelComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.dispatch(EinkaufszettelActions.loadEinkaufszettels());
-    this.store.dispatch(EinkaufszettelActions.loadUsersFriends());
+    this.store.dispatch(UserActions.loadUsersFriends());
 
     const einkaufszettelId = Number(this.activatedRoute.snapshot.paramMap.get('einkaufszettelId'));
     if (einkaufszettelId > 0) {

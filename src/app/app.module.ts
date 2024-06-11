@@ -8,7 +8,11 @@ import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {EffectsModule} from '@ngrx/effects';
 import {EinkaufszettelEffects} from "./store/einkaufszettel/einkaufszettel.effects";
-import {einkaufszettelFeatureKey, einkaufszettelReducer} from "./store/einkaufszettel/einkaufszettel.reducer";
+import {
+  einkaufszettelFeature,
+  einkaufszettelFeatureKey,
+  einkaufszettelReducer
+} from "./store/einkaufszettel/einkaufszettel.reducer";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {CardModule} from "primeng/card";
 import {CheckboxModule} from "primeng/checkbox";
@@ -38,6 +42,8 @@ import { UserComponent } from './components/user/user.component';
 import { RegistrationConfirmationComponent } from './components/registration-confirmation/registration-confirmation.component';
 import {AuthEffects} from "./store/auth/auth.effects";
 import {authFeature, authFeatureKey, authReducer} from "./store/auth/auth.reducer";
+import {UserEffects} from "./store/user/user.effects";
+import {userFeature} from "./store/user/user.reducer";
 
 @NgModule({
   declarations: [
@@ -65,9 +71,11 @@ import {authFeature, authFeatureKey, authReducer} from "./store/auth/auth.reduce
     EffectsModule.forRoot([]),
     StoreDevtoolsModule.instrument({maxAge: 25, logOnly: !isDevMode()}),
     EffectsModule.forFeature([EinkaufszettelEffects]),
-    StoreModule.forFeature(einkaufszettelFeatureKey, einkaufszettelReducer),
+    StoreModule.forFeature(einkaufszettelFeature),
     EffectsModule.forFeature([AuthEffects]),
     StoreModule.forFeature(authFeature),
+    EffectsModule.forFeature([UserEffects]),
+    StoreModule.forFeature(userFeature),
 
     //primeng
     ButtonModule,

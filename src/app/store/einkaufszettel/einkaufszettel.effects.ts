@@ -33,16 +33,16 @@ export class EinkaufszettelEffects {
   createEinkaufszettelSuccess$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(EinkaufszettelActions.createEinkaufszettelSuccess),
-      this.navigateToHome('Einkaufszettel wurde gespeichert'),
+      this.navigateToHomeWithMessage('Einkaufszettel wurde gespeichert'),
       this.loadAllEinkaufszettel()
     )
   });
 
-  private navigateToHome(message: string) {
-    return this.navigate(message, 'home');
+  private navigateToHomeWithMessage(message: string) {
+    return this.navigateWithMessage(message, 'home');
   }
 
-  private navigate(message: string, navigationTarget: string) {
+  private navigateWithMessage(message: string, navigationTarget: string) {
     return tap(() => {
       this.router.navigateByUrl(`/${navigationTarget}`);
       this.messageService.clear();
@@ -64,7 +64,7 @@ export class EinkaufszettelEffects {
   updateEinkaufszettelSuccess$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(EinkaufszettelActions.updateEinkaufszettelSuccess),
-      this.navigateToHome('Einkaufszettel wurde gespeichert'),
+      this.navigateToHomeWithMessage('Einkaufszettel wurde gespeichert'),
       this.loadAllEinkaufszettel()
     )
   });
@@ -84,7 +84,7 @@ export class EinkaufszettelEffects {
   deleteEinkaufszettelSuccess$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(EinkaufszettelActions.deleteEinkaufszettelSuccess),
-      this.navigateToHome('Einkaufszettel wurde gelöscht'),
+      this.navigateToHomeWithMessage('Einkaufszettel wurde gelöscht'),
       this.loadAllEinkaufszettel()
     )
   });
@@ -102,7 +102,7 @@ export class EinkaufszettelEffects {
   createArtikelSuccess$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(EinkaufszettelActions.createArtikelSuccess),
-      this.navigateToHome('Artikel wurde gespeichert'),
+      this.navigateToHomeWithMessage('Artikel wurde gespeichert'),
       this.loadAllEinkaufszettel()
     )
   });
@@ -120,7 +120,7 @@ export class EinkaufszettelEffects {
   updateArtikelSuccess$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(EinkaufszettelActions.updateArtikelSuccess),
-      this.navigateToHome('Artikel wurde gespeichert'),
+      this.navigateToHomeWithMessage('Artikel wurde gespeichert'),
       this.loadAllEinkaufszettel()
     )
   });
@@ -138,7 +138,7 @@ export class EinkaufszettelEffects {
   deleteArtikelSuccess$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(EinkaufszettelActions.deleteArtikelSuccess),
-      this.navigateToHome('Artikel wurde gelöscht'),
+      this.navigateToHomeWithMessage('Artikel wurde gelöscht'),
       this.loadAllEinkaufszettel()
     )
   });
@@ -156,7 +156,7 @@ export class EinkaufszettelEffects {
   archiviereArtikelSuccess$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(EinkaufszettelActions.archiviereArtikelSuccess),
-      this.navigateToHome('Artikel wurden archiviert'),
+      this.navigateToHomeWithMessage('Artikel wurden archiviert'),
       this.loadAllEinkaufszettel()
     )
   });
@@ -165,84 +165,6 @@ export class EinkaufszettelEffects {
     return concatMap(() => this.einkaufszettelService.getAllEinkaufszettel().pipe(
       map(data => EinkaufszettelActions.loadEinkaufszettelsSuccess({data: data})),
       catchError(error => of(EinkaufszettelActions.loadEinkaufszettelsFailure({error})))
-    ));
-  }
-
-  loadUsersFriends$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(EinkaufszettelActions.loadUsersFriends),
-      switchMap(() => this.userService.getAllUsersFriends().pipe(
-          map(users => EinkaufszettelActions.loadUsersFriendsSuccess({data: users})),
-          catchError(error => of(EinkaufszettelActions.loadUsersFriendsFailure({error})))
-        )
-      )
-    );
-  });
-
-  loadUsers$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(EinkaufszettelActions.loadUsers),
-      switchMap(() => this.userService.getAllUsers().pipe(
-          map(users => EinkaufszettelActions.loadUsersSuccess({data: users})),
-          catchError(error => of(EinkaufszettelActions.loadUsersFailure({error})))
-        )
-      )
-    );
-  });
-
-  loadRoles$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(EinkaufszettelActions.loadRoles),
-      switchMap(() => this.roleService.getAllRoles().pipe(
-          map(roles => EinkaufszettelActions.loadRolesSuccess({data: roles})),
-          catchError(error => of(EinkaufszettelActions.loadRolesFailure({error})))
-        )
-      )
-    );
-  });
-
-  updateUser$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(EinkaufszettelActions.updateUser),
-      map(action => action.data),
-      concatMap(inputData => this.userService.updateUser(inputData).pipe(
-        map(data => EinkaufszettelActions.updateUserSuccess({data: data})),
-        catchError(error => of(EinkaufszettelActions.updateUserFailure({error})))
-      ))
-    )
-  });
-
-  updateUserSuccess$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(EinkaufszettelActions.updateUserSuccess),
-      this.navigate('User wurde gespeichert', 'user'),
-      this.loadAllUsers()
-    )
-  });
-
-  deleteUser$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(EinkaufszettelActions.deleteUser),
-      map(action => action.data),
-      concatMap(inputData => this.userService.deleteUser(inputData).pipe(
-        map(data => EinkaufszettelActions.deleteUserSuccess({data: data})),
-        catchError(error => of(EinkaufszettelActions.deleteUserFailure({error})))
-      ))
-    )
-  });
-
-  deleteUserSuccess$ = createEffect(() => {
-    return this.actions$.pipe(
-      ofType(EinkaufszettelActions.deleteUserSuccess),
-      this.navigate('User wurde gelöscht', 'user'),
-      this.loadAllUsers()
-    )
-  });
-
-  private loadAllUsers() {
-    return concatMap(() => this.userService.getAllUsers().pipe(
-      map(data => EinkaufszettelActions.loadUsersSuccess({data: data})),
-      catchError(error => of(EinkaufszettelActions.loadUsersFailure({error})))
     ));
   }
 

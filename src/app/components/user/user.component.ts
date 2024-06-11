@@ -4,10 +4,10 @@ import {ActivatedRoute} from "@angular/router";
 import {FormBuilder} from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {ConfirmationService} from "primeng/api";
-import {EinkaufszettelActions} from "../../store/einkaufszettel/einkaufszettel.actions";
-import {selectAllRoles, selectAllUsers} from "../../store/einkaufszettel/einkaufszettel.selectors";
 import {Role} from "../../entities/role";
 import {ROLE_NAME} from "../../entities/enum/rolename";
+import {UserActions} from "../../store/user/user.actions";
+import {selectAllRoles, selectAllUsers} from "../../store/user/user.selectors";
 
 @Component({
   selector: 'app-user',
@@ -24,8 +24,8 @@ export class UserComponent {
   }
 
   ngOnInit(): void {
-    this.store.dispatch(EinkaufszettelActions.loadUsers());
-    this.store.dispatch(EinkaufszettelActions.loadRoles());
+    this.store.dispatch(UserActions.loadUsers());
+    this.store.dispatch(UserActions.loadRoles());
 
     this.store.select(selectAllUsers).subscribe(users => {
       this.allUsers = JSON.parse(JSON.stringify(users)); // deep copy
@@ -38,7 +38,7 @@ export class UserComponent {
   }
 
   onRowEditSave(user: User) {
-    this.store.dispatch(EinkaufszettelActions.updateUser({data: user}));
+    this.store.dispatch(UserActions.updateUser({data: user}));
   }
 
   onRowEditCancel(rowIndex: number) {
@@ -60,8 +60,8 @@ export class UserComponent {
       rejectIcon: "none",
       rejectButtonStyleClass: "p-button-text",
       accept: () => {
-        this.store.dispatch(EinkaufszettelActions.deleteUser({data: user}));
-        this.store.dispatch(EinkaufszettelActions.loadUsers());
+        this.store.dispatch(UserActions.deleteUser({data: user}));
+        this.store.dispatch(UserActions.loadUsers());
       }
     });
   }
