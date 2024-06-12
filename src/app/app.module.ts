@@ -47,6 +47,7 @@ import {userFeature} from "./store/user/user.reducer";
 import {ArchivEffects} from "./store/archiv/archiv.effects";
 import {archivFeature} from "./store/archiv/archiv.reducer";
 import { NavigationLinksComponent } from './components/common/navigation-links/navigation-links.component';
+import { SplitButtonComponent } from './components/common/split-button/split-button.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { NavigationLinksComponent } from './components/common/navigation-links/n
     EditEinkaufszettelComponent,
     UserComponent,
     RegistrationConfirmationComponent,
-    NavigationLinksComponent
+    NavigationLinksComponent,
+    SplitButtonComponent
   ],
   imports: [
     // standard angular

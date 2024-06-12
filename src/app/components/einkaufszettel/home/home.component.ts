@@ -16,10 +16,20 @@ export class HomeComponent implements OnInit {
   constructor(private store: Store) {
   }
 
+  archiviereGekaufteArtikel() {
+    this.store.dispatch(EinkaufszettelActions.archiviereArtikel());
+  }
+
   ngOnInit(): void {
     this.store.dispatch(EinkaufszettelActions.loadEinkaufszettels());
 
-    this.store.select(selectAllEinkaufszettel).subscribe(einkaufszettel => this.einkaufszettel = JSON.parse(JSON.stringify(einkaufszettel))); // deep copy of store, so that changes are possible
+    this.store.select(selectAllEinkaufszettel).subscribe(einkaufszettel => {
+      this.einkaufszettel = JSON.parse(JSON.stringify(einkaufszettel)); // deep copy of store, so that changes are possible
+      this.einkaufszettel.forEach(einkaufszettel => einkaufszettel.einkaufszettelActions = [
+        {label: 'Einstellungen', routerLink: ['/einkaufszettel', einkaufszettel.id], icon: 'fas fa-gear'},
+        {label: 'Gekaufte Artikel archivieren', callback: () => this.archiviereGekaufteArtikel(), icon: 'fas fa-box-archive'},
+      ]);
+    });
   }
 
   changeArtikelGekauft(einkaufszettel: Einkaufszettel, artikel: Artikel) {

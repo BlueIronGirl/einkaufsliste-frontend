@@ -1,15 +1,13 @@
 <div class="w-full">
   <div *ngFor="let einkaufszettel of einkaufszettel"
-       class="flex-grow-1 bg-white m-5 p-3 rounded-lg overflow-hidden shadow-lg border-2">
+       class="flex-grow-1 bg-white m-5 p-3 rounded-lg shadow-lg border-2">
     <h2 class="flex ml-1 mb-2 text-2xl">
       <span class="font-bold text-lime-600">{{ einkaufszettel.name }} </span>
       <button type="button" [routerLink]="['/artikel/new', einkaufszettel.id]"
               pTooltip="Neuen Artikel anlegen"
               class="fas fa-plus ml-2 text-gray-500"></button>
       <div class="grow"></div>
-      <button type="button" [routerLink]="['/einkaufszettel', einkaufszettel.id]"
-              pTooltip="Einkaufszettel bearbeiten"
-              class="fas fa-gear text-xl text-gray-500"></button>
+      <app-split-button [className]="['w-56']" *ngIf="einkaufszettel.einkaufszettelActions" [actions]="einkaufszettel.einkaufszettelActions"></app-split-button>
     </h2>
 
     <div class="p-3">
