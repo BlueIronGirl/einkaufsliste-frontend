@@ -19,7 +19,7 @@
                     [binary]="true"
                     (onChange)="changeArtikelGekauft(einkaufszettel, artikel)"></p-checkbox>
 
-        <span class="text-primary font-semibold text-xl text-lime-600 mr-1">{{ artikel.anzahl }}</span>
+        <span class="text-primary font-semibold text-xl text-lime-600 mr-2">{{ artikel.anzahl }}</span>
         <span class="text-primary font-semibold text-xl cursor-pointer hover:underline"
               pTooltip="Artikel bearbeiten"
               [routerLink]="['/artikel', einkaufszettel.id, artikel.id]">{{ artikel.name }}</span>
