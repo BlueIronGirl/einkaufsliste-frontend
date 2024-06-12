@@ -18,7 +18,6 @@ export class AppComponent implements OnInit {
   profileMenuVisible = false;
 
   constructor(private store: Store, private confirmationService: ConfirmationService) {
-
   }
 
   ngOnInit(): void {

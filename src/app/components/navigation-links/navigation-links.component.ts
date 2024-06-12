@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {ROLE_NAME, RoleName} from "../../entities/enum/rolename";
 import {AuthActions} from "../../store/auth/auth.actions";
 import {Store} from "@ngrx/store";
@@ -10,7 +10,8 @@ import {User} from "../../entities/user";
 @Component({
   selector: 'app-navigation-links',
   templateUrl: './navigation-links.component.html',
-  styleUrls: ['./navigation-links.component.scss']
+  styleUrls: ['./navigation-links.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class NavigationLinksComponent implements OnInit {
 
@@ -18,9 +19,8 @@ export class NavigationLinksComponent implements OnInit {
   userRoles: RoleName[] = [];
   userIsLoggedIn = false;
   userLoggedIn: User | undefined;
-  profileMenuVisible = false;
 
-  constructor(private store: Store, private confirmationService: ConfirmationService, private authService: AuthService) {
+  constructor(private store: Store, private authService: AuthService) {
 
   }
 
@@ -34,26 +34,5 @@ export class NavigationLinksComponent implements OnInit {
 
   hasRole(roleName: RoleName) {
     return this.userRoles.filter(role => role === roleName).length > 0
-  }
-
-  toggleProfileMenu() {
-    this.profileMenuVisible = !this.profileMenuVisible;
-  }
-
-  logout(event: Event) {
-    this.confirmationService.confirm({
-      target: event.target as EventTarget,
-      message: 'Sind Sie sich sicher, dass Sie sich ausloggen wollen?',
-      header: 'Confirmation',
-      icon: 'pi pi-exclamation-triangle',
-      acceptLabel: 'Ja',
-      rejectLabel: 'Nein',
-      acceptIcon: "none",
-      rejectIcon: "none",
-      rejectButtonStyleClass: "p-button-text",
-      accept: () => {
-        this.store.dispatch(AuthActions.logout());
-      }
-    });
   }
 }
