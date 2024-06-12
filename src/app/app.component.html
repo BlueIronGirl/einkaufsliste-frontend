@@ -1,8 +1,8 @@
 <div class="m-auto text-gray-600 border-2" style="max-width: 1200px; min-height: 800px;">
   <nav class="bg-lime-400">
     <div class="mx-auto px-2 sm:px-6 lg:px-4">
-      <div class="relative flex h-16 items-center justify-between">
-        <div class="flex items-center sm:hidden">
+      <div class="relative flex h-10 sm:h-16 items-center justify-between">
+        <div class="sm:hidden">
           <!-- Mobile menu button-->
           <button type="button"
                   class="fas fa-bars inline-flex items-center rounded-lg p-2 text-gray-600 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
@@ -47,7 +47,7 @@
 
     <!-- Mobile menu, show/hide based on menu state. -->
     <div *ngIf="mobileMenuVisible && userIsLoggedIn" class="sm:hidden" id="mobile-menu"> <!--- mobile menu -->
-      <div class="space-y-1 px-2 pb-3 pt-2 items-center">
+      <div class="space-y-1 px-2 pb-1 items-center">
         <app-navigation-links></app-navigation-links>
       </div> <!--- mobile menu ende -->
     </div>
