@@ -24,99 +24,49 @@
         </div>
 
         <div class="flex flex-1 items-center sm:items-stretch sm:justify-start">
-          <div class="hidden sm:block">
-            <div class="flex space-x-4 items-center justify-center">
-              <a routerLink="/home"
-                 routerLinkActive="bg-gray-200"
-                 class="hover:bg-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 font-medium"
-                 aria-current="page">
-                <span class="fas fa-house fa-sm"></span> Übersicht
-              </a>
-              <a routerLink="/einkaufszettel"
-                 routerLinkActive="bg-gray-200"
-                 class="hover:bg-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 font-medium"
-                 aria-current="page">
-                <span class="fas fa-cart-shopping fa-sm"></span> Einkaufszettel
-              </a>
-              <a routerLink="/archiv"
-                 routerLinkActive="bg-gray-200"
-                 class="hover:bg-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 font-medium"
-                 aria-current="page">
-                <span class="fas fa-archive fa-sm"></span> Archiv
-              </a>
-              <a *ngIf="hasRole(ROLE_NAME.ROLE_ADMIN)"
-                 routerLink="/user"
-                 routerLinkActive="bg-gray-200"
-                 class="hover:bg-gray-200 rounded-lg px-3 py-2 text-sm text-gray-600 font-medium"
-                 aria-current="page">
-                <span class="fas fa-user-tie fa-sm"></span> Userverwaltung
-              </a>
+          <div class="hidden sm:block"> <!-- webmenu -->
+            <div class="flex space-x-4 items-center justify-center w-full">
+              <app-navigation-links></app-navigation-links>
             </div>
           </div>
-
-          <button type="button"
-                  (click)="archiviereGekaufteArtikel()"
-                  *ngIf="userIsLoggedIn"
-                  pTooltip="Alle gekauften Artikel archivieren"
-                  class="bg-gray-50 rounded-lg ml-6 px-2 py-2 text-sm text-center">
-            Archivieren
-          </button>
         </div>
 
         <div class="relative">
           <button type="button"
-                  class="fas fa-user inline-flex items-center rounded-lg p-2 text-gray-500 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                  class="sm:inline fas fa-user inline-flex items-center rounded-lg p-2 text-gray-500 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white focus:bg-gray-200"
                   (click)="toggleProfileMenu()"
                   [disabled]="!userIsLoggedIn">
           </button>
 
-          <div *ngIf="profileMenuVisible && userIsLoggedIn" class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg border-2">
+
+          <div class="grow"></div>
+
+          <div *ngIf="profileMenuVisible && userIsLoggedIn"
+               class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg border-2 z-50">
             <div class="border-b-2 py-2">
               <div class="px-4">{{ userLoggedIn?.name }}</div>
               <div class="px-4 font-bold">{{ userLoggedIn?.email }}</div>
             </div>
             <ul class="text-gray-700">
               <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><span class="fas fa-user"></span> Profil</li>
-              <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><span class="fas fa-gear"></span> Einstellungen</li>
-              <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" (click)="logout($event)"><span class="fas fa-arrow-right-from-bracket"></span> Ausloggen</li>
+              <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><span class="fas fa-gear"></span> Einstellungen
+              </li>
+              <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" (click)="logout($event)"><span
+                class="fas fa-arrow-right-from-bracket"></span> Ausloggen
+              </li>
             </ul>
           </div>
         </div>
-
       </div>
     </div>
 
     <!-- Mobile menu, show/hide based on menu state. -->
-    <div *ngIf="mobileMenuVisible && userIsLoggedIn" class="sm:hidden" id="mobile-menu">
+    <div *ngIf="mobileMenuVisible && userIsLoggedIn" class="sm:hidden" id="mobile-menu"> <!--- mobile menu -->
       <div class="space-y-1 px-2 pb-3 pt-2 items-center">
-        <a routerLink="/home"
-           routerLinkActive="bg-gray-200"
-           class="block rounded-lg px-3 py-2 text-base text-gray-600 font-medium"
-           aria-current="page">
-          <span class="fas fa-house fa-sm"></span> Übersicht
-        </a>
-        <a routerLink="/einkaufszettel"
-           routerLinkActive="bg-gray-200"
-           class="block rounded-lg px-3 py-2 text-base text-gray-600 font-medium"
-           aria-current="page">
-          <span class="fas fa-cart-shopping fa-sm"></span> Einkaufszettel
-        </a>
-        <a routerLink="/archiv"
-           routerLinkActive="bg-gray-200"
-           class="block rounded-lg px-3 py-2 text-base text-gray-600 font-medium"
-           aria-current="page">
-          <span class="fas fa-archive fa-sm"></span> Archiv
-        </a>
-
-        <a *ngIf="hasRole(ROLE_NAME.ROLE_ADMIN)"
-           routerLink="/user"
-           routerLinkActive="bg-gray-200"
-           class="block rounded-lg px-3 py-2 text-base text-gray-600 font-medium"
-           aria-current="page">
-          <span class="fas fa-user-tie fa-sm"></span> Userverwaltung
-        </a>
-      </div>
+        <app-navigation-links></app-navigation-links>
+      </div> <!--- mobile menu ende -->
     </div>
+
   </nav>
 
   <div class="p-4" style="min-height: inherit; height: inherit">

@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {EinkaufszettelActions} from "./store/einkaufszettel/einkaufszettel.actions";
 import {ConfirmationService} from "primeng/api";
-import {AuthService} from "./service/auth.service";
-import {ROLE_NAME, RoleName} from "./entities/enum/rolename";
 import {AuthActions} from "./store/auth/auth.actions";
 import {selectLogin} from "./store/auth/auth.selectors";
 import {User} from "./entities/user";
@@ -18,9 +16,8 @@ export class AppComponent implements OnInit {
   userLoggedIn: User | undefined;
   mobileMenuVisible = false;
   profileMenuVisible = false;
-  private userRoles: RoleName[] = [];
 
-  constructor(private store: Store, private confirmationService: ConfirmationService, private authService: AuthService) {
+  constructor(private store: Store, private confirmationService: ConfirmationService) {
 
   }
 
@@ -28,7 +25,6 @@ export class AppComponent implements OnInit {
     this.store.select(selectLogin).subscribe(user => {
       this.userLoggedIn = user != null ? user : undefined;
       this.userIsLoggedIn = user != null;
-      this.userRoles = [...this.authService.getAllRolesOfLoggedInUser()];
     });
   }
 
@@ -60,10 +56,4 @@ export class AppComponent implements OnInit {
   toggleProfileMenu() {
     this.profileMenuVisible = !this.profileMenuVisible;
   }
-
-  hasRole(roleName: RoleName) {
-    return this.userRoles.filter(role => role === roleName).length > 0
-  }
-
-  protected readonly ROLE_NAME = ROLE_NAME;
 }

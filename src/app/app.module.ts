@@ -46,6 +46,7 @@ import {UserEffects} from "./store/user/user.effects";
 import {userFeature} from "./store/user/user.reducer";
 import {ArchivEffects} from "./store/archiv/archiv.effects";
 import {archivFeature} from "./store/archiv/archiv.reducer";
+import { NavigationLinksComponent } from './components/navigation-links/navigation-links.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {archivFeature} from "./store/archiv/archiv.reducer";
     ArchivComponent,
     EditEinkaufszettelComponent,
     UserComponent,
-    RegistrationConfirmationComponent
+    RegistrationConfirmationComponent,
+    NavigationLinksComponent
   ],
   imports: [
     // standard angular
