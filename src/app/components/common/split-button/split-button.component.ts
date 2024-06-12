@@ -9,7 +9,7 @@ import {Router} from "@angular/router";
 })
 export class SplitButtonComponent {
   @Input() actions: Action[] = [];
-  @Input() className: string[] = [];
+  @Input({ required: true }) width!: string;
   isOpen = false;
 
   constructor(private router: Router) {}
