@@ -1,14 +1,14 @@
 import {Component, OnInit} from '@angular/core';
-import {Einkaufszettel} from "../../entities/einkaufszettel";
+import {Einkaufszettel} from "../../../entities/einkaufszettel";
 import {Store} from "@ngrx/store";
-import {EinkaufszettelActions} from "../../store/einkaufszettel/einkaufszettel.actions";
-import {selectEinkaufszettelById} from "../../store/einkaufszettel/einkaufszettel.selectors";
+import {EinkaufszettelActions} from "../../../store/einkaufszettel/einkaufszettel.actions";
+import {selectEinkaufszettelById} from "../../../store/einkaufszettel/einkaufszettel.selectors";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
-import {User} from "../../entities/user";
+import {User} from "../../../entities/user";
 import {ConfirmationService} from "primeng/api";
-import {UserActions} from "../../store/user/user.actions";
-import {selectAllUsersFriends} from "../../store/user/user.selectors";
+import {UserActions} from "../../../store/user/user.actions";
+import {selectAllUsersFriends} from "../../../store/user/user.selectors";
 
 @Component({
   selector: 'app-einkaufszettel',

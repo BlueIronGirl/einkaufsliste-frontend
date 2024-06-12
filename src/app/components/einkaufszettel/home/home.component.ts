@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {EinkaufszettelActions} from "../../store/einkaufszettel/einkaufszettel.actions";
-import {selectAllEinkaufszettel} from "../../store/einkaufszettel/einkaufszettel.selectors";
-import {Artikel} from "../../entities/artikel";
-import {Einkaufszettel} from "../../entities/einkaufszettel";
+import {EinkaufszettelActions} from "../../../store/einkaufszettel/einkaufszettel.actions";
+import {selectAllEinkaufszettel} from "../../../store/einkaufszettel/einkaufszettel.selectors";
+import {Artikel} from "../../../entities/artikel";
+import {Einkaufszettel} from "../../../entities/einkaufszettel";
 
 @Component({
   selector: 'app-home',

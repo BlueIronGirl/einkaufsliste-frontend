@@ -1,18 +1,18 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {HomeComponent} from "./components/home/home.component";
-import {EditArtikelComponent} from "./components/edit-artikel/edit-artikel.component";
-import {LoginComponent} from "./components/login/login.component";
+import {HomeComponent} from "./components/einkaufszettel/home/home.component";
+import {EditArtikelComponent} from "./components/einkaufszettel/edit-artikel/edit-artikel.component";
+import {LoginComponent} from "./components/auth/login/login.component";
 import {AuthGuard} from "./guard/auth-guard";
-import {RegisterComponent} from "./components/register/register.component";
+import {RegisterComponent} from "./components/auth/register/register.component";
 import {ArchivComponent} from "./components/archiv/archiv.component";
-import {EditEinkaufszettelComponent} from "./components/edit-einkaufszettel/edit-einkaufszettel.component";
+import {EditEinkaufszettelComponent} from "./components/einkaufszettel/edit-einkaufszettel/edit-einkaufszettel.component";
 import {RoleGuard} from "./guard/role-guard";
 import {UserComponent} from "./components/user/user.component";
 import {ROLE_NAME} from "./entities/enum/rolename";
 import {
   RegistrationConfirmationComponent
-} from "./components/registration-confirmation/registration-confirmation.component";
+} from "./components/auth/registration-confirmation/registration-confirmation.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},

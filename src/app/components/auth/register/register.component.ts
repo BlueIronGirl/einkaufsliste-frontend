@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {MessageService} from "primeng/api";
-import {User} from "../../entities/user";
+import {User} from "../../../entities/user";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {Router} from "@angular/router";
-import {AuthActions} from "../../store/auth/auth.actions";
+import {AuthActions} from "../../../store/auth/auth.actions";
 
 @Component({
   selector: 'app-register',

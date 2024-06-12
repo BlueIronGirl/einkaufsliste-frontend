@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {Store} from "@ngrx/store";
-import {selectArtikelById} from "../../store/einkaufszettel/einkaufszettel.selectors";
-import {Artikel} from "../../entities/artikel";
-import {EinkaufszettelActions} from "../../store/einkaufszettel/einkaufszettel.actions";
+import {selectArtikelById} from "../../../store/einkaufszettel/einkaufszettel.selectors";
+import {Artikel} from "../../../entities/artikel";
+import {EinkaufszettelActions} from "../../../store/einkaufszettel/einkaufszettel.actions";
 import {ConfirmationService} from "primeng/api";
 
 @Component({
