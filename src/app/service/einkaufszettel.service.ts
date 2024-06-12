@@ -5,6 +5,7 @@ import {Artikel} from "../entities/artikel";
 import {catchError} from "rxjs/operators";
 import {environment} from "../../environments/environment";
 import {Einkaufszettel} from "../entities/einkaufszettel";
+import {ArtikelArchiv} from "../entities/artikelarchiv";
 
 @Injectable({
   providedIn: 'root'
@@ -68,8 +69,8 @@ export class EinkaufszettelService {
     );
   }
 
-  loadAllArtikelArchiv(): Observable<Artikel[]> {
-    return this.httpClient.get<Artikel[]>(`${this.api}/archiv`).pipe(
+  loadAllArtikelArchiv(): Observable<ArtikelArchiv[]> {
+    return this.httpClient.get<ArtikelArchiv[]>(`${this.api}/archiv`).pipe(
       retry(3)
     );
   }

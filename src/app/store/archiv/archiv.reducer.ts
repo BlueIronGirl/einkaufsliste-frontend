@@ -1,11 +1,11 @@
 import { createFeature, createReducer, on } from '@ngrx/store';
 import { ArchivActions } from './archiv.actions';
-import {Artikel} from "../../entities/artikel";
+import {ArtikelArchiv} from "../../entities/artikelarchiv";
 
 export const archivFeatureKey = 'archiv';
 
 export interface State {
-  artikelsArchiv: Artikel[];
+  artikelsArchiv: ArtikelArchiv[];
 }
 
 export const initialState: State = {

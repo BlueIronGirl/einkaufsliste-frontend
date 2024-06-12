@@ -1,12 +1,12 @@
 import { createActionGroup, emptyProps, props } from '@ngrx/store';
-import {Artikel} from "../../entities/artikel";
 import {HttpErrorResponse} from "@angular/common/http";
+import {ArtikelArchiv} from "../../entities/artikelarchiv";
 
 export const ArchivActions = createActionGroup({
   source: 'Archiv',
   events: {
     'Load Archiv': emptyProps(),
-    'Load Archiv Success': props<{ data: Artikel[] }>(),
+    'Load Archiv Success': props<{ data: ArtikelArchiv[] }>(),
     'Load Archiv Failure': props<{ error: HttpErrorResponse }>(),
   }
 });

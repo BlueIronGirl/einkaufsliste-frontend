@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {Artikel} from "../../entities/artikel";
 import {Store} from "@ngrx/store";
 import {ArchivActions} from "../../store/archiv/archiv.actions";
 import {selectAllArtikelArchiv} from "../../store/archiv/archiv.selectors";
+import {ArtikelArchiv} from "../../entities/artikelarchiv";
 
 @Component({
   selector: 'app-archiv',
@@ -10,7 +10,7 @@ import {selectAllArtikelArchiv} from "../../store/archiv/archiv.selectors";
   styleUrls: ['./archiv.component.scss']
 })
 export class ArchivComponent implements OnInit {
-  artikels!: Artikel[];
+  artikels!: ArtikelArchiv[];
 
   constructor(private store: Store) {
   }

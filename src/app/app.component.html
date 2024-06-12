@@ -6,8 +6,8 @@
           <!-- Mobile menu button-->
           <button type="button"
                   class="inline-flex items-center rounded-lg p-2 text-gray-600 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                  [disabled]="!userLoggedIn"
-                  (click)="toggleCollapseMenu()"
+                  [disabled]="!userIsLoggedIn"
+                  (click)="toggleMobileMenu()"
                   aria-controls="mobile-menu" aria-expanded="false">
             <span class="sr-only">Open main menu</span>
             <!--Icon when menu is closed. Menu open: "hidden", Menu closed: "block" -->
@@ -56,30 +56,38 @@
 
           <button type="button"
                   (click)="archiviereGekaufteArtikel()"
-                  *ngIf="userLoggedIn"
+                  *ngIf="userIsLoggedIn"
                   pTooltip="Alle gekauften Artikel archivieren"
                   class="bg-gray-50 rounded-lg ml-6 px-2 py-2 text-sm text-center">
             Archivieren
           </button>
         </div>
 
-        <button type="button"
-                *ngIf="userLoggedIn"
-                (click)="logout($event)"
-                class="bg-gray-50 rounded-lg px-2 py-2 text-sm text-center font-medium end-0">
-          Logout
-        </button>
+        <div class="relative">
+          <button type="button"
+                  class="fas fa-user inline-flex items-center rounded-lg p-2 text-gray-500 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                  (click)="toggleProfileMenu()"
+                  [disabled]="!userIsLoggedIn">
+          </button>
 
-        <!-- Mobile menu button-->
-        <button type="button"
-                class="fas fa-user inline-flex items-center rounded-lg p-2 text-gray-500 hover:bg-gray-200 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
-                [disabled]="!userLoggedIn">
-        </button>
+          <div *ngIf="profileMenuVisible && userIsLoggedIn" class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg border-2">
+            <div class="border-b-2 py-2">
+              <div class="px-4">{{ userLoggedIn?.name }}</div>
+              <div class="px-4 font-bold">{{ userLoggedIn?.email }}</div>
+            </div>
+            <ul class="text-gray-700">
+              <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><span class="fas fa-user"></span> Profil</li>
+              <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><span class="fas fa-gear"></span> Einstellungen</li>
+              <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" (click)="logout($event)"><span class="fas fa-arrow-right-from-bracket"></span> Ausloggen</li>
+            </ul>
+          </div>
+        </div>
+
       </div>
     </div>
 
     <!-- Mobile menu, show/hide based on menu state. -->
-    <div *ngIf="!menuCollapsed" class="sm:hidden" id="mobile-menu">
+    <div *ngIf="mobileMenuVisible && userIsLoggedIn" class="sm:hidden" id="mobile-menu">
       <div class="space-y-1 px-2 pb-3 pt-2 items-center">
         <a routerLink="/home"
            routerLinkActive="bg-gray-200"

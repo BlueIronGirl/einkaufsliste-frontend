@@ -6,6 +6,7 @@ import {AuthService} from "./service/auth.service";
 import {ROLE_NAME, RoleName} from "./entities/enum/rolename";
 import {AuthActions} from "./store/auth/auth.actions";
 import {selectLogin} from "./store/auth/auth.selectors";
+import {User} from "./entities/user";
 
 @Component({
   selector: 'app-root',
@@ -13,8 +14,10 @@ import {selectLogin} from "./store/auth/auth.selectors";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  userLoggedIn = false;
-  menuCollapsed = true;
+  userIsLoggedIn = false;
+  userLoggedIn: User | undefined;
+  mobileMenuVisible = false;
+  profileMenuVisible = false;
   private userRoles: RoleName[] = [];
 
   constructor(private store: Store, private confirmationService: ConfirmationService, private authService: AuthService) {
@@ -23,7 +26,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.store.select(selectLogin).subscribe(user => {
-      this.userLoggedIn = user != null;
+      this.userLoggedIn = user != null ? user : undefined;
+      this.userIsLoggedIn = user != null;
       this.userRoles = [...this.authService.getAllRolesOfLoggedInUser()];
     });
   }
@@ -49,8 +53,12 @@ export class AppComponent implements OnInit {
     });
   }
 
-  toggleCollapseMenu() {
-    this.menuCollapsed = !this.menuCollapsed;
+  toggleMobileMenu() {
+    this.mobileMenuVisible = !this.mobileMenuVisible;
+  }
+
+  toggleProfileMenu() {
+    this.profileMenuVisible = !this.profileMenuVisible;
   }
 
   hasRole(roleName: RoleName) {
