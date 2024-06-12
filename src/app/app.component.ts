@@ -24,6 +24,8 @@ export class AppComponent implements OnInit {
     this.store.select(selectLogin).subscribe(user => {
       this.userLoggedIn = user != null ? user : undefined;
       this.userIsLoggedIn = user != null;
+      this.mobileMenuVisible = false;
+      this.profileMenuVisible = false;
     });
   }
 
@@ -44,6 +46,8 @@ export class AppComponent implements OnInit {
       rejectButtonStyleClass: "p-button-text",
       accept: () => {
         this.store.dispatch(AuthActions.logout());
+        this.profileMenuVisible = false;
+        this.mobileMenuVisible = false;
       }
     });
   }
