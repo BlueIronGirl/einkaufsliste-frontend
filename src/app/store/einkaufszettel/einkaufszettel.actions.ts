@@ -1,9 +1,7 @@
 import {createActionGroup, emptyProps, props} from '@ngrx/store';
 import {HttpErrorResponse} from "@angular/common/http";
 import {Artikel} from "../../entities/artikel";
-import {User} from "../../entities/user";
 import {Einkaufszettel} from "../../entities/einkaufszettel";
-import {Role} from "../../entities/role";
 
 export const EinkaufszettelActions = createActionGroup({
   source: 'Einkaufszettel',
@@ -41,7 +39,7 @@ export const EinkaufszettelActions = createActionGroup({
     'Delete Artikel Success': props<{ data: Artikel }>(),
     'Delete Artikel Failure': props<{ error: HttpErrorResponse }>(),
 
-    'Archiviere Artikel': emptyProps(),
+    'Archiviere Artikel': props<{ einkaufszettelId: number }>(),
     'Archiviere Artikel Success': props<{ data: Artikel[] }>(),
     'Archiviere Artikel Failure': props<{ error: HttpErrorResponse }>(),
   }

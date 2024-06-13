@@ -29,10 +29,6 @@ export class AppComponent implements OnInit {
     });
   }
 
-  archiviereGekaufteArtikel() {
-    this.store.dispatch(EinkaufszettelActions.archiviereArtikel());
-  }
-
   logout(event: Event) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,

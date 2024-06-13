@@ -131,7 +131,7 @@ export class EinkaufszettelEffects {
   archiviereArtikel$ = createEffect(() => {
     return this.actions$.pipe(
       ofType(EinkaufszettelActions.archiviereArtikel),
-      concatMap(inputData => this.einkaufszettelService.archiviereArtikel().pipe(
+      concatMap(inputData => this.einkaufszettelService.archiviereArtikel(inputData.einkaufszettelId).pipe(
         map(data => EinkaufszettelActions.archiviereArtikelSuccess({data: data})),
         catchError(error => of(EinkaufszettelActions.archiviereArtikelFailure({error})))
       ))

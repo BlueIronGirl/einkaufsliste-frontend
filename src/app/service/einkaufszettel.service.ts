@@ -57,14 +57,14 @@ export class EinkaufszettelService {
     );
   }
 
-  deleteArtikel(einkaufszettelId: number,artikel: Artikel) {
+  deleteArtikel(einkaufszettelId: number, artikel: Artikel) {
     return this.httpClient.delete<Artikel>(`${this.api}/einkaufszettel/${einkaufszettelId}/artikel/${artikel.id}`).pipe(
       catchError(EinkaufszettelService.errorHandler)
     );
   }
 
-  archiviereArtikel() {
-    return this.httpClient.post<Artikel[]>(`${this.api}/archiv/archiviereGekaufteArtikel`, null).pipe(
+  archiviereArtikel(einkaufszettelId: number) {
+    return this.httpClient.post<Artikel[]>(`${this.api}/einkaufszettel/${einkaufszettelId}/archiviereGekaufteArtikel`, null).pipe(
       catchError(EinkaufszettelService.errorHandler)
     );
   }
