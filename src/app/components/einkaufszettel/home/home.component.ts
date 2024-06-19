@@ -36,7 +36,15 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  changeArtikel(einkaufszettel: Einkaufszettel, artikel: Artikel) {
+    this.store.dispatch(EinkaufszettelActions.updateArtikel({
+      einkaufszettelId: einkaufszettel.id,
+      data: artikel
+    }));
+  }
+
   changeArtikelGekauft(einkaufszettel: Einkaufszettel, artikel: Artikel) {
+    artikel.gekauft = !artikel.gekauft;
     this.store.dispatch(EinkaufszettelActions.updateArtikel({
       einkaufszettelId: einkaufszettel.id,
       data: artikel

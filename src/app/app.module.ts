@@ -48,6 +48,7 @@ import {ArchivEffects} from "./store/archiv/archiv.effects";
 import {archivFeature} from "./store/archiv/archiv.reducer";
 import { NavigationLinksComponent } from './components/common/navigation-links/navigation-links.component';
 import { SplitButtonComponent } from './components/common/split-button/split-button.component';
+import { BoughtArticlesPipe } from './pipe/bought-articles.pipe';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { SplitButtonComponent } from './components/common/split-button/split-but
     UserComponent,
     RegistrationConfirmationComponent,
     NavigationLinksComponent,
-    SplitButtonComponent
+    SplitButtonComponent,
+    BoughtArticlesPipe
   ],
   imports: [
     // standard angular
