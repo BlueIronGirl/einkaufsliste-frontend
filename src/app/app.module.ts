@@ -38,7 +38,7 @@ import {MultiSelectModule} from "primeng/multiselect";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {TableModule} from "primeng/table";
 import {TooltipModule} from "primeng/tooltip";
-import { UserComponent } from './components/user/user.component';
+import { UserComponent } from './components/admin/user/user.component';
 import { RegistrationConfirmationComponent } from './components/auth/registration-confirmation/registration-confirmation.component';
 import {AuthEffects} from "./store/auth/auth.effects";
 import {authFeature, authFeatureKey, authReducer} from "./store/auth/auth.reducer";

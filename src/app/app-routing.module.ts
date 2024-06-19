@@ -8,7 +8,7 @@ import {RegisterComponent} from "./components/auth/register/register.component";
 import {ArchivComponent} from "./components/archiv/archiv.component";
 import {EditEinkaufszettelComponent} from "./components/einkaufszettel/edit-einkaufszettel/edit-einkaufszettel.component";
 import {RoleGuard} from "./guard/role-guard";
-import {UserComponent} from "./components/user/user.component";
+import {UserComponent} from "./components/admin/user/user.component";
 import {ROLE_NAME} from "./entities/enum/rolename";
 import {
   RegistrationConfirmationComponent

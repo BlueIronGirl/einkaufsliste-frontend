@@ -1,13 +1,13 @@
 import {Component} from '@angular/core';
-import {User} from "../../entities/user";
+import {User} from "../../../entities/user";
 import {ActivatedRoute} from "@angular/router";
 import {FormBuilder} from "@angular/forms";
 import {Store} from "@ngrx/store";
 import {ConfirmationService} from "primeng/api";
-import {Role} from "../../entities/role";
-import {ROLE_NAME} from "../../entities/enum/rolename";
-import {UserActions} from "../../store/user/user.actions";
-import {selectAllRoles, selectAllUsers} from "../../store/user/user.selectors";
+import {Role} from "../../../entities/role";
+import {ROLE_NAME} from "../../../entities/enum/rolename";
+import {UserActions} from "../../../store/user/user.actions";
+import {selectAllRoles, selectAllUsers} from "../../../store/user/user.selectors";
 
 @Component({
   selector: 'app-user',
