@@ -32,7 +32,11 @@
               <div class="px-4 font-bold">{{ userLoggedIn?.email }}</div>
             </div>
             <ul class="text-gray-700">
-              <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><span class="fas fa-user"></span> Profil</li>
+              <a routerLink="/profile-edit">
+                <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                  <span class="fas fa-user"></span> Profil
+                </li>
+              </a>
               <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer"><span class="fas fa-gear"></span> Einstellungen
               </li>
               <li class="px-4 py-2 hover:bg-gray-100 cursor-pointer" (click)="logout($event)"><span

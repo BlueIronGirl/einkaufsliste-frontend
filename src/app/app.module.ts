@@ -8,11 +8,7 @@ import {StoreModule} from '@ngrx/store';
 import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {EffectsModule} from '@ngrx/effects';
 import {EinkaufszettelEffects} from "./store/einkaufszettel/einkaufszettel.effects";
-import {
-  einkaufszettelFeature,
-  einkaufszettelFeatureKey,
-  einkaufszettelReducer
-} from "./store/einkaufszettel/einkaufszettel.reducer";
+import {einkaufszettelFeature} from "./store/einkaufszettel/einkaufszettel.reducer";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {CardModule} from "primeng/card";
 import {CheckboxModule} from "primeng/checkbox";
@@ -33,22 +29,30 @@ import {ConfirmationService, MessageService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
 import {ArchivComponent} from './components/archiv/archiv.component';
 import {DividerModule} from "primeng/divider";
-import {EditEinkaufszettelComponent} from './components/einkaufszettel/edit-einkaufszettel/edit-einkaufszettel.component';
+import {
+  EditEinkaufszettelComponent
+} from './components/einkaufszettel/edit-einkaufszettel/edit-einkaufszettel.component';
 import {MultiSelectModule} from "primeng/multiselect";
 import {ConfirmDialogModule} from "primeng/confirmdialog";
 import {TableModule} from "primeng/table";
 import {TooltipModule} from "primeng/tooltip";
-import { UserComponent } from './components/admin/user/user.component';
-import { RegistrationConfirmationComponent } from './components/auth/registration-confirmation/registration-confirmation.component';
+import {UserComponent} from './components/admin/user/user.component';
+import {
+  RegistrationConfirmationComponent
+} from './components/auth/registration-confirmation/registration-confirmation.component';
 import {AuthEffects} from "./store/auth/auth.effects";
-import {authFeature, authFeatureKey, authReducer} from "./store/auth/auth.reducer";
+import {authFeature} from "./store/auth/auth.reducer";
 import {UserEffects} from "./store/user/user.effects";
 import {userFeature} from "./store/user/user.reducer";
 import {ArchivEffects} from "./store/archiv/archiv.effects";
 import {archivFeature} from "./store/archiv/archiv.reducer";
-import { NavigationLinksComponent } from './components/common/navigation-links/navigation-links.component';
-import { SplitButtonComponent } from './components/common/split-button/split-button.component';
-import { BoughtArticlesPipe } from './pipe/bought-articles.pipe';
+import {NavigationLinksComponent} from './components/common/navigation-links/navigation-links.component';
+import {SplitButtonComponent} from './components/common/split-button/split-button.component';
+import {BoughtArticlesPipe} from './pipe/bought-articles.pipe';
+import {ProfileEditComponent} from './components/settings/profile-edit/profile-edit.component';
+import {FileUploadModule} from "primeng/fileupload";
+import {ImageCropperComponent} from './components/common/image-cropper/image-cropper.component';
+import {DialogModule} from "primeng/dialog";
 
 @NgModule({
   declarations: [
@@ -63,7 +67,8 @@ import { BoughtArticlesPipe } from './pipe/bought-articles.pipe';
     RegistrationConfirmationComponent,
     NavigationLinksComponent,
     SplitButtonComponent,
-    BoughtArticlesPipe
+    BoughtArticlesPipe,
+    ProfileEditComponent
   ],
   imports: [
     // standard angular
@@ -102,7 +107,9 @@ import { BoughtArticlesPipe } from './pipe/bought-articles.pipe';
     MultiSelectModule,
     ConfirmDialogModule,
     TableModule,
-    TooltipModule
+    TooltipModule,
+    FileUploadModule,
+    DialogModule
   ],
   providers: [
     {
