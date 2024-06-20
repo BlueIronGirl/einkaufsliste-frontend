@@ -26,8 +26,8 @@ export class ProfileService {
     return throwError(() => error);
   }
 
-  uploadFile(formData: FormData) {
-    return this.httpClient.post<undefined>(`${this.api}/profil/uploadFile`, formData).pipe(
+  uploadFile(user: User) {
+    return this.httpClient.post<undefined>(`${this.api}/profil/uploadFile`, user).pipe(
       catchError(error => this.errorHandler(error))
     );
   }

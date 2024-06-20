@@ -71,7 +71,7 @@ export class ImageCropperComponent implements OnInit, AfterViewInit {
     let roundedImage = document.createElement('img');
 
     if (roundedImage) {
-      this.ref.close(roundedCanvas.toDataURL());
+      this.ref.close(roundedCanvas.toDataURL('image/jpeg', 0.6));
     } else {
       return this.ref.close(null);
     }

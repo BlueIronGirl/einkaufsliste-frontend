@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ControlValueAccessor, FormBuilder, NG_VALUE_ACCESSOR} from "@angular/forms";
-import {FileSelectEvent} from "primeng/fileupload";
+import {FileSelectEvent, FileUpload} from "primeng/fileupload";
 import {ImageCropperComponent} from "../../../common/image-cropper/image-cropper.component";
-import {ProfileService} from "../../../../service/profile.service";
 import {MessageService} from "primeng/api";
 import {DialogService, DynamicDialogRef} from "primeng/dynamicdialog";
 import {environment} from "../../../../../environments/environment";
@@ -20,6 +19,11 @@ import {environment} from "../../../../../environments/environment";
   ]
 })
 export class AvatarComponent implements OnInit, ControlValueAccessor {
+  @Input() image!: Uint8Array | string | undefined;
+  @Output() inputValueChange = new EventEmitter<string>();
+
+  @ViewChild('fileUpload') fileUpload!: FileUpload;
+
   api = `${environment.webserviceurl}/profil/uploadFile`;
   file: string = '';
   ref: DynamicDialogRef | undefined;
@@ -31,7 +35,7 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
 
   disabled: boolean = false;
 
-  constructor(private fb: FormBuilder, private profileService: ProfileService, private messageService: MessageService, private dialogService: DialogService) {
+  constructor(private messageService: MessageService, private dialogService: DialogService) {
 
   }
 
@@ -59,17 +63,15 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
     if (file) {
       const _file = URL.createObjectURL(file);
       this.file = _file;
+
       this.resetInput();
 
       this.openAvatarEditor(_file);
     }
-    this.messageService.add({severity: 'success', summary: 'Success', detail: 'Das Profilbild wurde geändert!'});
   }
 
   openAvatarEditor(image: string): void {
     this.ref = this.dialogService.open(ImageCropperComponent, {
-      width: '80vw',
-      height: '80vh',
       data: image,
     });
 
@@ -77,15 +79,12 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
       if (result) {
         this.file = result;
         this.onChange(this.file);
-        this.messageService.add({ severity: 'info', summary: 'Image Selected', detail: result });
+        this.inputValueChange.emit(this.file);
       }
     });
   }
 
   resetInput() {
-    const input = document.getElementById('avatar-input-file') as HTMLInputElement;
-    if (input) {
-      input.value = "";
-    }
+    this.fileUpload.clear();
   }
 }

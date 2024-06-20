@@ -10,4 +10,6 @@ export interface User {
   roles?: Role[];
   createdAt?: Date;
   lastLoggedIn?: Date;
+  avatar?: Uint8Array;
+  avatarBase64?: string;
 }

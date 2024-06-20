@@ -1,23 +1,23 @@
-<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-  <div class="flex">
-    <div class="flex-auto w-1/2"> <!-- START Bild -->
-      <app-avatar formControlName="avatar"></app-avatar>
-    </div> <!-- ENDE Bild -->
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()" class="max-w-xl m-auto">
+  <div class="mr-5 w-full"> <!-- START Bild -->
+    <app-avatar [image]="getImage()" (inputValueChange)="onChildInputChange($event)" formControlName="avatar"></app-avatar>
+  </div> <!-- ENDE Bild -->
 
-    <div class="flex-auto w-1/2"> <!-- START Eingabefelder -->
-      <!-- Name -->
-      <div class="mt-2 mb-6">
-        <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="name">Name*</label>
-        <input id="name" class="w-full" type="text" pInputText formControlName="name"/>
-      </div>
-      <!-- E-Mail -->
-      <div class="mt-2 mb-6">
-        <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="name">E-Mail-Adresse*</label>
-        <input id="email" class="w-full" type="text" pInputText formControlName="email"/>
-      </div>
-    </div> <!-- ENDE Eingabefelder -->
-
+  <!-- Name -->
+  <div class="mt-2 mb-6">
+    <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="name">Name*</label>
+    <input id="name" class="w-full" type="text" pInputText formControlName="name"/>
+  </div>
+  <!-- E-Mail -->
+  <div class="mt-2 mb-6">
+    <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="name">E-Mail-Adresse*</label>
+    <input id="email" class="w-full" type="text" pInputText formControlName="email"/>
   </div>
 
-  <button type="submit">Save</button>
+  <div class="mt-2">
+    <button type="submit" [disabled]="profileForm.invalid"
+            class="bg-lime-400 rounded-lg px-2 py-2 text-center">
+      Speichern
+    </button>
+  </div>
 </form>
