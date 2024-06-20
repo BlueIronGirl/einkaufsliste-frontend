@@ -37,14 +37,14 @@ export class ProfileEditComponent {
   onSubmit() {
     if (this.profileForm.valid) {
       const formValue = this.profileForm.getRawValue();
-      const result: User = {...formValue, avatarBase64: formValue.avatar, avatar: ''};
+      const result: User = {...formValue, avatarBase64: '', avatar: ''};
       this.updateProfileData(result);
 
     }
   }
 
   private updateProfileData(result: User) {
-    this.profileService.uploadFile(result).subscribe(() => {
+    this.profileService.saveProfile(result).subscribe(() => {
       this.messageService.add({severity: 'info', summary: 'Profil erfolgreich gespeichert'});
       if (this.userLoggedIn?.token) {
         this.store.dispatch(AuthActions.refreshToken({data: this.userLoggedIn.token}));
@@ -52,7 +52,7 @@ export class ProfileEditComponent {
     });
   }
 
-  onChildInputChange(newInputValue: string) {
+  onImageChange(newInputValue: string) {
     if (this.userLoggedIn) {
       const result: User = {...this.userLoggedIn, avatarBase64: newInputValue, avatar: undefined};
       this.updateProfileData(result);

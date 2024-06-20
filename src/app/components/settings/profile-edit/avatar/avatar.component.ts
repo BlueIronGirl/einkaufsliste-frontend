@@ -20,7 +20,7 @@ import {environment} from "../../../../../environments/environment";
 })
 export class AvatarComponent implements OnInit, ControlValueAccessor {
   @Input() image!: Uint8Array | string | undefined;
-  @Output() inputValueChange = new EventEmitter<string>();
+  @Output() imageChange = new EventEmitter<string>();
 
   @ViewChild('fileUpload') fileUpload!: FileUpload;
 
@@ -79,7 +79,7 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
       if (result) {
         this.file = result;
         this.onChange(this.file);
-        this.inputValueChange.emit(this.file);
+        this.imageChange.emit(this.file);
       }
     });
   }
