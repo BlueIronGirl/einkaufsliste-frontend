@@ -53,6 +53,7 @@ import {ProfileEditComponent} from './components/settings/profile-edit/profile-e
 import {FileUploadModule} from "primeng/fileupload";
 import {ImageCropperComponent} from './components/common/image-cropper/image-cropper.component';
 import {DialogModule} from "primeng/dialog";
+import { AvatarComponent } from './components/settings/profile-edit/avatar/avatar.component';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,8 @@ import {DialogModule} from "primeng/dialog";
     NavigationLinksComponent,
     SplitButtonComponent,
     BoughtArticlesPipe,
-    ProfileEditComponent
+    ProfileEditComponent,
+    AvatarComponent
   ],
   imports: [
     // standard angular

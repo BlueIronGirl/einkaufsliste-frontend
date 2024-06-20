@@ -1,0 +1,27 @@
+<div class="avatar-container">
+  <div class="image-container" *ngIf="file; else placeholder"
+       [ngClass]="{'box-shadow-avatar': !!file}"
+       [ngStyle]="{backgroundImage: 'url(' + file + ')'}"
+  ></div>
+
+  <ng-template #placeholder>
+    <div class="image-container">
+      <span class="fas fa-user w-full"></span>
+    </div>
+  </ng-template>
+
+  <div class="icon-wrapper">
+    <p-fileUpload
+      id="avatar-fileupload2"
+      mode="basic"
+      chooseIcon="pi pi-upload"
+      name="file"
+      accept="image/*"
+      [auto]="false"
+      [url]="api"
+      [maxFileSize]="10000000"
+      (onSelect)="onSelect($event)"/>
+  </div>
+
+
+</div>
