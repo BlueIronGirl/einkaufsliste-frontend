@@ -1,0 +1,50 @@
+<form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+  <div class="flex">
+    <div class="flex-auto w-1/2"> <!-- START Bild -->
+
+      <div class="avatar-container">
+        <div class="image-container" *ngIf="file; else placeholder"
+             [ngClass]="{'box-shadow-avatar': !!file}"
+             [ngStyle]="{backgroundImage: 'url(' + file + ')'}"
+        ></div>
+
+        <ng-template #placeholder>
+          <div class="image-container">
+            <span class="fas fa-user w-full"></span>
+          </div>
+        </ng-template>
+
+        <div class="icon-wrapper">
+          <p-fileUpload
+            id="avatar-fileupload2"
+            mode="basic"
+            chooseIcon="pi pi-upload"
+            name="file"
+            accept="image/*"
+            [auto]="false"
+            [url]="api"
+            [maxFileSize]="10000000"
+            (onSelect)="onSelect($event)"/>
+        </div>
+
+
+      </div>
+    </div> <!-- ENDE Bild -->
+
+    <div class="flex-auto w-1/2"> <!-- START Eingabefelder -->
+      <!-- Name -->
+      <div class="mt-2 mb-6">
+        <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="name">Name*</label>
+        <input id="name" class="w-full" type="text" pInputText formControlName="name"/>
+      </div>
+      <!-- E-Mail -->
+      <div class="mt-2 mb-6">
+        <label class="block text-gray-500 font-bold mb-1 md:mb-0 pr-4" for="name">E-Mail-Adresse*</label>
+        <input id="email" class="w-full" type="text" pInputText formControlName="email"/>
+      </div>
+    </div> <!-- ENDE Eingabefelder -->
+
+  </div>
+
+  <button type="submit">Save</button>
+</form>
