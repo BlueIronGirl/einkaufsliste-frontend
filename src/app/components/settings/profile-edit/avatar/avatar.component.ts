@@ -72,7 +72,7 @@ export class AvatarComponent implements OnInit, ControlValueAccessor {
 
   openAvatarEditor(image: string): void {
     this.ref = this.dialogService.open(ImageCropperComponent, {
-      style: {'max-width': '1200px'},
+      style: {'max-width': '100%'},
       data: image,
     });
 
