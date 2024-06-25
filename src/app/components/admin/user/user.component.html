@@ -50,6 +50,9 @@
                 [(ngModel)]="user.username"/>
             </ng-template>
             <ng-template pTemplate="output">
+              <div class="image-container rounded-full p-2 h-[38px] w-[38px]" *ngIf="user.avatar"
+                   [ngClass]="{'box-shadow-avatar': !!user.avatar}"
+                   [ngStyle]="{backgroundImage: 'url(data:image/png;base64,' + user.avatar + ')'}"></div>
               {{ user.username }}
             </ng-template>
           </p-cellEditor>
